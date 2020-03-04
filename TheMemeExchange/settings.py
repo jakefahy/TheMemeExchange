@@ -27,7 +27,7 @@ SECRET_KEY = '(_t4%5v=96o*l%egfp1bud*jwkgh8r@gp02gud%2mme9u_mjt#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['the-meme-exchange.herokuapp.com']
 
 
 # Application definition
