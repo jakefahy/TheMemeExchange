@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'TheMemeExchange.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd71jiii08kbjuk',
+        'USER': 'mvmvpfcmrmlyxq',
+        'PASSWORD': 'e032acd9c74f63ff7f92c74db4b07dc7a049d4145ebdc69c40a854a86eb1be0a',
+        'HOST': 'ec2-184-72-236-57.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
