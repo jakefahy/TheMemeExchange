@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class CreateacctConfig(AppConfig):
-    name = 'createAcct'
+    name = 'CreateAcct'
