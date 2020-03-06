@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
 from pathlib import Path
+import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parents[1]
@@ -25,7 +27,8 @@ SECRET_KEY = '(_t4%5v=96o*l%egfp1bud*jwkgh8r@gp02gud%2mme9u_mjt#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['the-meme-exchange.herokuapp.com',
+                'localhost']
 
 
 # Application definition
@@ -36,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles'
 ]
 
 MIDDLEWARE = [
@@ -54,7 +57,12 @@ ROOT_URLCONF = 'TheMemeExchange.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates/FrontPage'],
+        'DIRS': ['templates/ProfilePage',
+                 'templates/PurchasePage',
+                 'public/',
+                 'templates/FrontPage'
+        ],
+
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,8 +83,12 @@ WSGI_APPLICATION = 'TheMemeExchange.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd71jiii08kbjuk',
+        'USER': 'mvmvpfcmrmlyxq',
+        'PASSWORD': 'e032acd9c74f63ff7f92c74db4b07dc7a049d4145ebdc69c40a854a86eb1be0a',
+        'HOST': 'ec2-184-72-236-57.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -121,4 +133,10 @@ STATICFILES_DIRS = [
     'var/www/static/',
 ]
 
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",
+#     '/var/www/static/',
+# ]
+
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
