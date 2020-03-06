@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Buying MemeCoins</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <style>
+      .jumbotron {
+        background-color: Transparent;
+      }
+
+      main {
+        background: #b7bdc7;
+      }
+
+      body {
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 5px;
+      }
+
+      .prices {
+        padding-left: 30px;
+      }
+    </style>
+
+</head>
+<body>
+
+  {% extends "base.html" %}
+
+  {% block content %}
+  <main class="">
+
+      <div class="jumbotron flex justify-content-center text-center">
+        <h2> All The MemeCoin Deals </h2>
+        <hr class="my-6">
+
+      </div>
+
+      <div class="flex justify-content-center text-left prices">
+          <h4>500 MemeCoins - $0.99 </h4> <br>
+          <h4>22000 MemeCoins - $4.99 </h4> <br>
+          <h4>55000 MemeCoins - $9.99 </h4> <br>
+          <h4>11000 MemeCoins - $19.99 </h4> <br>
+      </div>
+
+
+
+
+    </main>
+
+    {% endblock %}
+
+</body>
+
+</html>
