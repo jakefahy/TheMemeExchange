@@ -57,14 +57,12 @@ ROOT_URLCONF = 'TheMemeExchange.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-<<<<<<< HEAD:TheMemeExchange/settings.py
-        'DIRS': ['templates/CreateAcct','templates/MemeDetails'],
-=======
         'DIRS': ['templates/ProfilePage',
                  'templates/PurchasePage',
+                 'templates/CreateAcct',
+                 'templates/MemeDetails',
                  'public/'
         ],
->>>>>>> b60c968367c32bb3531191979d1d8f41664a1bbc:TheMemeExchange/settings.py
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

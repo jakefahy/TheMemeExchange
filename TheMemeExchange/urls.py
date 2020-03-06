@@ -14,18 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-<<<<<<< HEAD:TheMemeExchange/urls.py
-from django.urls import path, include
-
-urlpatterns = [
-	path('memeDetails/', include('MemeDetails.urls')),
-	path('createAccount/', include('CreateAcct.urls')),
-=======
 from django.urls import include, path
 
 urlpatterns = [
+    path('memeDetails/', include('MemeDetails.urls')),
+    path('createAccount/', include('CreateAcct.urls')),
     path('Profile/', include('ProfilePage.urls')),
->>>>>>> b60c968367c32bb3531191979d1d8f41664a1bbc:TheMemeExchange/urls.py
     path('admin/', admin.site.urls),
     path('BuyMemeCoin/', include('PurchasePage.urls'))
 ]
