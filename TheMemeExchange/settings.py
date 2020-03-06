@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,7 +27,7 @@ SECRET_KEY = '(_t4%5v=96o*l%egfp1bud*jwkgh8r@gp02gud%2mme9u_mjt#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['the-meme-exchange.herokuapp.com']
 
 
 # Application definition
@@ -76,8 +77,12 @@ WSGI_APPLICATION = 'TheMemeExchange.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd71jiii08kbjuk',
+        'USER': 'mvmvpfcmrmlyxq',
+        'PASSWORD': 'e032acd9c74f63ff7f92c74db4b07dc7a049d4145ebdc69c40a854a86eb1be0a',
+        'HOST': 'ec2-184-72-236-57.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -119,3 +124,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
