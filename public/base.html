@@ -1,0 +1,50 @@
+<!doctype html>
+
+<style>
+
+.padding {
+  padding-right: 20px;
+  padding-top: 20px;
+}
+
+a {
+  color: #FF0000;
+}
+
+button {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+}
+
+</style>
+
+<header class="flex justify-content-center text-right padding">
+
+<div class="text-center">
+  <h2>The Meme Exchange</h2>
+
+  <hr> 
+
+</div>
+
+Hello <i> User</i>,  You Currently Have:
+
+<a href="../BuyMemeCoin/"> 20 MemeCoins </a>
+
+
+{% load static %}
+<button> <img src="{% static "/shoppingCart.png" %}" alt="My image" height="30" width="30"> </button>
+
+
+
+</header>
+{% block content %}{% endblock %}
+<footer>
+
+
+
+</footer>
