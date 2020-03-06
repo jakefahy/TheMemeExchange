@@ -4,5 +4,5 @@ from django.template import loader
 
 def index(request):
     context = {}
-    template = loader.get_template('index.html')
+    template = loader.get_template('profile.html')
     return HttpResponse(template.render(context, request))

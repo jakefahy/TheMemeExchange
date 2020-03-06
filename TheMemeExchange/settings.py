@@ -27,7 +27,8 @@ SECRET_KEY = '(_t4%5v=96o*l%egfp1bud*jwkgh8r@gp02gud%2mme9u_mjt#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['the-meme-exchange.herokuapp.com']
+ALLOWED_HOSTS = ['the-meme-exchange.herokuapp.com',
+                'localhost']
 
 
 # Application definition
@@ -56,7 +57,10 @@ ROOT_URLCONF = 'TheMemeExchange.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates/ProfilePage'],
+        'DIRS': ['templates/ProfilePage',
+                 'templates/PurchasePage',
+                 'public/'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,6 +126,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
+
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",
+#     '/var/www/static/',
+# ]
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
