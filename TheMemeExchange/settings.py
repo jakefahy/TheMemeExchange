@@ -60,6 +60,8 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': ['templates/ProfilePage',
                  'templates/PurchasePage',
+                 'templates/CreateAcct',
+                 'templates/MemeDetails',
                  'public/'
         ],
         'APP_DIRS': True,
