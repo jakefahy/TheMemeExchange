@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
+    path('memeDetails/', include('MemeDetails.urls')),
+    path('createAccount/', include('CreateAcct.urls')),
     path('Profile/', include('ProfilePage.urls')),
     path('admin/', admin.site.urls),
     path('BuyMemeCoin/', include('PurchasePage.urls'))
