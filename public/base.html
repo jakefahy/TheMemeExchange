@@ -50,7 +50,7 @@ button {
 <div class="text-center">
   <h2>The Meme Exchange</h2>
 
-  <hr> 
+  <hr>
 
 </div>
 
@@ -62,11 +62,18 @@ button {
 <!-- Trigger/Open The Modal -->
 {% if request.user.is_anonymous %}
   <button id="myBtn" >Click Here To Login</button>
+{% else %}
+  Hello <i> {{request.user}}</i>,  You Currently Have:
+  <a href="../BuyMemeCoin/"> 20 MemeCoins </a> <br>
+  {% load static %}
+  <button> <img src="{% static "/shoppingCart.png" %}" alt="My image" height="30" width="30"> </button><br>
+  <a href="../Profile/logout" id="logout" >Logout</a>
 {% endif %}
+
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
-    <form class="modal-content animate" action="/action_page.php" method="post">
+    <form class="modal-content animate" action="{% url 'login' %}" method="get">
       <span class="close">&times;</span>
       <h2 class="text-center">
         Login To Begin Memeing
@@ -95,7 +102,8 @@ var btn = document.getElementById("myBtn");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks the button, open the modal 
+
+// When the user clicks the button, open the modal
 btn.onclick = function() {
   modal.style.display = "block";
 }
@@ -111,11 +119,10 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
+
 </script>
 
-
-{% load static %}
-<button> <img src="{% static "/shoppingCart.png" %}" alt="My image" height="30" width="30"> </button>
 
 
 
