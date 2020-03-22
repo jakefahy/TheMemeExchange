@@ -50,7 +50,7 @@ button {
 <div class="text-center">
   <h2>The Meme Exchange</h2>
 
-  <hr> 
+  <hr>
 
 </div>
 
@@ -62,7 +62,14 @@ button {
 <!-- Trigger/Open The Modal -->
 {% if request.user.is_anonymous %}
   <button id="myBtn" >Click Here To Login</button>
+{% else %}
+  Hello <i> {{request.user}}</i>,  You Currently Have:
+  <a href="../BuyMemeCoin/"> 20 MemeCoins </a> <br>
+  {% load static %}
+  <button> <img src="{% static "/shoppingCart.png" %}" alt="My image" height="30" width="30"> </button><br>
+  <button id="logout" >Logout</button>
 {% endif %}
+
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
@@ -95,7 +102,9 @@ var btn = document.getElementById("myBtn");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks the button, open the modal 
+var logoutBtn = document.getElementById("logoutBtn")[0];
+
+// When the user clicks the button, open the modal
 btn.onclick = function() {
   modal.style.display = "block";
 }
@@ -111,11 +120,10 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
+
 </script>
 
-
-{% load static %}
-<button> <img src="{% static "/shoppingCart.png" %}" alt="My image" height="30" width="30"> </button>
 
 
 
