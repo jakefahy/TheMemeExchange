@@ -89,6 +89,9 @@ button {
       <div class="modal-content ">
         <button type="submit" >Login</button>
       </div>
+      <span>
+        <a href="../createAccount" id="sign-up">Don't have an account? Click to Sign Up!</a>
+      </span>
   </form>
 </div>
 
@@ -102,6 +105,8 @@ var btn = document.getElementById("myBtn");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
+//Gets the button required to create an account
+var create = document.getElementById("sign-up");
 
 // When the user clicks the button, open the modal
 btn.onclick = function() {
@@ -119,8 +124,6 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
-
-
 </script>
 
 
