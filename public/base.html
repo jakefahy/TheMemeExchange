@@ -27,13 +27,14 @@ button {
 <div class="text-center">
   <h2>The Meme Exchange</h2>
 
-  <hr> 
+  <hr>
 
 </div>
 
-Hello <i> User</i>,  You Currently Have:
-
+{% if request.user %}
+Hello <i> {{request.user}}</i>,  You Currently Have:
 <a href="../BuyMemeCoin/"> 20 MemeCoins </a>
+{% endif %}
 
 
 {% load static %}

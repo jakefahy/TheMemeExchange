@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from dbFunctions import createUser
-
+from django.contrib.auth import authenticate, login
+from django.shortcuts import redirect
 from .forms import InsertAcctForm
 
 
@@ -23,6 +24,9 @@ def insertAcct(request):
             return HttpResponse(template.render({
             "error" : "yes"
             }, request))
-        #login session
+        user = authenticate(request, username=username, password=password)
+        login(request, user)
         # go to home page
-        return HttpResponse("acct created")
+        #return HttpResponse("acct created")
+        return redirect("/Profile/")
+        #return HttpResponseRedirect('Profile')
