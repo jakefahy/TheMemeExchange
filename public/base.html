@@ -60,7 +60,9 @@ button {
 <a href="../BuyMemeCoin/"> 20 MemeCoins </a> -->
 
 <!-- Trigger/Open The Modal -->
-<button id="myBtn" >Click Here To Login</button>
+{% if request.user.is_anonymous %}
+  <button id="myBtn" >Click Here To Login</button>
+{% endif %}
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
