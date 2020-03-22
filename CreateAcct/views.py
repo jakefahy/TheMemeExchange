@@ -7,7 +7,7 @@ from .forms import InsertAcctForm
 
 
 def index(request):
-    context = {}
+    context = {"error": "no"}
     template = loader.get_template('createAcct.html')
     return HttpResponse(template.render(context, request))
 
@@ -16,7 +16,13 @@ def insertAcct(request):
         username = request.POST['username']
         email = request.POST['email']
         password = request.POST['pass']
-        createUser(username, email, password)
+        try:
+            createUser(username, email, password)
+        except:
+            template = loader.get_template('createAcct.html')
+            return HttpResponse(template.render({
+            "error" : "yes"
+            }, request))
         #login session
         # go to home page
         return HttpResponse("acct created")

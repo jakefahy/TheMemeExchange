@@ -55,7 +55,7 @@ span.note {
 <div class="container d-flex justify-content-around">
     <div class="form">
         <h1><span class="note">Welcome To A New World Of Memes</span></h1>
-
+        <div id="isError">{{error}}</div>
         <form action="{% url 'insertAcct' %}" method="post"> {% csrf_token %}
         	<div class="form-group">
 			    <label for="user">Username</label>
@@ -98,6 +98,10 @@ span.note {
 
 <script type="text/javascript">
   $( document ).ready(function() {
+    $("#isError").hide();
+    if($("#isError").text() == "yes"){
+      alert("Username is already taken");
+    }
     document.getElementById("btn").disabled = true;
   	var myInput = document.getElementById("pass1");
   	var letter = document.getElementById("letter");
