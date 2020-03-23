@@ -2,6 +2,10 @@ from django.contrib.auth.models import User
 from ProfilePage.models import Account
 from ProfilePage.models import ImageLink
 
+def getLastTenImg():
+    q = ImageLink.objects.all()
+    return q if len(q) < 10 else q[-10:]
+
 def createUser(username, email, password):
     user = User.objects.create_user(username, email, password)
     user.save()
