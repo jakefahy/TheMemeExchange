@@ -32,3 +32,7 @@ def getCart(user):
 
 def getImagesFromCart(img_ids):
 	return [ImageLink.objects.get(id=i) for i in img_ids]
+
+def getUserMemes(id):
+    query = ImageLink.objects.filter(creator = id)
+    return query

@@ -13,11 +13,13 @@ from firebase_admin import storage
 import os
 from django.shortcuts import redirect
 from dbFunctions import uploadImagetoDB
+from dbFunctions import getUserMemes
 from django.contrib.auth import logout as djangoLogout, login as djangoLogin, authenticate
 from django.shortcuts import redirect
 
 def index(request):
-    context = {}
+    memes = getUserMemes(request.user.id)
+    context = {"mymemes" : memes}
     template = loader.get_template('profile.html')
     return HttpResponse(template.render(context, request))
 
@@ -50,8 +52,9 @@ def uploadMemeImg(request):
         filename = fs.save(myfile.name, myfile)
         uploaded_file_url = fs.path(filename)
         print(uploaded_file_url)
-        cred = credentials.Certificate('the-meme-exchange-026e359fe3e6.json')
-        default_app = firebase_admin.initialize_app(cred, {'storageBucket': 'the-meme-exchange.appspot.com'})
+        if (not len(firebase_admin._apps)):
+            cred = credentials.Certificate('the-meme-exchange-026e359fe3e6.json')
+            default_app = firebase_admin.initialize_app(cred, {'storageBucket': 'the-meme-exchange.appspot.com'})
         bucket = storage.bucket()
         blob = bucket.blob(filename)
         blob.upload_from_filename(uploaded_file_url)

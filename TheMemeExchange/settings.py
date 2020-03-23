@@ -66,6 +66,7 @@ TEMPLATES = [
                  'templates/MemeDetails',
                  'templates/FrontPage',
                  'templates/CartPage',
+                 'templates/AboutPage',
                  'public/'
         ],
         'APP_DIRS': True,
@@ -134,6 +135,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
+
 STATICFILES_DIRS = [
     BASE_DIR / "static",
     'var/www/static/',
