@@ -16,6 +16,7 @@ def uploadImagetoDB(link,tags,description,creator):
     img = ImageLink(link=link,tags=tags,description=description,creator=creator)
     img.save()
 
+<<<<<<< HEAD
 def getImageByID(image_id):
 	return ImageLink.objects.get(id=image_id)
 
@@ -32,6 +33,15 @@ def getCart(user):
 
 def getImagesFromCart(img_ids):
 	return [ImageLink.objects.get(id=i) for i in img_ids]
+
+def getUserCoins(user):
+    return Account.objects.get(user=user).memeBucks
+
+def updateUserCoins(user, purchaseAmmt):
+    acct = Account.objects.get(user=user)
+    acct.memeBucks += purchaseAmmt
+    acct.save()
+    return acct.memeBucks
 
 def getUserMemes(id):
     query = ImageLink.objects.filter(creator = id)
