@@ -62,6 +62,7 @@ TEMPLATES = [
                  'templates/CreateAcct',
                  'templates/MemeDetails',
                  'templates/FrontPage',
+                 'templates/AboutPage',
                  'public/'
         ],
         'APP_DIRS': True,
