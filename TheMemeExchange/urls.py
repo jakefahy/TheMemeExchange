@@ -15,13 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('front/', include('FrontPage.urls')),
     path('memeDetails/', include('MemeDetails.urls')),
     path('createAccount/', include('CreateAcct.urls')),
-    path('Profile/', include('ProfilePage.urls')),
     path('admin/', admin.site.urls),
     path('BuyMemeCoin/', include('PurchasePage.urls')),
     path('shoppingCart/', include('CartPage.urls'))
+    path('Profile/', include('ProfilePage.urls')),
+
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
