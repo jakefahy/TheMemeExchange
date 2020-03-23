@@ -27,7 +27,9 @@
 						<div>
 							<label style="font-size: 20px"> "{{ pic.description }}" </label>
 						</div>
-						<button class="rounded " style="font-size: 15px; padding: 5px; border: solid;">Remove from Cart ?</button> 
+						<form style="padding-left: 10px; padding-top: 25px" action="../../shoppingCart/removeItemFromCart/{{ pic.id }}/" method="delete"> {% csrf_token %}
+							<input type="submit" class="rounded " style="font-size: 15px; padding: 5px; border: solid;" value="Remove from Cart ?"/> 
+						</form>						
 					</span>
 				</div>
 			{% endfor %}
@@ -38,7 +40,9 @@
 
 		<div id="purchModal" class="modal">
 			<form class="modal-content2 animate" >
-				<span class="close">&times;</span>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	              <span aria-hidden="true">&times;</span>
+	            </button>
 				<h3 class="text-center"> Confirm Your Meme Purchase </h3>
 				<div class="modal-content2 ">
 					<b>Your Meme Coins: </b>
@@ -64,6 +68,14 @@
 
 		// Get the button that opens the modal
 		var btn = document.getElementById("purchase");
+
+		// // Get the <span> element that closes the modal
+		// var span = document.getElementsByClassName("close")[0];
+
+		// // When the user clicks on <span> (x), close the modal
+		// span.onclick = function() {
+		//   modal.style.display = "none";
+		// }
 
 		// When the user clicks the button, open the modal
 		btn.onclick = function() {

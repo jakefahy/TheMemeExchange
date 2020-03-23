@@ -36,3 +36,21 @@ def getImagesFromCart(img_ids):
 def getUserMemes(id):
     query = ImageLink.objects.filter(creator = id)
     return query
+
+def remove(img_id,user):
+	acct = Account.objects.get(user=user)
+	cart = getImagesFromCart(acct.cartItems)
+	final = []
+	for i in range(len(cart)):
+		if (cart[i]).id == img_id:
+			cart = cart[:i]+cart[i+1:]
+			for j in range(len(cart)):
+				final.append(cart[j].id)
+			acct.cartItems = final
+			acct.save()
+			break
+
+
+
+
+
