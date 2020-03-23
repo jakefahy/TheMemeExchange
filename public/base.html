@@ -64,8 +64,8 @@ button {
   Hello <i> {{request.user}}</i>,  You Currently Have:
   <a href="../BuyMemeCoin/"> 20 MemeCoins </a> <br>
   {% load static %}
-  <button> <img src="{% static "/shoppingCart.png" %}" alt="My image" height="30" width="30"> </button><br>
-  <a href="../Profile/logout" id="logout" >Logout</a>
+  <a href="../../shoppingCart/" > <img src="{% static "/shoppingCart.png" %}" alt="My image" height="30" width="30"> </a><br>
+  <a href="../../Profile/logout" id="logout" >Logout</a>
 {% endif %}
 
 

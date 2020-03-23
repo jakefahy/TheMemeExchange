@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ProfilePage.apps.ProfilepageConfig',
+    'CartPage.apps.CartpageConfig',
+    'MemeDetails.apps.MemedetailsConfig',
 ]
 
 MIDDLEWARE = [
