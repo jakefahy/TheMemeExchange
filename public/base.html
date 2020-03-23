@@ -62,7 +62,7 @@ button {
   <button id="myBtn" >Click Here To Login</button>
 {% else %}
   Hello <i> {{request.user}}</i>,  You Currently Have:
-  <a href="../BuyMemeCoin/"> 20 MemeCoins </a> <br>
+  <a href="../BuyMemeCoin/"> {{ request.session.coins }} MemeCoins </a> <br>
   {% load static %}
   <button> <img src="{% static "/shoppingCart.png" %}" alt="My image" height="30" width="30"> </button><br>
   <a href="../Profile/logout" id="logout" >Logout</a>

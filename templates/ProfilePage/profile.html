@@ -99,7 +99,7 @@
       <span class="jumbotron flex justify-content-center text-center">
         <h2> Welcome to the Profile Page </h2>
         <div id="checkUploadStatus">{{upload}}</div>
-        <h4> You have 0 MemeCoins </h4>
+        <h4> You have {{ request.session.coins }} MemeCoins </h4>
         <h6> <a href="../BuyMemeCoin/"><u>Buy More Here!</u></a> </h6>
       </span>
 
