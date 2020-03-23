@@ -13,6 +13,8 @@ from firebase_admin import storage
 import os
 from django.shortcuts import redirect
 from dbFunctions import uploadImagetoDB
+from django.contrib.auth import logout as djangoLogout, login as djangoLogin, authenticate
+from django.shortcuts import redirect
 
 def index(request):
     context = {}
@@ -39,3 +41,18 @@ def uploadMemeImg(request):
         messages.add_message(request,20, "A Fine Addition To Your Collection")
 
         return redirect("/Profile")
+      
+def logout(request):
+    djangoLogout(request)
+    return redirect("/Profile/")
+
+def login(request):
+    if request.method == "GET":
+        username = request.GET['uname']
+        password = request.GET['psw']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            djangoLogin(request, user)
+        else:
+            print("No user found")
+        return redirect("/Profile/")
