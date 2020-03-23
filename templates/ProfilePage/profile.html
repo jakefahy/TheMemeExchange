@@ -8,8 +8,32 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
     <style>
+      #MyMemesTab{
+        padding-left: 60px;
+        padding-right: 20px;
+      }
+
+      #imageFrame{
+        border-radius: 2px; /* Rounded borders */
+        width:315px;
+        margin: 10px;
+      }
+
+      #PageDisplay{
+        display: flex;
+        flex-direction:row;
+        flex-wrap: wrap;
+        padding: 10px;
+      }
+
+      .bluetime{
+        color: #325aa8 !important;
+      }
+
       .padding {
         padding-top: 10px;
       }
@@ -100,10 +124,20 @@
         </div>
         <div id="MyMemesTab" class="tab">
           <br>
-          <h4>Your Glorious Memes</h4> <hr width="25%">
-          <p>
+          <h4>Your Glorious Memes</h4> <hr width="25%"> <br><br>
+          <div id="PageDisplay">
+            {% for meme in mymemes %}
+              <div id="imageFrame">
+                  <b> {{meme.description}} </b>
+                  <a href="#"><div id="actualMeme">
+                    <img class="rounded border" src="{{meme.link}}" alt="My image" height="300" width="300"> <br>
+                  </div></a>
+                  <a class="bluetime" href="#"><i class='fas fa-edit' style='font-size:24px'></i></a> &ensp;
+                  <a class="bluetime" href="#"><i class='far fa-trash-alt' style='font-size:24px'></a></i>
+              </div>
 
-          </p>
+            {% endfor %}
+          </div>
         </div>
       </div>
       {% if messages %}

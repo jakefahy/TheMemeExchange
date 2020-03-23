@@ -23,4 +23,8 @@ def updateUserCoins(user, purchaseAmmt):
     acct = Account.objects.get(user=user)
     acct.memeBucks += purchaseAmmt
     acct.save()
-    return acct.memeBucks 
+    return acct.memeBucks
+
+def getUserMemes(id):
+    query = ImageLink.objects.filter(creator = id)
+    return query
