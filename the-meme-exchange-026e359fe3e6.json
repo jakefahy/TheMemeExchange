@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "the-meme-exchange",
+  "private_key_id": "026e359fe3e6bcd9136783a7acd37a82a5638b69",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC9djAaF58rQ9MB\nR4WpWsJZH1nJEEVxGMW4qUytxJ+ZDtLj1FAvncZB9KlQYLal8L/r/4YD86ljuJWx\nC+t9wCtFfhvaJpuYXuyUQVtUPAC0r8Qa9+YkAcez5wsdz3yxdXtfbtgiAytxX7mT\nb/8y9qXyfFiLkFlj9Ksr7Kq+2FE8HZbYDY+UI4te7J7BrQ+1S0HVtlZsXJVAzoRZ\nXj5F6X2UVxzT17i3vTb3/jh8HSRyjWiLCjs4o2WM7OjmhtRREH6aokvxpwcdvwaT\nNpnERyQIVs3qoLCrfIzRaoSfRE+EigEn+fA9mdL8aoGvRmxWXHboNJaX9/bY3Ytb\nuRayDfVlAgMBAAECggEAC1kocW+nx4ok+eckUOwQRxFTKfFxD2Cp+zEc2C22V48l\nP6NIeEmthebXO2rHlfHxNPwVtWfjZgc45CVwIhSgIuX2Wh9E46AP8KNnioibjDcY\n+nqNzOtUYGi+6Da049ZDIQi9JnBlKkHPFk83jIBsmTUsgpOPXybZF+Txp0PCveR3\nalTNG4uLfNzk0xeVe7zHsRgrxvND7Vh5WuKJabH1skRM3F0ddrJEs0pv5hRFu3U2\noHlHcDTX8kNbAjRJUJDKLSdp4zqTz+EuQ6jon9VOyHC3SWLChRqF2RbFEU04o9X+\nPekRFlQf2R0RieGp7McI+jv08GwKZr/xAAItc7XQkQKBgQDm+vng2+OaxFwdguNb\nt10tFPHCTrDf4VNPpUDUWC8c6pduqWOiO+kOohqMJKdt07Ro3GvV8mvXqLAO3NEd\nSHOftC6hOEeSd4RYKWumnFYSq4k5IWbbNOI49Xgn9br0P/sieoD5PI6j4YWkmD03\nrDTHZaNQkfJGfgOpEJqeM3nLaQKBgQDR++jGd8ZxYEUzzcbk2Wzc56UOQUZwLEtT\nRAz11NtiHZpN1Ujk9yrE8c784XFbNQpcVwJPZU5WOVK2p7SjQCs36/08A1QbDBhN\nxoyeZNLuW9Mswxe7lP10+xyUBlnJR/khyi3vgt9IdUEZjBVAHRkw+eHFCXKC0O60\nKEhoAKHGnQKBgQCYa7/fGVuNsswSkV/VEyBCcpLCpUjkw/1FDojEV1jnnQrG9LKR\nyTUW+fPIzRtLRyvDEsl6SlnN2zwq4p5/02KxXaZzrv7T8Vh9EQA/1uSZt2Z7M8Z7\nGt+5tIpQ3EA9k8b2Tp6zWbnK/TRClE+5YEMH3dMyhMy6pcdmllVh1hgmGQKBgQDK\nDqQ8Lk83E9MjeTSVTB80JncuU2OLVyQYeJgcCfoc3K15je353Vk7cA+kSO9CO7S/\njD491hbeY4STHKd2m626vwvLrsxExouwc4kmdZB/Kr73CLgSmdiWs3gZfE7zn508\nhYdUPNPMrn+5LJHaQuXVue4lIuUcuh2oIEckRM9nBQKBgHagrTdIOOUQ5RN2M7eZ\nLDmgAsoMmtQDSTj1Of+lqsJIoXr7dm0j4MR8qL7cXgkIm/P2aNhIiGwS09x6lE7U\n1SHiL3q2wbrE2jNEv9ZedC9KX3rkJbO1vXPIKcKe7z0Fer/l9hP/PKfhaGkJHNKE\nfsa1gOzXvdGEAibdvUgrD/Er\n-----END PRIVATE KEY-----\n",
+  "client_email": "the-meme-exchange@appspot.gserviceaccount.com",
+  "client_id": "106110840608210755154",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/the-meme-exchange%40appspot.gserviceaccount.com"
+}

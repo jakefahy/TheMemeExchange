@@ -46,34 +46,40 @@ span.note {
   left: -35px;
   content: "✖";
 }
+
+#passwordMatch {
+  display: none;
+}
 </style>
 
 <div class="container d-flex justify-content-around">
+  
     <div class="form">
         <h1><span class="note">Welcome To A New World Of Memes</span></h1>
-
-        <form>
+        <div id="isError">{{error}}</div>
+        <form action="{% url 'insertAcct' %}" method="post"> {% csrf_token %}
         	<div class="form-group">
-			    <label for="usernameInput">Username</label>
-			    <input type="Username" class="form-control" id="user" aria-describedby="usernameHelp" placeholder="Enter username">
+			    <label for="user">Username</label>
+			    <input type="Username" name="username" class="form-control" id="user" aria-describedby="usernameHelp" placeholder="Enter username">
 			    <small id="usernameHelp" class="form-text text-muted">Be creative with your username (we don't allow duplicates)!</small>
   			</div>
 			<div class="form-group">
 			    <label for="emailInput">Email address</label>
-			    <input type="Email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+			    <input type="Email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
 			    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
   			</div>
 			<div class="form-group">
 				<label for="passwordInput">Password</label>
-				<input type="Password" class="form-control" id="pass1" placeholder="Enter Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{6,}" title="Must contain at least one number and one uppercase, one special character and lowercase letter, and at least 6 or more characters" required>
+				<input type="Password" name="pass" class="form-control" id="pass1" placeholder="Enter Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{6,}" title="Must contain at least one number and one uppercase, one special character and lowercase letter, and at least 6 or more characters" required>
 				<small id="passwordHelp" class="form-text text-muted">Must include at least one special character and be 6 or more characters.</small>
 			</div>
 			<div class="form-group">
 				<label for="passwordInput">Confirm Password</label>
-				<input type="Password" class="form-control" id="pass2" placeholder="Confirm Password">
+				<input type="Password" name="confirmPass" class="form-control" id="pass2" placeholder="Confirm Password">
+        <small id="passwordMatch">Passwords must match</small>
 			</div>
 			<div class="form-group form-check">
-				<input type="checkbox" class="form-check-input" id="acceptBox">
+				<input type="checkbox" name="checkbox" class="form-check-input" id="acceptBox">
 				<label class="form-check-label" for="acceptBox">Hello There</label>
 			</div>
 			<button type="submit" id="btn" class="btn btn-primary">Get To Memeing</button>
@@ -92,73 +98,102 @@ span.note {
 
 
 <script type="text/javascript">
-	var myInput = document.getElementById("pass1");
-	var letter = document.getElementById("letter");
-	var capital = document.getElementById("capital");
-	var number = document.getElementById("number");
-	var length = document.getElementById("length");
-	var special = document.getElementById("special")
+  $( document ).ready(function() {
+    $("#isError").hide();
+    if($("#isError").text() == "yes"){
+      alert("Username is already taken");
+    }
+    document.getElementById("btn").disabled = true;
+  	var myInput = document.getElementById("pass1");
+  	var letter = document.getElementById("letter");
+  	var capital = document.getElementById("capital");
+  	var number = document.getElementById("number");
+  	var length = document.getElementById("length");
+  	var special = document.getElementById("special");
+    var pass2 = document.getElementById("pass2");
+    var email = document;
 
-	// When the user clicks on the password field, show the message box
-	myInput.onfocus = function() {
-	  document.getElementById("message").style.display = "block";
-	}
+  	// When the user clicks on the password field, show the message box
+  	myInput.onfocus = function() {
+  	  document.getElementById("message").style.display = "block";
+  	}
 
-	// When the user clicks outside of the password field, hide the message box
-	myInput.onblur = function() {
-	  document.getElementById("message").style.display = "none";
-	}
+  	// When the user clicks outside of the password field, hide the message box
+  	myInput.onblur = function() {
+  	  document.getElementById("message").style.display = "none";
+  	}
 
-	myInput.onkeyup = function() {
-		// Validate lowercase letters
-		var lowerCaseLetters = /[a-z]/g;
-		if(myInput.value.match(lowerCaseLetters)) {  
-		letter.classList.remove("invalid");
-		letter.classList.add("valid");
-		} else {
-		letter.classList.remove("valid");
-		letter.classList.add("invalid");
-		}
+  	myInput.onkeyup = function() {
+  		// Validate lowercase letters
+  		var lowerCaseLetters = /[a-z]/g;
+  		if(myInput.value.match(lowerCaseLetters)) {
+  		letter.classList.remove("invalid");
+  		letter.classList.add("valid");
+  		} else {
+  		letter.classList.remove("valid");
+  		letter.classList.add("invalid");
+      document.getElementById("mySubmit").disabled = true;
+  		}
 
-		// Validate capital letters
-		var upperCaseLetters = /[A-Z]/g;
-		if(myInput.value.match(upperCaseLetters)) {  
-		capital.classList.remove("invalid");
-		capital.classList.add("valid");
-		} else {
-		capital.classList.remove("valid");
-		capital.classList.add("invalid");
-		}
+  		// Validate capital letters
+  		var upperCaseLetters = /[A-Z]/g;
+  		if(myInput.value.match(upperCaseLetters)) {
+  		capital.classList.remove("invalid");
+  		capital.classList.add("valid");
+  		} else {
+  		capital.classList.remove("valid");
+  		capital.classList.add("invalid");
+      document.getElementById("btn").disabled = true;
+  		}
 
-		// Validate numbers
-		var numbers = /[0-9]/g;
-		if(myInput.value.match(numbers)) {  
-		number.classList.remove("invalid");
-		number.classList.add("valid");
-		} else {
-		number.classList.remove("valid");
-		number.classList.add("invalid");
-		}
+  		// Validate numbers
+  		var numbers = /[0-9]/g;
+  		if(myInput.value.match(numbers)) {
+  		number.classList.remove("invalid");
+  		number.classList.add("valid");
+  		} else {
+  		number.classList.remove("valid");
+  		number.classList.add("invalid");
+      document.getElementById("btn").disabled = true;
+  		}
 
-		// Validate length
-		if(myInput.value.length >= 8) {
-		length.classList.remove("invalid");
-		length.classList.add("valid");
-		} else {
-		length.classList.remove("valid");
-		length.classList.add("invalid");
-		}
+  		// Validate length
+  		if(myInput.value.length >= 6) {
+  		length.classList.remove("invalid");
+  		length.classList.add("valid");
+  		} else {
+  		length.classList.remove("valid");
+  		length.classList.add("invalid");
+      document.getElementById("btn").disabled = true;
+  		}
 
-		// Validate special char
-		var specials = /\W/g;
-		if(myInput.value.match(specials)) {  
-		special.classList.remove("invalid");
-		special.classList.add("valid");
-		} else {
-		special.classList.remove("valid");
-		special.classList.add("invalid");
-		}
-	}
+  		// Validate special char
+  		var specials = /\W/g;
+  		if(myInput.value.match(specials)) {
+  		special.classList.remove("invalid");
+  		special.classList.add("valid");
+  		} else {
+  		special.classList.remove("valid");
+  		special.classList.add("invalid");
+      document.getElementById("btn").disabled = true;
+  		}
+  	}
+
+    pass2.onkeyup = function() {
+      if(myInput.value.localeCompare(pass2.value) != 0) { // passwords don't match
+        $("#pass2").css("border-color", "red");
+        $("#passwordMatch").css("color", "red");
+        $("#passwordMatch").css("display", "block");
+        document.getElementById("btn").disabled = true;
+      } else {
+        $("#pass2").css("border-color", "green");
+        $("#passwordMatch").text("Passwords match");
+        $("#passwordMatch").css("color", "green");
+        document.getElementById("btn").disabled = false;
+      }
+    }
+  });
+
 
 
 </script>
