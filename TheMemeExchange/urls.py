@@ -22,5 +22,6 @@ urlpatterns = [
     path('createAccount/', include('CreateAcct.urls')),
     path('Profile/', include('ProfilePage.urls')),
     path('admin/', admin.site.urls),
-    path('BuyMemeCoin/', include('PurchasePage.urls'))
+    path('BuyMemeCoin/', include('PurchasePage.urls')),
+    path('shoppingCart/', include('CartPage.urls'))
 ]
