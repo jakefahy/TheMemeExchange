@@ -95,6 +95,7 @@
 
   <main class="padding">
 
+      <!-- bootstrap jumbotron -->
       <span class="jumbotron flex justify-content-center text-center">
         <h2> Welcome to the Profile Page </h2>
         <div id="checkUploadStatus">{{upload}}</div>
@@ -103,7 +104,7 @@
       </span>
 
 
-
+      <!-- Upload Button -->
       <div class="flex justify-content-center text-right">
         <button type="button" class="btn btn-secondary " id="uploadModelButton" onclick="modalhelper()">Upload A Spicy New Meme</button>
       </div>
@@ -132,7 +133,7 @@
                   <a href="#"><div id="actualMeme">
                     <img class="rounded border" src="{{meme.link}}" alt="My image" height="300" width="300"> <br>
                   </div></a>
-                  <a class="bluetime" href="#"><i class='fas fa-edit' style='font-size:24px'></i></a> &ensp;
+                  <a class="bluetime" href="#" onclick="editModalHelper({{meme.id}})"><i class='fas fa-edit' style='font-size:24px'></i></a> &ensp;
                   <a class="bluetime" href="#"><i class='far fa-trash-alt' style='font-size:24px'></a></i>
               </div>
 
@@ -140,6 +141,10 @@
           </div>
         </div>
       </div>
+
+     <!-- End of Nav Tabs -->
+
+      <!-- Hacky Toast Code -->
       {% if messages %}
             <div id="tester22">YES</div>
             <ul class="messages">
@@ -150,7 +155,7 @@
       {% endif %}
 
     </main>
-
+<!-- Start of Upload Model -->
     <div class="modal fade" id="UploadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -161,9 +166,7 @@
             </button>
           </div>
           <div class="modal-body">
-
              <div>
-
                 <h1 id="insideTitle"><i>Just Do It<i></h1> <br><br>
                   <form action="{% url 'uploadMemes' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
@@ -182,9 +185,7 @@
                     </div>
                     <button id="checkForUpload" type="submit" class="btn btn-primary">Upload</button>
                   </form>
-
             </div>
-
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -192,8 +193,77 @@
         </div>
       </div>
     </div>
+<!-- End of Upload Model -->
+
+<!-- Start of Edit Model -->
+    <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"><h2 id="modalTitle">Editing Meme</h2></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+             <div>
+                <h1 id="insideTitle"><i>Just Do It<i></h1> <br><br>
+                  <form action="{% url 'updateMeme' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <img id="currentImage" class="rounded border" src=" " alt="My image" height="300" width="300"> <br><br>
+                    <input type="hidden" id="imgId" name="imageId">
+                    <i>Edit your tags </i> <br><br>
+                    <div class="form-group">
+                      <input type="text" aria-label="FirstTag" id="FirstTag" name="FirstTag" width="15px"  maxlength="25" placeholder="Required"> <br> <br>
+                      <input type="text" aria-label="SecondTag" id="SecondTag" name="SecondTag" width="15px"  maxlength="25" placeholder="Required"> <br> <br>
+                      <input type="text" aria-label="ThirdTag" id="ThirdTag" name="ThirdTag" width="15px"  maxlength="25" placeholder="Optional"> <br> <br>
+                      <input type="text" aria-label="FourthTag" id="FourthTag" name="FourthTag" width="15px"  maxlength="25" placeholder="Optional"> <br> <br>
+                      <input type="text" aria-label="FifthTag" id="FifthTag" name="FifthTag" width="15px"  maxlength="25" placeholder="Optional">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleFormControlTextarea2"><i>Edit your description</i></label>
+                      <textarea name="descriptionbox" class="form-control" id="exampleFormControlTextarea2" rows="3"></textarea>
+                    </div>
+                    <button id="checkForEdit" type="submit" class="btn btn-primary">Save</button>
+                  </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<!--End of Edit Model  -->
 
     <script type="text/javascript">
+
+    // Some Code Django Docs provided so that Ajax requests can get through
+    $.ajaxSetup({
+         beforeSend: function(xhr, settings) {
+             function getCookie(name) {
+                 var cookieValue = null;
+                 if (document.cookie && document.cookie != '') {
+                     var cookies = document.cookie.split(';');
+                     for (var i = 0; i < cookies.length; i++) {
+                         var cookie = jQuery.trim(cookies[i]);
+                         // Does this cookie string begin with the name we want?
+                         if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                             cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                             break;
+                         }
+                     }
+                 }
+                 return cookieValue;
+             }
+             if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                 // Only send the token to relative URLs i.e. locally.
+                 xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+             }
+         }
+    });
+
+    //Function for toast/snack
     function showSnack() {
       // Get the snackbar DIV
       var x = document.getElementById("snackbar");
@@ -202,13 +272,63 @@
       // After 4 seconds, remove the show class from DIV
       setTimeout(function(){ x.className = x.className.replace("show", ""); }, 4000);
       }
+
+      //Shows upload modal on button press
       function modalhelper() {
         $("#UploadModal").modal("show");
       }
+
+      $('#EditModal').on('hidden.bs.modal', function () {
+          $("#FirstTag").attr("value", " ");
+          $("#SecondTag").attr("value", " ");
+          $("#ThirdTag").attr("value", " ");
+          $("#FourthTag").attr("value", " ");
+          $("#FifthTag").attr("value", " ");
+      });
+
+      //Shows edit modal on href press
+      function editModalHelper(id) {
+          $.ajax({
+          method: "GET",
+          url: '{% url "getMeme" %}',
+          data: {
+            'memeid': id
+          },
+          dataType: 'json',
+          success: function (data) {
+            console.log(data);
+            $("#imgId").attr("value", data['id'])
+            $("#currentImage").attr("src",data['memeLink']);
+            $("#EditModal").modal("show");
+            $("#exampleFormControlTextarea2").html(data['memeDescription']);
+            $("#FirstTag").attr("value", data['memeTags'][0]);
+            $("#SecondTag").attr("value", data['memeTags'][1]);
+            if(data['memeTags'].length >= 3) {
+              $("#ThirdTag").attr("value", data['memeTags'][2]);
+            }
+            if(data['memeTags'].length >= 4) {
+              $("#FourthTag").attr("value", data['memeTags'][3]);
+            }
+            if(data['memeTags'].length == 5) {
+              $("#FifthTag").attr("value", data['memeTags'][4]);
+            }
+          }
+        });
+      }
+
+      $("#checkForEdit").click(function() {
+        $("#EditModal").modal("hide");
+      });
+
+      //Checks to see if an upload occured to hide modal
       $("#checkForUpload").click(function() {
         $("#UploadModal").modal("hide");
       });
+
+      //Document Ready Stuff
       $(document).ready(function(){
+
+        //Code to get toast to show up
         hack = $("#checkUploadStatus");
         hack.hide();
         $("#MyMemesTab").hide();
@@ -216,27 +336,21 @@
         if($("#tester22").text() == "YES") {
           showSnack();
         }
+
+        //Code that allows switching between the tabs
         $(".nav-tabs li a").click(function(e){
            e.preventDefault();
         });
-
         $(".nav-tabs li").click(function(){
            var tabid = $(this).find("a").attr("href");
            $(".nav-tabs li,.tabs div.tab").removeClass("active");   // removing active class from tab
            var res = String(tabid);
-           if(res == "#MyMemesTab") {
-             //Database Calls to get the list of memes and load them from Firebase
-           }
-           else {
-
-           }
            $(".tab").hide();   // hiding open tab
            $(tabid).show();    // show tab
            $(this).addClass("active"); //  adding active class to clicked tab
-
         });
 
-      });
+      }); //End of Document Ready
     </script>
 
 
