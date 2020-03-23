@@ -3,6 +3,6 @@ from django.http import HttpResponse
 from django.template import loader
 
 def index(request):
-	context = {"error": "no"}
+	context = {}
 	template = loader.get_template('cart.html')
 	return HttpResponse(template.render(context, request))

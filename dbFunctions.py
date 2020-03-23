@@ -11,3 +11,11 @@ def createUser(username, email, password):
 def uploadImagetoDB(link):
     img = ImageLink(link=link)
     img.save()
+
+def getImageByID(image_id):
+	return ImageLink.objects.get(id=image_id)
+
+def addToCart(currUser, id):
+	acct = Account.objects.get(user=currUser)
+	acct.cartItems.append(id)
+	acct.save()
