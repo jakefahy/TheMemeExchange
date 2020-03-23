@@ -15,3 +15,7 @@ def createUser(username, email, password):
 def uploadImagetoDB(link,tags,description,creator):
     img = ImageLink(link=link,tags=tags,description=description,creator=creator)
     img.save()
+
+def getUserMemes(id):
+    query = ImageLink.objects.filter(creator = id)
+    return query
