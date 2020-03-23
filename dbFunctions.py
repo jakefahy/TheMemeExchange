@@ -28,3 +28,14 @@ def updateUserCoins(user, purchaseAmmt):
 def getUserMemes(id):
     query = ImageLink.objects.filter(creator = id)
     return query
+
+def getMemeById(id):
+    query = ImageLink.objects.filter(id = id)
+    return query
+
+def updateMemeInDB(tags,description,id):
+    print(id)
+    img = ImageLink.objects.get(id = id)
+    img.description = description
+    img.tags = tags
+    img.save()
