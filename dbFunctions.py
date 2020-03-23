@@ -16,7 +16,6 @@ def uploadImagetoDB(link,tags,description,creator):
     img = ImageLink(link=link,tags=tags,description=description,creator=creator)
     img.save()
 
-<<<<<<< HEAD
 def getImageByID(image_id):
 	return ImageLink.objects.get(id=image_id)
 
