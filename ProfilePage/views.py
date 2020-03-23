@@ -12,7 +12,7 @@ from firebase_admin import credentials
 from firebase_admin import storage
 import os
 from django.shortcuts import redirect
-from dbFunctions import uploadImagetoDB
+from dbFunctions import uploadImagetoDB, getUserCoins
 from django.contrib.auth import logout as djangoLogout, login as djangoLogin, authenticate
 from django.shortcuts import redirect
 
@@ -76,6 +76,7 @@ def login(request):
         username = request.GET['uname']
         password = request.GET['psw']
         user = authenticate(request, username=username, password=password)
+        request.session['coins'] = getUserCoins(user)
         if user is not None:
             djangoLogin(request, user)
         else:
