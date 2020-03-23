@@ -65,13 +65,13 @@ button {
   <a href="../BuyMemeCoin/"> 20 MemeCoins </a> <br>
   {% load static %}
   <button> <img src="{% static "/shoppingCart.png" %}" alt="My image" height="30" width="30"> </button><br>
-  <button id="logout" >Logout</button>
+  <a href="../Profile/logout" id="logout" >Logout</a>
 {% endif %}
 
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
-    <form class="modal-content2 animate" action="/action_page.php" method="post">
+    <form class="modal-content2 animate" action="{% url 'login' %}" method="get">
       <span class="close">&times;</span>
       <h2 class="text-center">
         Login To Begin Memeing
@@ -87,6 +87,9 @@ button {
       <div class="modal-content2 ">
         <button type="submit" >Login</button>
       </div>
+      <span>
+        <a href="../createAccount" id="sign-up">Don't have an account? Click to Sign Up!</a>
+      </span>
   </form>
 </div>
 
@@ -100,7 +103,8 @@ var btn = document.getElementById("myBtn");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
-var logoutBtn = document.getElementById("logoutBtn")[0];
+//Gets the button required to create an account
+var create = document.getElementById("sign-up");
 
 // When the user clicks the button, open the modal
 btn.onclick = function() {
@@ -118,8 +122,6 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
-
-
 </script>
 
 

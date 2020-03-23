@@ -26,7 +26,4 @@ def insertAcct(request):
             }, request))
         user = authenticate(request, username=username, password=password)
         login(request, user)
-        # go to home page
-        #return HttpResponse("acct created")
         return redirect("/Profile/")
-        #return HttpResponseRedirect('Profile')

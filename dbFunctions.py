@@ -8,6 +8,6 @@ def createUser(username, email, password):
     acct = Account(user=user, memeBucks=0)
     acct.save()
 
-def uploadImagetoDB(link):
-    img = ImageLink(link=link)
+def uploadImagetoDB(link,tags,description,creator):
+    img = ImageLink(link=link,tags=tags,description=description,creator=creator)
     img.save()
