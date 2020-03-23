@@ -113,7 +113,7 @@
                 <div id="snackbar">{{ message }}</div>
                 {% endfor %}
             </ul>
-        {% endif %}
+      {% endif %}
 
     </main>
 
@@ -134,6 +134,18 @@
                   <form action="{% url 'uploadMemes' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <input type="file" name="myfile"> <br><br>
+                    <i>Add up to 5 tags for your post (Minimum of 2) </i>
+                    <div class="form-group">
+                      <input type="text" aria-label="FirstTag" name="FirstTag" width="15px"  maxlength="25" placeholder="Required"> <br> <br>
+                      <input type="text" aria-label="SecondTag" name="SecondTag" width="15px"  maxlength="25" placeholder="Required"> <br> <br>
+                      <input type="text" aria-label="ThirdTag" name="ThirdTag" width="15px"  maxlength="25" placeholder="Optional"> <br> <br>
+                      <input type="text" aria-label="FourthTag" name="FourthTag" width="15px"  maxlength="25" placeholder="Optional"> <br> <br>
+                      <input type="text" aria-label="FifthTag" name="FifthTag" width="15px"  maxlength="25" placeholder="Optional">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleFormControlTextarea1"><i>Add a description to your post</i></label>
+                      <textarea name="descriptionbox" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Tell us about your super sweet meme..."></textarea>
+                    </div>
                     <button id="checkForUpload" type="submit" class="btn btn-primary">Upload</button>
                   </form>
 
@@ -153,7 +165,7 @@
       var x = document.getElementById("snackbar");
       // Add the "show" class to DIV
       x.className = "show";
-      // After 3 seconds, remove the show class from DIV
+      // After 4 seconds, remove the show class from DIV
       setTimeout(function(){ x.className = x.className.replace("show", ""); }, 4000);
       }
       function modalhelper() {
