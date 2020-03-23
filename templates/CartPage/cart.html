@@ -19,18 +19,66 @@
 		{% block content %}
 	    <h2 style="text-align: center; padding-bottom: 30px">Currently Viewing Your Cart</h2>
 
-	    {% load static %}
-	    <div style="padding-left: 150px; padding-bottom: 25px " >
-			<img class="rounded border" src="{% static "/shoppingCart.png" %}" alt="My image" height="150" width="300">
-			<span style="position: absolute; padding-left: 25px; padding-top: 20px">
-				<div>
-					<label style="font-size: 20px">Insert the meme details here</label>
+	    {% if cart %}
+		    {% for pic in cart %}
+			    <div style="padding-left: 150px; padding-bottom: 25px " >
+					<img class="rounded border" src="{{pic.link}}" alt="My image" height="150" width="300">
+					<span style="position: absolute; padding-left: 25px; padding-top: 20px">
+						<div>
+							<label style="font-size: 20px"> "{{ pic.description }}" </label>
+						</div>
+						<button class="rounded " style="font-size: 15px; padding: 5px; border: solid;">Remove from Cart ?</button> 
+					</span>
 				</div>
-				<button class="rounded " style="font-size: 15px; padding: 5px; border: solid;">Remove from Cart ?</button> 
-			</span>
+			{% endfor %}
+		{% endif %}
+		<div style="text-align: center;">
+			<button id="purchase" class="border rounded " style="font-weight: bold; font-size: 25px; border: solid; border-width: thick; box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); ">Get Those Memes!</button>
 		</div>
-		<button style="text-align: center; position: relative; justify-content: center; display: flex">Purchase Now!</button>
-		
-	    {% endblock %}
+
+		<div id="purchModal" class="modal">
+			<form class="modal-content2 animate" >
+				<span class="close">&times;</span>
+				<h3 class="text-center"> Confirm Your Meme Purchase </h3>
+				<div class="modal-content2 ">
+					<b>Your Meme Coins: </b>
+					<label>Insert meme coin amount here</label>
+				</div>
+				<div class="modal-content2 ">
+					<b>Meme Purchase Total:  </b>
+					<label>Insert purchase total here</label>
+				</div>
+				<div class="modal-content2 text-center">
+					<button type="submit" class="rounded border">Confirm</button>
+				</div>
+				<!-- <span>
+					<a href="../createAccount">Purchase More MemeCoins Here!</a>
+				</span> -->
+				<label>Purchase More MemeCoins Here!</label>
+			</form>
+		</div>
+
+		<script>
+		// Get the modal
+		var modal = document.getElementById("purchModal");
+
+		// Get the button that opens the modal
+		var btn = document.getElementById("purchase");
+
+		// When the user clicks the button, open the modal
+		btn.onclick = function() {
+		  modal.style.display = "block";
+		}
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+		  if (event.target == modal) {
+		    modal.style.display = "none";
+		  }
+		}
+		</script> 
+			
+			
+		{% endblock %}
 	</body>
 </html>

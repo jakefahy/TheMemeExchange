@@ -23,3 +23,12 @@ def addToCart(currUser, id):
 	acct = Account.objects.get(user=currUser)
 	acct.cartItems.append(id)
 	acct.save()
+
+def getUserByID(id):
+	return User.objects.get(id=id)
+
+def getCart(user):
+	return Account.objects.get(user=user).cartItems
+
+def getImagesFromCart(img_ids):
+	return [ImageLink.objects.get(id=i) for i in img_ids]
