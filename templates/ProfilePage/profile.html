@@ -6,11 +6,60 @@
     <meta charset="utf-8">
     <title>Profile Page</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
     <style>
       .padding {
         padding-top: 10px;
+      }
+      .jumbotron {
+        background-color: Transparent;
+      }
+
+      #snackbar {
+        visibility: hidden; /* Hidden by default. Visible on click */
+        min-width: 250px; /* Set a default minimum width */
+        margin-left: -125px; /* Divide value of min-width by 2 */
+        background-color: #333; /* Black background color */
+        color: #fff; /* White text color */
+        text-align: center; /* Centered text */
+        border-radius: 2px; /* Rounded borders */
+        padding: 16px; /* Padding */
+        position: fixed; /* Sit on top of the screen */
+        z-index: 1; /* Add a z-index if needed */
+        left: 50%; /* Center the snackbar */
+        bottom: 120px; /* 30px from the bottom */
+      }
+
+      /* Show the snackbar when clicking on a button (class added with JavaScript) */
+      #snackbar.show {
+        visibility: visible; /* Show the snackbar */
+        /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+        However, delay the fade out process for 2.5 seconds */
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 3.5s;
+        animation: fadein 0.5s, fadeout 0.5s 3.5s;
+      }
+
+      /* Animations to fade the snackbar in and out */
+      @-webkit-keyframes fadein {
+        from {bottom: 0; opacity: 0;}
+        to {bottom: 120px; opacity: 1;}
+      }
+
+      @keyframes fadein {
+        from {bottom: 0; opacity: 0;}
+        to {bottom: 120px; opacity: 1;}
+      }
+
+      @-webkit-keyframes fadeout {
+        from {bottom: 120px; opacity: 1;}
+        to {bottom: 0; opacity: 0;}
+      }
+
+      @keyframes fadeout {
+        from {bottom: 120px; opacity: 1;}
+        to {bottom: 0; opacity: 0;}
       }
     </style>
 
@@ -22,30 +71,127 @@
 
   <main class="padding">
 
-      <div class="jumbotron flex justify-content-center text-center">
+      <span class="jumbotron flex justify-content-center text-center">
         <h2> Welcome to the Profile Page </h2>
-        <hr class="my-6">
-
+        <div id="checkUploadStatus">{{upload}}</div>
         <h4> You have 0 MemeCoins </h4>
         <h6> <a href="../BuyMemeCoin/"><u>Buy More Here!</u></a> </h6>
-      </div>
+      </span>
+
+
 
       <div class="flex justify-content-center text-right">
-        <button type="button" class="btn btn-secondary " id="startButton">Upload A Spicy New Meme</button>
+        <button type="button" class="btn btn-secondary " id="uploadModelButton" onclick="modalhelper()">Upload A Spicy New Meme</button>
       </div>
 
-      <ul class="nav justify-content-center nav-tabs flex">
-        <li class="nav-item">
-          <a class="nav-link active" href="#">Meme Collection</a>
-          <!-- This is where we would call to Database for users images -->
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">My Memes</a>
-        </li>
-      </ul>
+      <!-- Nav tabs -->
+      <div class="flex justify-content-center text-center">
+        <ul class="nav nav-tabs justify-content-center" role="tablist">
+           <li class="active nav-link nav-item"><a href="#MemeCollectionTab">Meme Collection</a></li>
+           <li class="nav-item nav-link" ><a href="#MyMemesTab">My Memes</a></li>
+        </ul>
 
+        <div id="MemeCollectionTab" class="tab active">
+           <br>
+           <h4>Quite a Meme Collection You Have Here</h4><hr width="35%">
+           <p>
+
+           </p>
+        </div>
+        <div id="MyMemesTab" class="tab">
+          <br>
+          <h4>Your Glorious Memes</h4> <hr width="25%">
+          <p>
+
+          </p>
+        </div>
+      </div>
+      {% if messages %}
+            <div id="tester22">YES</div>
+            <ul class="messages">
+                {% for message in messages %}
+                <div id="snackbar">{{ message }}</div>
+                {% endfor %}
+            </ul>
+        {% endif %}
 
     </main>
+
+    <div class="modal fade" id="UploadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"><h2 id="modalTitle">Uploading Sweet New Meme</h2></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+             <div>
+
+                <h1 id="insideTitle"><i>Just Do It<i></h1> <br><br>
+                  <form action="{% url 'uploadMemes' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="file" name="myfile"> <br><br>
+                    <button id="checkForUpload" type="submit" class="btn btn-primary">Upload</button>
+                  </form>
+
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+    function showSnack() {
+      // Get the snackbar DIV
+      var x = document.getElementById("snackbar");
+      // Add the "show" class to DIV
+      x.className = "show";
+      // After 3 seconds, remove the show class from DIV
+      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 4000);
+      }
+      function modalhelper() {
+        $("#UploadModal").modal("show");
+      }
+      $("#checkForUpload").click(function() {
+        $("#UploadModal").modal("hide");
+      });
+      $(document).ready(function(){
+        hack = $("#checkUploadStatus");
+        hack.hide();
+        $("#MyMemesTab").hide();
+        $("#tester22").hide();
+        if($("#tester22").text() == "YES") {
+          showSnack();
+        }
+        $(".nav-tabs li a").click(function(e){
+           e.preventDefault();
+        });
+
+        $(".nav-tabs li").click(function(){
+           var tabid = $(this).find("a").attr("href");
+           $(".nav-tabs li,.tabs div.tab").removeClass("active");   // removing active class from tab
+           var res = String(tabid);
+           if(res == "#MyMemesTab") {
+             //Database Calls to get the list of memes and load them from Firebase
+           }
+           else {
+
+           }
+           $(".tab").hide();   // hiding open tab
+           $(tabid).show();    // show tab
+           $(this).addClass("active"); //  adding active class to clicked tab
+
+        });
+
+      });
+    </script>
 
 
     {% endblock %}

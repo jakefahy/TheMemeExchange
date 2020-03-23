@@ -8,3 +8,10 @@ class Account(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class ImageLink(models.Model):
+    link = models.TextField(default="AAAAAAAAA")
+
+
+    def __str__(self):
+        return self.link

@@ -3,7 +3,7 @@
 <style>
 
 /* The Modal (background) */
-.modal {
+#myMmodal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
@@ -17,7 +17,7 @@
 }
 
 /* Modal Content */
-.modal-content {
+.modal-content2 {
   background-color: #fefefe;
   margin: auto;
   padding: 20px;
@@ -51,9 +51,7 @@ button {
   <h2>The Meme Exchange</h2>
 
   <hr>
-
 </div>
-
 <!-- need to add in if the session then check if login is needed or not -->
 <!-- Hello <i> User</i>,  You Currently Have:
 
@@ -73,20 +71,21 @@ button {
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
+
     <form class="modal-content animate" action="{% url 'login' %}" method="get">
       <span class="close">&times;</span>
       <h2 class="text-center">
         Login To Begin Memeing
       </h2>
-      <div class="modal-content ">
+      <div class="modal-content2 ">
         <label for="uname"><b>Username</b></label>
         <input type="text" placeholder="Enter Username" name="uname" required>
       </div>
-      <div class="modal-content ">
+      <div class="modal-content2 ">
         <label for="psw"><b>Password</b></label>
         <input type="password" placeholder="Enter Password" name="psw" required>
       </div>
-      <div class="modal-content ">
+      <div class="modal-content2 ">
         <button type="submit" >Login</button>
       </div>
       <span>
@@ -125,8 +124,6 @@ window.onclick = function(event) {
   }
 }
 </script>
-
-
 
 
 </header>
