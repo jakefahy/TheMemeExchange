@@ -88,7 +88,7 @@
 
           </div>
           <div class="modal-footer">
-            <button id="modalConfirm" type="button" class="btn btn-primary" data-dismiss="modal">Confirm Purchase of $<span id="totalReal"></span>?</button>
+            <button id="modalConfirm" type="button" class="btn btn-primary">Confirm Purchase of $<span id="totalReal"></span>?</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
           </div>
         </div>
@@ -96,17 +96,58 @@
     </div>
     <!-- End of Modal -->
 
+    {% block javascript %}
+      <script>
 
-    <script>
+        function buy(x,money) {
+          //console.log(x)
+          $("#buyingNum").html(x)
+          $("#totalReal").html(money)
+          $("#buyModal").modal("show");
+        }
 
-      function buy(x,money) {
-        //console.log(x)
-        $("#buyingNum").html(x)
-        $("#totalReal").html(money)
-        $("#buyModal").modal("show");
-      }
+        $.ajaxSetup({
+         beforeSend: function(xhr, settings) {
+             function getCookie(name) {
+                 var cookieValue = null;
+                 if (document.cookie && document.cookie != '') {
+                     var cookies = document.cookie.split(';');
+                     for (var i = 0; i < cookies.length; i++) {
+                         var cookie = jQuery.trim(cookies[i]);
+                         // Does this cookie string begin with the name we want?
+                         if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                             cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                             break;
+                         }
+                     }
+                 }
+                 return cookieValue;
+             }
+             if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                 // Only send the token to relative URLs i.e. locally.
+                 xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+             }
+         }
+    });
 
-    </script>
+        $("#modalConfirm").on("click", function() {
+          $.ajax({
+            method: "POST",
+            url: "{% url 'purchase' %}",
+            data: {"purchaseAmmt": $("#buyingNum").text()},
+            dataType: 'json',
+            success: function(result, status)
+            {
+                console.log("success");
+                $("#buyModal").modal('hide');
+                location.reload(); 
+            }
+
+          });//a
+        });
+
+      </script>
+    {% endblock javascript %}
 
 
 </body>
