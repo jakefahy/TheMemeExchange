@@ -15,6 +15,8 @@ from django.contrib.auth import logout as djangoLogout, login as djangoLogin, au
 from django.shortcuts import redirect
 
 def index(request):
+    if(request.user.is_anonymous):
+        return redirect("/createAccount")
     memes = getUserMemes(request.user.id)
     purchased = getOwnedMemes(request.user)
     owned = []

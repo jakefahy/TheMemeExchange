@@ -5,6 +5,8 @@ from dbFunctions import getCart, getImagesFromCart, remove, addToPurchased, upda
 from django.shortcuts import redirect
 
 def index(request):
+	if(request.user.is_anonymous):
+		return redirect("/createAccount")
 	cart = getImagesFromCart(getCart(request.user))
 	context = {"cart" : cart, "total" : len(cart)*10}
 	template = loader.get_template('cart.html')
