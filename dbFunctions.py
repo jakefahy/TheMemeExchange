@@ -16,6 +16,23 @@ def uploadImagetoDB(link,tags,description,creator):
     img = ImageLink(link=link,tags=tags,description=description,creator=creator)
     img.save()
 
+def getImageByID(image_id):
+	return ImageLink.objects.get(id=image_id)
+
+def addToCart(currUser, id):
+	acct = Account.objects.get(user=currUser)
+	acct.cartItems.append(id)
+	acct.save()
+
+def getUserByID(id):
+	return User.objects.get(id=id)
+
+def getCart(user):
+	return Account.objects.get(user=user).cartItems
+
+def getImagesFromCart(img_ids):
+	return [ImageLink.objects.get(id=i) for i in img_ids]
+
 def getUserCoins(user):
     return Account.objects.get(user=user).memeBucks
 
@@ -28,6 +45,24 @@ def updateUserCoins(user, purchaseAmmt):
 def getUserMemes(id):
     query = ImageLink.objects.filter(creator = id)
     return query
+
+def remove(img_id,user):
+	acct = Account.objects.get(user=user)
+	cart = getImagesFromCart(acct.cartItems)
+	final = []
+	for i in range(len(cart)):
+		if (cart[i]).id == img_id:
+			cart = cart[:i]+cart[i+1:]
+			for j in range(len(cart)):
+				final.append(cart[j].id)
+			acct.cartItems = final
+			acct.save()
+			break
+
+def addToPurchased(user,img_id):
+	acct = Account.objects.get(user=user)
+	acct.purchased.append(img_id)
+	acct.save()
 
 def getMemeById(id):
     query = ImageLink.objects.filter(id = id)

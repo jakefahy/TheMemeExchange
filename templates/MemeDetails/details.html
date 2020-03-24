@@ -17,22 +17,24 @@
 		{% extends "base.html" %}
 
 		{% block content %}
-	    <h2 style="text-align: center; padding-bottom: 30px">Insert Meme Title Here</h1>
+	    <h2 style="text-align: center; padding-bottom: 30px">"{{ image.description }}"</h1>
 
 	    {% load static %}
 	    <div style="padding-left: 150px; padding-bottom: 25px " >
-			<img class="rounded border" src="{% static "/shoppingCart.png" %}" alt="My image" height="400" width="600">
+			<img class="rounded border" src="{{image.link}}" alt="My image" height="400" width="600">
 			<span style="position: absolute; padding-left: 25px; padding-top: 100px">
-				<b style="padding-right: 150px; font-size: 25px;">More About This Meme</b>
-				<button class="rounded " style="font-size: 20px; padding: 10px; border: dotted; background: #ccccff">Add to Cart</button> 
-				<div>
-					<label style="font-size: 20px">Insert the meme details here</label>
-				</div>
+				<b style="padding-left: 10px; font-size: 25px" >Creator: </b>
+				<label style="font-size: 20px"> {{ user.username }}</label>
+				
+				<form style="padding-left: 10px; padding-top: 25px" action="../../memeDetails/addToCart/{{ image.id }}/" method="post"> {% csrf_token %}
+					<input type="submit" class="rounded " style="font-size: 20px; padding: 10px; border: dotted; background: #ccccff" value="Add to Cart"/> 
+				</form>
 			</span>
 		</div>
 		<span>
-			<b style="padding-left: 150px; font-size: 25px" >Creator: </b>
-			<label style="font-size: 20px">Insert creator name here</label>	
+				
+			<b style="padding-left: 150px; font-size: 25px">Tags: </b>
+			<label style="font-size: 20px"> {{ image.tags }}</label>
 		</span>
 		
 	    {% endblock %}
