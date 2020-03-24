@@ -46,10 +46,15 @@
 					</span>
 				</div>
 			{% endfor %}
+			<div style="text-align: center;">
+				<button id="purchase" class="border rounded " style="font-weight: bold; font-size: 25px; border: solid; border-width: thick; box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); ">Get Those Memes!</button>
+
+			</div>
+		{% else %}
+			<div style="padding-left: 150px; padding-bottom: 25px " >
+				<label>Your Cart Is Empty! Go Add Some Memes :)</label>
+			</div>
 		{% endif %}
-		<div style="text-align: center;">
-			<button id="purchase" class="border rounded " style="font-weight: bold; font-size: 25px; border: solid; border-width: thick; box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); ">Get Those Memes!</button>
-		</div>
 
 		<div id="purchModal" class="modal">
 			<form class="modal-content2 animate" >
@@ -91,6 +96,8 @@
 		btn.onclick = function() {
 		  modal.style.display = "block";
 		}
+
+		btn.
 
 		// When the user clicks anywhere outside of the modal, close it
 		window.onclick = function(event) {
