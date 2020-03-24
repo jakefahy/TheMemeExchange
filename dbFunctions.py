@@ -74,3 +74,7 @@ def updateMemeInDB(tags,description,id):
     img.description = description
     img.tags = tags
     img.save()
+
+def deleteMemefromDB(id):
+    img = ImageLink.objects.get(id = id)
+    img.delete()
