@@ -1,7 +1,5 @@
-from django.http import HttpResponse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template import loader
-from django.http import JsonResponse
 from django.conf import settings
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
@@ -12,7 +10,7 @@ from firebase_admin import storage
 import os
 import json
 from django.shortcuts import redirect
-from dbFunctions import uploadImagetoDB, getUserCoins, getUserMemes, updateMemeInDB, getMemeById, getUserMemes, uploadImagetoDB
+from dbFunctions import uploadImagetoDB, getUserCoins, getUserMemes, updateMemeInDB, getMemeById, getUserMemes, uploadImagetoDB, deleteMemefromDB
 from django.contrib.auth import logout as djangoLogout, login as djangoLogin, authenticate
 from django.shortcuts import redirect
 
@@ -143,4 +141,11 @@ def updateMeme(request):
     updateMemeInDB(tags,descript,id)
     messages.add_message(request,20, "Meme Updated!")
 
+    return redirect("/Profile/")
+
+def deleteMeme(request):
+    data = request.POST.copy()
+    id = data.get("deleteId")
+    deleteMemefromDB(id)
+    messages.add_message(request,20, "Meme Deleted!")
     return redirect("/Profile/")

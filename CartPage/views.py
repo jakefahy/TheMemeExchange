@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
-from dbFunctions import getCart, getImagesFromCart, remove, addToPurchased, updateUserCoins, getUserByID
+from dbFunctions import getCart, getImagesFromCart, remove, addToPurchased, updateUserCoins, getUserByID, likeImage
 from django.shortcuts import redirect
 
 def index(request):
@@ -23,6 +23,7 @@ def purchaseMeme(request):
 		currAmt = updateUserCoins(request.user,-10)
 		updateUserCoins(getUserByID(pic.creator),10)
 		request.session['coins'] = currAmt
+		likeImage(pic.id)
 		remove(pic.id,request.user)
 
 	return redirect("/Profile")

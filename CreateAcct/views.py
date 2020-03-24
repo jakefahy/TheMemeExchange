@@ -17,13 +17,14 @@ def insertAcct(request):
         username = request.POST['username']
         email = request.POST['email']
         password = request.POST['pass']
-        try:
-            createUser(username, email, password)
-        except:
-            template = loader.get_template('createAcct.html')
-            return HttpResponse(template.render({
-            "error" : "yes"
-            }, request))
+        # try:
+        #     createUser(username, email, password)
+        # except Exception as e:
+        #     template = loader.get_template('createAcct.html')
+        #     return HttpResponse(template.render({
+        #     "error" : e
+        #     }, request))
+        createUser(username, email, password)
         user = authenticate(request, username=username, password=password)
         login(request, user)
         return redirect("/Profile/")

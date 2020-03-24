@@ -10,4 +10,5 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('getMeme/',views.getMeme, name="getMeme"),
     path('update/',views.updateMeme, name="updateMeme"),
+    path('delete/',views.deleteMeme, name="deleteMeme")
 ]

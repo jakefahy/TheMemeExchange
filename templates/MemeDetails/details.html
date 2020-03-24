@@ -17,7 +17,7 @@
 		{% extends "base.html" %}
 
 		{% block content %}
-	    <h2 style="text-align: center; padding-bottom: 30px">"{{ image.description }}"</h1>
+	    <h2 style="text-align: center; padding-bottom: 30px">"{{ image.description }}"</h2>
 
 	    {% load static %}
 	    <div style="padding-left: 150px; padding-bottom: 25px " >
@@ -36,13 +36,15 @@
 					</form>
 				{% endif %}
 			</span>
+			<br><br>
+			<span>{{image.likes}} memers have bought this dank masterpiece</span> <br>
 		</div>
 		<span>
-				
+
 			<b style="padding-left: 150px; font-size: 25px">Tags: </b>
 			<label style="font-size: 20px"> {{ image.tags }}</label>
 		</span>
-		
+
 	    {% endblock %}
 	</body>
 </html>
