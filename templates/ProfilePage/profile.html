@@ -12,18 +12,33 @@
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
     <style>
-      #MyMemesTab{
+
+      .preloader {
+        align-items: center;
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+        left: 0;
+        position: fixed;
+        top: 0;
+        transition: opacity 0.3s linear;
+        width: 100%;
+        z-index: 9999;
+      }
+
+
+      .MemesTab{
         padding-left: 60px;
         padding-right: 20px;
       }
 
-      #imageFrame{
+      .imageFrame{
         border-radius: 2px; /* Rounded borders */
         width:315px;
         margin: 10px;
       }
 
-      #PageDisplay{
+      .PageDisplay{
         display: flex;
         flex-direction:row;
         flex-wrap: wrap;
@@ -95,6 +110,11 @@
 
   <main class="padding">
 
+    <div class="preloader" id='loader' style='display: none;'>
+      {% load static %}
+      <img src="{% static "/luke.gif" %}" >
+    </div>
+
       <!-- bootstrap jumbotron -->
       <span class="jumbotron flex justify-content-center text-center">
         <h2> Welcome to the Profile Page </h2>
@@ -112,25 +132,34 @@
       <!-- Nav tabs -->
       <div class="flex justify-content-center text-center">
         <ul class="nav nav-tabs justify-content-center" role="tablist">
-           <li class="nav-link nav-item"><a href="#MemeCollectionTab">Meme Collection</a></li>
-           <li class="active nav-item nav-link" ><a href="#MyMemesTab">My Memes</a></li>
+           <li id="CollectionBox" class="nav-link nav-item"><a href="#MemeCollectionTab">Meme Collection</a></li>
+           <li id="MemeBox" class="active nav-item nav-link" ><a href="#MyMemesTab">My Memes</a></li>
         </ul>
 
         <div id="MemeCollectionTab" class="tab active">
            <br>
-           <h4>Quite a Meme Collection You Have Here</h4><hr width="35%">
-           <p>
+           <h4>Quite a Meme Collection You Have Here</h4><hr width="35%"> <br><br>
+           <div class="PageDisplay">
+             {% for m in ownedmemes %}
+               <div class="imageFrame">
+                   <b> {{m.description}} </b>
+                   <a class="tester" href="../memeDetails/{{meme.id}}"><div class="actualMeme">
+                     <img class="rounded border" src="{{m.link}}" alt="My image" height="300" width="300"> <br>
+                   </div></a>
+               </div>
 
-           </p>
+             {% endfor %}
+           </div>
+
         </div>
-        <div id="MyMemesTab" class="tab">
+        <div id="MyMemesTab" class="MemesTab" class="tab">
           <br>
           <h4>Your Glorious Memes</h4> <hr width="25%"> <br><br>
-          <div id="PageDisplay">
+          <div class="PageDisplay">
             {% for meme in mymemes %}
-              <div id="imageFrame">
+              <div class="imageFrame">
                   <b> {{meme.description}} </b>
-                  <a href="#"><div id="actualMeme">
+                  <a class="tester" href="../memeDetails/{{meme.id}}"><div class="actualMeme">
                     <img class="rounded border" src="{{meme.link}}" alt="My image" height="300" width="300"> <br>
                   </div></a>
                   <a class="bluetime" href="#" onclick="editModalHelper({{meme.id}})"><i class='fas fa-edit' style='font-size:24px'></i></a> &ensp;
@@ -170,7 +199,7 @@
                 <h1 id="insideTitle"><i>Just Do It<i></h1> <br><br>
                   <form action="{% url 'uploadMemes' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <input type="file" name="myfile"> <br><br>
+                    <input type="file" name="myfile" accept="image/*"> <br><br>
                     <i>Add up to 5 tags for your post (Minimum of 2) </i>
                     <div class="form-group">
                       <input type="text" aria-label="FirstTag" name="FirstTag" width="15px"  maxlength="25" placeholder="Required"> <br> <br>
@@ -301,11 +330,11 @@
       // Add the "show" class to DIV
       x.className = "show";
       // After 4 seconds, remove the show class from DIV
-      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 4000);
+      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
       }
 
       //Shows upload modal on button press
-      function modalhelper(id) {
+      function modalhelper() {
         $("#UploadModal").modal("show");
       }
 
@@ -326,6 +355,10 @@
             'memeid': id
           },
           dataType: 'json',
+          beforeSend: function(){
+            // Show image container
+            $("#loader").show();
+           },
           success: function (data) {
             //console.log(data);
             $("#imgId").attr("value", data['id'])
@@ -343,7 +376,11 @@
             if(data['memeTags'].length == 5) {
               $("#FifthTag").attr("value", data['memeTags'][4]);
             }
-          }
+          },
+          complete:function(data){
+          // Hide image container
+          $("#loader").hide();
+         }
         });
       }
 
@@ -359,11 +396,19 @@
             'memeid': id
           },
           dataType: 'json',
+          beforeSend: function(){
+            // Show image container
+            $("#loader").show();
+           },
           success: function (data) {
             $("#deletingId").attr("value", data['id']);
             $("#DeleteImage").attr("src",data['memeLink']);
             $("#DeleteModal").modal("show");
-          }
+          },
+          complete:function(data){
+          // Hide image container
+          $("#loader").hide();
+         }
         });
 
       }
@@ -379,6 +424,16 @@
 
       //Document Ready Stuff
       $(document).ready(function(){
+        $("form").on("submit", function(){
+          $("#loader").show();
+          setTimeout(function() {
+            $("#loader").hide();
+          },4000);
+        });//submit
+
+        $(".tester").on("click",function() {
+          $("#loader").show();
+        });
 
         //Code to get toast to show up
         hack = $("#checkUploadStatus");
@@ -393,13 +448,33 @@
         $(".nav-tabs li a").click(function(e){
            e.preventDefault();
         });
+        var check = true;
         $(".nav-tabs li").click(function(){
-           var tabid = $(this).find("a").attr("href");
-           $(".nav-tabs li,.tabs div.tab").removeClass("active");   // removing active class from tab
-           var res = String(tabid);
-           $(".tab").hide();   // hiding open tab
-           $(tabid).show();    // show tab
-           $(this).addClass("active"); //  adding active class to clicked tab
+          if(check == true) {
+            $("#MyMemesTab").removeClass("active");
+            $("#MemeBox").removeClass("active");
+            $("#MyMemesTab").hide();
+            $("#MemeCollectionTab").addClass("active");
+            $("#CollectionBox").addClass("active");
+            $("#MemeCollectionTab").show();
+            check = false;
+          }
+          else if(check == false) {
+            $("#MemeCollectionTab").removeClass("active");
+            $("#CollectionBox").removeClass("active");
+            $("#MemeCollectionTab").hide();
+            $("#MyMemesTab").addClass("active");
+            $("#MemeBox").addClass("active");
+            $("#MyMemesTab").show();
+            check = true;
+          }
+
+           // var tabid = $(this).find("a").attr("href");
+           // $(".nav-tabs li,.tabs div.tab").removeClass("active");   // removing active class from tab
+           // var res = String(tabid);
+           // $(".tab").hide();   // hiding open tab
+           // $(tabid).show();    // show tab
+           // $(this).addClass("active"); //  adding active class to clicked tab
         });
 
       }); //End of Document Ready

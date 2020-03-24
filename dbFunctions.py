@@ -47,7 +47,7 @@ def getUserMemes(id):
     return query
 
 def getOwnedMemes(user):
-    query = Account.objects.get(user = user).purchased
+    query = Account.objects.get(user=user).purchased
     return query
 
 def remove(img_id,user):
@@ -83,7 +83,7 @@ def likeImage(imageId):
     img = ImageLink.objects.get(id=imageId)
     img.likes += 1
     img.save()
-    
+
 def deleteMemefromDB(id):
     img = ImageLink.objects.get(id = id)
     img.delete()

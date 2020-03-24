@@ -10,7 +10,7 @@ from firebase_admin import storage
 import os
 import json
 from django.shortcuts import redirect
-from dbFunctions import uploadImagetoDB, getUserCoins, getUserMemes, updateMemeInDB, getMemeById, getUserMemes, uploadImagetoDB, deleteMemefromDB
+from dbFunctions import uploadImagetoDB, getUserCoins, getUserMemes, updateMemeInDB, getMemeById, getUserMemes, uploadImagetoDB, deleteMemefromDB, getOwnedMemes
 from django.contrib.auth import logout as djangoLogout, login as djangoLogin, authenticate
 from django.shortcuts import redirect
 
@@ -18,7 +18,12 @@ def index(request):
     if(request.user.is_anonymous):
         return redirect("/createAccount")
     memes = getUserMemes(request.user.id)
-    context = {"mymemes" : memes}
+    purchased = getOwnedMemes(request.user)
+    owned = []
+    for m in purchased:
+        meme_query = getMemeById(m)
+        owned.append(meme_query[0])
+    context = {"mymemes" : memes, "ownedmemes" : owned}
     template = loader.get_template('profile.html')
     return HttpResponse(template.render(context, request))
 
