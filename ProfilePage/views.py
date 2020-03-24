@@ -1,7 +1,5 @@
-from django.http import HttpResponse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template import loader
-from django.http import JsonResponse
 from django.conf import settings
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
