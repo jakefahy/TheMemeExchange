@@ -64,7 +64,13 @@ def addToPurchased(user,img_id):
 	acct.purchased.append(img_id)
 	acct.save()
 
+def getMemeById(id):
+    query = ImageLink.objects.filter(id = id)
+    return query
 
-
-
-
+def updateMemeInDB(tags,description,id):
+    print(id)
+    img = ImageLink.objects.get(id = id)
+    img.description = description
+    img.tags = tags
+    img.save()
