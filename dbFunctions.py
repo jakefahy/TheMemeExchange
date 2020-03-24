@@ -74,3 +74,12 @@ def updateMemeInDB(tags,description,id):
     img.description = description
     img.tags = tags
     img.save()
+    
+def getImageByTag(tag):
+    query = ImageLink.objects.all()
+    results = []
+    for meme in query:
+        for memeTag in meme.tags:
+            if tag == memeTag:
+                results.append(meme)
+    return results
