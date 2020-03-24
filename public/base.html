@@ -48,7 +48,7 @@ button {
 <header class="flex justify-content-center text-right padding">
 
 <div class="text-center">
-  <h2>The Meme Exchange</h2>
+  <h2> <a href="../../front" style="color: #000000">The Meme Exchange</a> </h2>
 
   <hr>
 </div>
@@ -61,8 +61,8 @@ button {
 {% if request.user.is_anonymous %}
   <button id="myBtn" >Click Here To Login</button>
 {% else %}
-  Hello <i> {{request.user}}</i>,  You Currently Have:
-  <a href="../../BuyMemeCoin/"> {{ request.session.coins }} MemeCoins </a> <br>
+  Hello <i> <a href="../../Profile/"> {{request.user}} </a> </i>,  You Currently Have:
+  <a href="../../../BuyMemeCoin/"> {{ request.session.coins }} MemeCoins </a> <br>
   {% load static %}
   <a href="../../../shoppingCart/" > <img src="{% static "/shoppingCart.png" %}" alt="My image" height="30" width="30"> </a><br>
   <a href="../../Profile/logout" id="logout" >Logout</a>

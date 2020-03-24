@@ -70,9 +70,15 @@
 					<b>Meme Purchase Total:  </b>
 					<label>{{ total }}</label>
 				</div>
-				<div class="modal-content2 text-center">
-					<a href="../../shoppingCart/purchaseMeme/" >Confirm</a>
-				</div>
+				{% if total > request.session.coins %}
+					<div class="modal-content2 text-center">
+						<a href="../BuyMemeCoin/" >Not enough MemeCoins for this purchase! Click me to buy more.</a>
+					</div>
+				{% else %}
+					<div class="modal-content2 text-center">
+						<a href="../../shoppingCart/purchaseMeme/" >Confirm Your Purchase</a>
+					</div>
+				{% endif %}
 				<span>
 					<a href="../BuyMemeCoin">Purchase More MemeCoins Here!</a>
 				</span>
