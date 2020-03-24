@@ -4,6 +4,7 @@
 	    <meta charset="utf-8">
 	    <title>Shopping Cart Page</title>
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
 	    <style>
@@ -11,18 +12,6 @@
 				padding-top: 10px;
 			}
 
-			#purchModal {
-			  display: none; /* Hidden by default */
-			  position: fixed; /* Stay in place */
-			  z-index: 1; /* Sit on top */
-			  padding-top: 100px; /* Location of the box */
-			  left: 0;
-			  top: 0;
-			  width: 100%;
-			  overflow: auto; /* Enable scroll if needed */
-			  background-color: rgb(0,0,0); /* Fallback color */
-			  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-			}
 	    </style>
 
 	</head>
@@ -30,88 +19,98 @@
 		{% extends "base.html" %}
 
 		{% block content %}
-	    <h2 style="text-align: center; padding-bottom: 30px">Currently Viewing Your Cart</h2>
+
+		{% load static %}
+
+		<link rel="stylesheet" href="{% static 'TheMemeExchange/theme.css' %}">
+	    <h2 style="text-align: center; padding-bottom: 30px; padding-top: 30px">Currently Viewing Your Cart</h2>
 
 	    {% if cart %}
 		    {% for pic in cart %}
-			    <div style="padding-left: 150px; padding-bottom: 25px " >
-					<img class="rounded border" src="{{pic.link}}" alt="My image" height="150" width="300">
-					<span style="position: absolute; padding-left: 25px; padding-top: 20px">
-						<div>
-							<label style="font-size: 20px"> "{{ pic.description }}" </label>
-						</div>
-						<form style="padding-left: 10px; padding-top: 25px" action="../../shoppingCart/removeItemFromCart/{{ pic.id }}/" method="delete"> {% csrf_token %}
-							<input type="submit" class="rounded " style="font-size: 15px; padding: 5px; border: solid;" value="Remove from Cart ?"/> 
-						</form>						
-					</span>
+		    <div style="padding-left: 150px; padding-bottom: 175px " >
+		    	<div class="rounded " style="position: fixed; width: 300px;">
+					<img class="rounded border " src="{{pic.link}}" alt="My image" height="150" width="auto">
 				</div>
+
+				<span style="position: absolute; padding-left: 175px; padding-top: 20px">
+					<div>
+						<label style="font-size: 20px"> "{{ pic.description }}" </label>
+					</div>
+					<form style="padding-left: 10px; padding-top: 25px" action="../../shoppingCart/removeItemFromCart/{{ pic.id }}/" method="delete"> {% csrf_token %}
+						<input type="submit" class="rounded " style="font-size: 15px; padding: 5px; border: solid;" value="Remove from Cart ?"/> 
+					</form>						
+				</span>
+			</div>
 			{% endfor %}
-			<div style="text-align: center;">
-				<button id="purchase" class="border rounded " style="font-weight: bold; font-size: 25px; border: solid; border-width: thick; box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); ">Get Those Memes!</button>
+			<div style="text-align: center; ">
+				<button class="border rounded " type="button" class="btn btn-secondary " id="uploadModelButton" onclick="modalhelper()" style="font-weight: bold; font-size: 25px; border: dashed; border-width: thick; box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); background: #124B63; color: #ffffff">Get Those Memes!</button>
 
 			</div>
 		{% else %}
-			<div style="padding-left: 150px; padding-bottom: 25px " >
+			<div style="padding-top: 100px; text-align: center; font-size: 30px" >
 				<label>Your Cart Is Empty! Go Add Some Memes :)</label>
 			</div>
 		{% endif %}
 
-		<div id="purchModal" class="modal">
-			<form class="modal-content2 animate" >
-				<button id="closePurchButton" class="close" data-dismiss="modal" aria-label="Close">
-	              <span >&times;</span>
-	            </button>
-				<h3 class="text-center"> Confirm Your Meme Purchase </h3>
-				<div class="modal-content2 ">
-					<b>Your Meme Coins: </b>
-					<label>{{ request.session.coins }}</label>
-				</div>
-				<div class="modal-content2 ">
-					<b>Meme Purchase Total:  </b>
-					<label>{{ total }}</label>
-				</div>
-				{% if total > request.session.coins %}
-					<div class="modal-content2 text-center">
-						<a href="../BuyMemeCoin/" >Not enough MemeCoins for this purchase! Click me to buy more.</a>
+
+
+		<!-- Start of Purchase Model -->
+    <div class="modal fade" id="purchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"><h2 id="modalTitle">Confirm Your Meme Purchase</h2></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+             <div>
+                  <form>
+                    <div >
+						<b>Your Meme Coins: </b>
+						<label>{{ request.session.coins }}</label>
 					</div>
-				{% else %}
-					<div class="modal-content2 text-center">
-						<a href="../../shoppingCart/purchaseMeme/" >Confirm Your Purchase</a>
+					<div >
+						<b>Meme Purchase Total:  </b>
+						<label>{{ total }}</label>
 					</div>
-				{% endif %}
-				<span>
-					<a href="../BuyMemeCoin">Purchase More MemeCoins Here!</a>
-				</span>
-			</form>
-		</div>
+					{% if total > request.session.coins %}
+						<div class=" text-center">
+							<a href="../BuyMemeCoin/" >Not enough MemeCoins for this purchase! Click me to buy more.</a>
+						</div>
+					{% else %}
+						<div class="text-center" style="padding-top: 10px">
+							<b><a href="../../shoppingCart/purchaseMeme/" >Confirm Your Purchase</a></b>
+						</div>
+					{% endif %}
+                  </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+          	<span >
+				<a href="../BuyMemeCoin">Purchase More MemeCoins Here!</a>
+			</span>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- End of Upload Model -->
+	<script>
 
-		<script>
-	
-		$("#closePurchButton").click(function(){
-			$("#purchModal").modal("hide");
-		});
+	//Shows upload modal on button press
+	function modalhelper() {
+		$("#purchModal").modal("show");
+	}
 
-
-		// Get the modal
-		var modal = document.getElementById("purchModal");
-
-		// Get the button that opens the modal
-		var btn = document.getElementById("purchase");
-
-		// When the user clicks the button, open the modal
-		btn.onclick = function() {
-		  modal.style.display = "block";
-		}
-
-		btn.
-
-		// When the user clicks anywhere outside of the modal, close it
-		window.onclick = function(event) {
-		  if (event.target == modal) {
-		    modal.style.display = "none";
-		  }
-		}
-		</script> 
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+	  if (event.target == modal) {
+	    modal.style.display = "none";
+	  }
+	}
+	</script> 
 			
 			
 		{% endblock %}
