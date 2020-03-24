@@ -10,6 +10,19 @@
 			.padding {
 				padding-top: 10px;
 			}
+
+			#purchModal {
+			  display: none; /* Hidden by default */
+			  position: fixed; /* Stay in place */
+			  z-index: 1; /* Sit on top */
+			  padding-top: 100px; /* Location of the box */
+			  left: 0;
+			  top: 0;
+			  width: 100%;
+			  overflow: auto; /* Enable scroll if needed */
+			  background-color: rgb(0,0,0); /* Fallback color */
+			  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+			}
 	    </style>
 
 	</head>
@@ -40,42 +53,39 @@
 
 		<div id="purchModal" class="modal">
 			<form class="modal-content2 animate" >
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	              <span aria-hidden="true">&times;</span>
+				<button id="closePurchButton" class="close" data-dismiss="modal" aria-label="Close">
+	              <span >&times;</span>
 	            </button>
 				<h3 class="text-center"> Confirm Your Meme Purchase </h3>
 				<div class="modal-content2 ">
 					<b>Your Meme Coins: </b>
-					<label>Insert meme coin amount here</label>
+					<label>{{ request.session.coins }}</label>
 				</div>
 				<div class="modal-content2 ">
 					<b>Meme Purchase Total:  </b>
-					<label>Insert purchase total here</label>
+					<label>{{ total }}</label>
 				</div>
 				<div class="modal-content2 text-center">
-					<button type="submit" class="rounded border">Confirm</button>
+					<a href="../../shoppingCart/purchaseMeme/" >Confirm</a>
 				</div>
-				<!-- <span>
-					<a href="../createAccount">Purchase More MemeCoins Here!</a>
-				</span> -->
-				<label>Purchase More MemeCoins Here!</label>
+				<span>
+					<a href="../BuyMemeCoin">Purchase More MemeCoins Here!</a>
+				</span>
 			</form>
 		</div>
 
 		<script>
+	
+		$("#closePurchButton").click(function(){
+			$("#purchModal").modal("hide");
+		});
+
+
 		// Get the modal
 		var modal = document.getElementById("purchModal");
 
 		// Get the button that opens the modal
 		var btn = document.getElementById("purchase");
-
-		// // Get the <span> element that closes the modal
-		// var span = document.getElementsByClassName("close")[0];
-
-		// // When the user clicks on <span> (x), close the modal
-		// span.onclick = function() {
-		//   modal.style.display = "none";
-		// }
 
 		// When the user clicks the button, open the modal
 		btn.onclick = function() {

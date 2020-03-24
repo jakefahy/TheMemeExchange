@@ -59,6 +59,11 @@ def remove(img_id,user):
 			acct.save()
 			break
 
+def addToPurchased(user,img_id):
+	acct = Account.objects.get(user=user)
+	acct.purchased.append(img_id)
+	acct.save()
+
 
 
 
