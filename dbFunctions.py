@@ -46,6 +46,10 @@ def getUserMemes(id):
     query = ImageLink.objects.filter(creator = id)
     return query
 
+def getOwnedMemes(id):
+    query = Account.objects.get(id = id).purchased
+    return query
+
 def remove(img_id,user):
 	acct = Account.objects.get(user=user)
 	cart = getImagesFromCart(acct.cartItems)
