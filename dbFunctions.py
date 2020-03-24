@@ -79,6 +79,11 @@ def updateMemeInDB(tags,description,id):
     img.tags = tags
     img.save()
 
+def likeImage(imageId):
+    img = ImageLink.objects.get(id=imageId)
+    img.likes += 1
+    img.save()
+    
 def deleteMemefromDB(id):
     img = ImageLink.objects.get(id = id)
     img.delete()

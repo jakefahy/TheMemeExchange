@@ -18,3 +18,4 @@ class ImageLink(models.Model):
     tags = ArrayField(models.TextField(max_length=25), blank=True)
     description = models.TextField(default="No Description Provided")
     creator = models.IntegerField(default=-1)
+    likes = models.IntegerField(default=0)

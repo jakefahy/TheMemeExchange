@@ -17,7 +17,7 @@
 		{% extends "base.html" %}
 
 		{% block content %}
-	    <h2 style="text-align: center; padding-bottom: 30px">"{{ image.description }}"</h1>
+	    <h2 style="text-align: center; padding-bottom: 30px">"{{ image.description }}"</h2>
 
 	    {% load static %}
 	    <div style="padding-left: 150px; padding-bottom: 25px " >
@@ -25,18 +25,20 @@
 			<span style="position: absolute; padding-left: 25px; padding-top: 100px">
 				<b style="padding-left: 10px; font-size: 25px" >Creator: </b>
 				<label style="font-size: 20px"> {{ user.username }}</label>
-				
+
 				<form style="padding-left: 10px; padding-top: 25px" action="../../memeDetails/addToCart/{{ image.id }}/" method="post"> {% csrf_token %}
-					<input type="submit" class="rounded " style="font-size: 20px; padding: 10px; border: dotted; background: #ccccff" value="Add to Cart"/> 
+					<input type="submit" class="rounded " style="font-size: 20px; padding: 10px; border: dotted; background: #ccccff" value="Add to Cart"/>
 				</form>
 			</span>
+			<br><br>
+			<span>{{image.likes}} memers have bought this dank masterpiece</span> <br>
 		</div>
 		<span>
-				
+
 			<b style="padding-left: 150px; font-size: 25px">Tags: </b>
 			<label style="font-size: 20px"> {{ image.tags }}</label>
 		</span>
-		
+
 	    {% endblock %}
 	</body>
 </html>
