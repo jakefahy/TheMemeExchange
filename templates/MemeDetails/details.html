@@ -25,10 +25,25 @@
 			<span style="position: absolute; padding-left: 25px; padding-top: 100px">
 				<b style="padding-left: 10px; font-size: 25px" >Creator: </b>
 				<label style="font-size: 20px"> {{ user.username }}</label>
-
-				<form style="padding-left: 10px; padding-top: 25px" action="../../memeDetails/addToCart/{{ image.id }}/" method="post"> {% csrf_token %}
-					<input type="submit" class="rounded " style="font-size: 20px; padding: 10px; border: dotted; background: #ccccff" value="Add to Cart"/>
-				</form>
+				{% if image.creator == request.user.id %}
+					<div style="padding-left: 10px; padding-top: 25px">
+						<label class="rounded " style="font-size: 20px; padding: 10px; border: dotted; background: #ccccff">This is your meme!</label>
+					</div>
+				{% elif image.id in owned %}
+					<div style="padding-left: 10px; padding-top: 25px">
+						<label class="rounded " style="font-size: 20px; padding: 10px; border: dotted; background: #ccccff">You already own this!</label>
+					</div>
+				{% else %}
+					{% if image.id in cart %}
+						<div style="padding-left: 10px; padding-top: 25px">
+							<label class="rounded " style="font-size: 20px; padding: 10px; border: dotted; background: #ccccff">Added!</label>
+						</div>
+					{% else %}
+						<form style="padding-left: 10px; padding-top: 25px" action="../../memeDetails/addToCart/{{ image.id }}/" method="post"> {% csrf_token %}
+							<input type="submit" class="rounded " style="font-size: 20px; padding: 10px; border: dotted; background: #ccccff" value="Add to Cart"/> 
+						</form>
+					{% endif %}
+				{% endif %}
 			</span>
 			<br><br>
 			<span>{{image.likes}} memers have bought this dank masterpiece</span> <br>
