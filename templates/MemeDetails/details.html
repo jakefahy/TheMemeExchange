@@ -29,11 +29,20 @@
 					<div style="padding-left: 10px; padding-top: 25px">
 						<label class="rounded " style="font-size: 20px; padding: 10px; border: dotted; background: #ccccff">This is your meme!</label>
 					</div>
-					
+				{% elif image.id in owned %}
+					<div style="padding-left: 10px; padding-top: 25px">
+						<label class="rounded " style="font-size: 20px; padding: 10px; border: dotted; background: #ccccff">You already own this!</label>
+					</div>
 				{% else %}
-					<form style="padding-left: 10px; padding-top: 25px" action="../../memeDetails/addToCart/{{ image.id }}/" method="post"> {% csrf_token %}
-						<input type="submit" class="rounded " style="font-size: 20px; padding: 10px; border: dotted; background: #ccccff" value="Add to Cart"/> 
-					</form>
+					{% if image.id in cart %}
+						<div style="padding-left: 10px; padding-top: 25px">
+							<label class="rounded " style="font-size: 20px; padding: 10px; border: dotted; background: #ccccff">Added!</label>
+						</div>
+					{% else %}
+						<form style="padding-left: 10px; padding-top: 25px" action="../../memeDetails/addToCart/{{ image.id }}/" method="post"> {% csrf_token %}
+							<input type="submit" class="rounded " style="font-size: 20px; padding: 10px; border: dotted; background: #ccccff" value="Add to Cart"/> 
+						</form>
+					{% endif %}
 				{% endif %}
 			</span>
 			<br><br>
