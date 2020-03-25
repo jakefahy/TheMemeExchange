@@ -8,10 +8,6 @@
   padding-top: 20px;
 }
 
-a {
-  color: #FF0000;
-}
-
 button {
   background-color: Transparent;
   background-repeat:no-repeat;
@@ -30,36 +26,31 @@ button {
 
   <hr>
 </div>
-<!-- need to add in if the session then check if login is needed or not -->
-<!-- Hello <i> User</i>,  You Currently Have:
 
-<a href="../BuyMemeCoin/"> 20 MemeCoins </a> -->
-<!-- Trigger/Open The Modal -->
-{% if request.user.is_anonymous %}
-  <button id="myBtn" onclick="modalhelper()">Click Here To Login</button>
-{% else %}
+<div class="">
+  <span class=" input-group mb-3" style="padding-left: 10px;">
+    <a style="height: 35px; color: #124B63" class="btn btn-outline-dark round" href = "../front">home</a>
+    <a style="height: 35px;color: #124B63" class="btn btn-outline-dark round" href = "../about/">about</a>
 
-  Hello <i> <a href="../../Profile/"> {{request.user}} </a> </i>,  You Currently Have:
-  <a href="../../../BuyMemeCoin/"> {{ request.session.coins }} MemeCoins </a> <br>
-  {% load static %}
-  <a href="../../../shoppingCart/" > <img src="{% static "/shoppingCart.png" %}" alt="My image" height="30" width="30"> </a><br>
-  <a href="../../Profile/logout" id="logout" >Logout</a> <br>
- <!-- <a href="../../Profile"> Profile</a>-->
-{% endif %}
+    <span>   <input id="searchfield" type="text" class="form-control " aria-label="Text input" ></span>
+    <span class="input-group-prepend " >
+      <button id="searchbutton" class="btn btn-outline-dark round" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height: 35px;">Search</button>
+    </span>
+    <span style="padding-left: 510px">
+      {% if request.user.is_anonymous %}
+        <button id="myBtn" style="color: #124B63" onclick="modalhelper()">Click Here To Login</button>
+      {% else %}
 
-        <span>
-                <div class="d-flex input-group mb-3">
-				<a class="btn btn-outline-dark p-2" href = "../front">home</a>
-				<a class="btn btn-outline-dark p-2" href = "../about/">about</a>
-						
-                         <span class = "ml-auto">   <input id="searchfield" type="text" class="form-control " aria-label="Text input"></span>
-							<div class="input-group-prepend">
-                                <button id="searchbutton" class="btn btn-outline-dark" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search</button>
-                            </div>
-		
-						
-                </div>
-        </span>
+        <label style="font-size: 20px"> Hello <i> <a href="../../Profile/"> {{request.user}} </a> </i>,  You Currently Have:
+        <a href="../../../BuyMemeCoin/"> {{ request.session.coins }} MemeCoins </a> </label><br>
+        {% load static %}
+        <label style="font-size: 20px"> <a href="../../../shoppingCart/" > <img src="{% static "/shoppingCart.png" %}" alt="My image" height="35" width="35"> </a><br>
+        <a href="../../Profile/logout" id="logout" >Logout</a></label> <br>
+      {% endif %}
+    </span>
+  </span>
+
+</div>
 
 
 

@@ -18,27 +18,22 @@
         background: #d4d8d9;
       }
 
-      body {
-        padding-left: 20px;
-        padding-right: 20px;
-        padding-top: 5px;
-      }
-
       .prices {
         padding-right: 30px;
       }
     </style>
 
 </head>
+<header class="bg-dark p-2 text-center">
+  {% extends "base.html" %}
+      {% block content %}
+
+        {% load static %}
+
+        <link rel="stylesheet" href="{% static 'TheMemeExchange/theme.css' %}">
+</header> 
 <body>
 
-  {% extends "base.html" %}
-
-  {% block content %}
-
-  {% load static %}
-
-  <link rel="stylesheet" href="{% static 'TheMemeExchange/theme.css' %}">
   <main class="">
       {% load static %}
       <div class="jumbotron flex justify-content-center text-center">
@@ -47,22 +42,22 @@
       </div>
 
       <div class="flex justify-content-center text-center prices">
-          <button onclick="return buy(10000,0.99)" ><h4>10000 MemeCoins - $0.99 </h4> <br>
-          <img src="{% static "/memecoin1.png" %}" alt="coin" height="200" width="200">
-          </button>
-          <hr>
-          <button onclick="return buy(22000,4.99)" ><h4>22000 MemeCoins - $4.99 </h4> <br>
-          <img src="{% static "/pileOfCoins.png" %}" alt="coin" height="200" width="200">
-          </button>
-          <hr>
-          <button onclick="return buy(55000,9.99)" ><h4>55000 MemeCoins - $9.99 </h4> <br>
-          <img src="{% static "/pileOfCoins.png" %}" alt="coin" height="200" width="200">
-          </button>
-          <hr>
-          <button onclick="return buy(110000,19.99)" ><h4>110000 MemeCoins - $19.99 </h4> <br>
-          <img src="{% static "/pileOfCoins.png" %}" alt="coin" height="200" width="200">
-          </button>
-          <hr>
+        <button onclick="return buy(10000,0.99)" ><h4>10000 MemeCoins - $0.99 </h4> <br>
+        <img src="{% static "/memecoin1.png" %}" alt="coin" height="200" width="200">
+        </button>
+        <hr>
+        <button onclick="return buy(22000,4.99)" ><h4>22000 MemeCoins - $4.99 </h4> <br>
+        <img src="{% static "/pileOfCoins.png" %}" alt="coin" height="200" width="200">
+        </button>
+        <hr>
+        <button onclick="return buy(55000,9.99)" ><h4>55000 MemeCoins - $9.99 </h4> <br>
+        <img src="{% static "/pileOfCoins.png" %}" alt="coin" height="200" width="200">
+        </button>
+        <hr>
+        <button onclick="return buy(110000,19.99)" ><h4>110000 MemeCoins - $19.99 </h4> <br>
+        <img src="{% static "/pileOfCoins.png" %}" alt="coin" height="200" width="200">
+        </button>
+        <hr>
       </div>
 
     </main>
