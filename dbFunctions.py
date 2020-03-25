@@ -46,6 +46,10 @@ def getUserMemes(id):
     query = ImageLink.objects.filter(creator = id)
     return query
 
+def getOwnedMemes(user):
+    query = Account.objects.get(user=user).purchased
+    return query
+
 def remove(img_id,user):
 	acct = Account.objects.get(user=user)
 	cart = getImagesFromCart(acct.cartItems)
@@ -74,7 +78,7 @@ def updateMemeInDB(tags,description,id):
     img.description = description
     img.tags = tags
     img.save()
-    
+
 def getImageByTag(tag):
     query = ImageLink.objects.all()
     results = []
@@ -83,3 +87,12 @@ def getImageByTag(tag):
             if tag == memeTag:
                 results.append(meme)
     return results
+
+def likeImage(imageId):
+    img = ImageLink.objects.get(id=imageId)
+    img.likes += 1
+    img.save()
+
+def deleteMemefromDB(id):
+    img = ImageLink.objects.get(id = id)
+    img.delete()

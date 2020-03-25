@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
-from dbFunctions import getCart, getImagesFromCart, remove, addToPurchased, updateUserCoins, getUserByID
+from dbFunctions import getCart, getImagesFromCart, remove, addToPurchased, updateUserCoins, getUserByID, likeImage
 from django.shortcuts import redirect
 
 def index(request):
+	if(request.user.is_anonymous):
+		return redirect("/createAccount")
 	cart = getImagesFromCart(getCart(request.user))
 	context = {"cart" : cart, "total" : len(cart)*10}
 	template = loader.get_template('cart.html')
@@ -23,6 +25,7 @@ def purchaseMeme(request):
 		currAmt = updateUserCoins(request.user,-10)
 		updateUserCoins(getUserByID(pic.creator),10)
 		request.session['coins'] = currAmt
+		likeImage(pic.id)
 		remove(pic.id,request.user)
 
 	return redirect("/Profile")

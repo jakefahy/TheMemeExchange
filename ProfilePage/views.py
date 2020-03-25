@@ -1,24 +1,30 @@
-from django.http import HttpResponse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template import loader
-from django.http import JsonResponse
 from django.conf import settings
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
 import requests
 import firebase_admin
 from firebase_admin import credentials
+import google.cloud
 from firebase_admin import storage
 import os
 import json
 from django.shortcuts import redirect
-from dbFunctions import uploadImagetoDB, getUserCoins, getUserMemes, updateMemeInDB, getMemeById, getUserMemes, uploadImagetoDB
+from dbFunctions import uploadImagetoDB, getUserCoins, getUserMemes, updateMemeInDB, getMemeById, getUserMemes, uploadImagetoDB, deleteMemefromDB, getOwnedMemes
 from django.contrib.auth import logout as djangoLogout, login as djangoLogin, authenticate
 from django.shortcuts import redirect
 
 def index(request):
+    if(request.user.is_anonymous):
+        return redirect("/createAccount")
     memes = getUserMemes(request.user.id)
-    context = {"mymemes" : memes}
+    purchased = getOwnedMemes(request.user)
+    owned = []
+    for m in purchased:
+        meme_query = getMemeById(m)
+        owned.append(meme_query[0])
+    context = {"mymemes" : memes, "ownedmemes" : owned}
     template = loader.get_template('profile.html')
     return HttpResponse(template.render(context, request))
 
@@ -143,4 +149,11 @@ def updateMeme(request):
     updateMemeInDB(tags,descript,id)
     messages.add_message(request,20, "Meme Updated!")
 
+    return redirect("/Profile/")
+
+def deleteMeme(request):
+    data = request.POST.copy()
+    id = data.get("deleteId")
+    deleteMemefromDB(id)
+    messages.add_message(request,20, "Meme Deleted!")
     return redirect("/Profile/")
