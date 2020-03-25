@@ -61,19 +61,20 @@ button {
 {% if request.user.is_anonymous %}
   <button id="myBtn" >Click Here To Login</button>
 {% else %}
-  Hello <i> {{request.user}}</i>,  You Currently Have:
+  Hello <i>  <a href="../../Profile"> {{request.user}} </a></i>,  You Currently Have:
   <a href="../BuyMemeCoin/"> {{ request.session.coins }} MemeCoins </a> <br>
   {% load static %}
   <a href="../../../shoppingCart/" > <img src="{% static "/shoppingCart.png" %}" alt="My image" height="30" width="30"> </a><br>
-  <a href="../../Profile/logout" id="logout" >Logout</a>
+  <a href="../../Profile/logout" id="logout" >Logout</a> <br>
+ <!-- <a href="../../Profile"> Profile</a>-->
 {% endif %}
 
         <span>
                 <div class="d-flex input-group mb-3">
-				<a class="btn btn-outline-dark p-2" href = "/">home</a>
+				<a class="btn btn-outline-dark p-2" href = "../front">home</a>
 				<a class="btn btn-outline-dark p-2" href = "../about/">about</a>
 						
-                         <span class = "ml-auto">   <input id="searchfield" type="text" class="form-control " aria-label="Text input with dropdown button"></span>
+                         <span class = "ml-auto">   <input id="searchfield" type="text" class="form-control " aria-label="Text input"></span>
 							<div class="input-group-prepend">
                                 <button id="searchbutton" class="btn btn-outline-dark" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search</button>
                             </div>
