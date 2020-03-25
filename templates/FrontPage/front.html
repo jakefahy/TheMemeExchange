@@ -26,26 +26,10 @@
         {% load static %}
 
         <link rel="stylesheet" href="{% static 'TheMemeExchange/theme.css' %}">
-        <span>
-			<hr>
-                <div class="d-flex input-group mb-3">
-				<a class="btn btn-outline-secondary p-2" href = "/">home</a>
-				<a class="btn btn-outline-secondary p-2" href = "../about/">about</a>
-						
-                         <span class = "ml-auto">   <input id="searchfield" type="text" class="form-control " aria-label="Text input with dropdown button"></span>
-							<div class="input-group-prepend">
-                                <button id="searchbutton" class="btn btn-outline-secondary" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search</button>
-                            </div>
-		
-						
-                </div>
-        </span>
         <span class = "d-flex flex-column justify-content-center">
             
         </span>
-    </header> -->
-    	{% extends "base.html" %}
-	    {% block content %}
+    </header> 
     <div class="d-flex justify-content-center">
         <div class="w-75 bg-secondary h-100 p-5 bg-light" id="body">
             {% for img in images %}
@@ -54,11 +38,12 @@
         </div>
     </div>
 </body>
-  {% endblock %}
 <footer class="d-flex justify-content-center">
     <div class = "footer">
         <h3>&copy; Meme Exchange 2020</h3>
         </div>
 </footer>
+  {% endblock %}
+
 
 </html>

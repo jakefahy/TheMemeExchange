@@ -25,6 +25,7 @@ button {
 
 <header style="background-color: #D1D1D1; border-bottom: solid;" class="flex justify-content-center text-right padding">
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <div class="text-center">
   <h2> <a href="../../front" style="color: #000000">The Meme Exchange</a> </h2>
 
@@ -52,10 +53,15 @@ button {
 				<a class="btn btn-outline-dark p-2" href = "../front">home</a>
 				<a class="btn btn-outline-dark p-2" href = "../about/">about</a>
 						
-                         <span class = "ml-auto">   <input id="searchfield" type="text" class="form-control " aria-label="Text input"></span>
+                        <form action ="{% url 'searchByTag' %}" method ="get" class = "ml-auto"> 
+						
+						<!--<span class = "ml-auto">-->   
+						<input id="searchfield" type="text" class="form-control " name = "tag" aria-label="Text input">
+						<!--</span>-->
 							<div class="input-group-prepend">
-                                <button id="searchbutton" class="btn btn-outline-dark" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search</button>
+                                <button id="searchbutton" class="btn btn-outline-dark" type="submit" >Search</button>
                             </div>
+						</form>	
 		
 						
                 </div>
@@ -112,7 +118,19 @@ button {
       modal.style.display = "none";
     }
   }
+  $("#searchbutton").on("click",function(){
+  if($("#searchfield").val()!= ""){
+	console.log("hello");
+	
+	}
+	else
+	{
+		console.log("goodbye");
+	}
+  })
+
 </script>
+
 
 
 </header>
