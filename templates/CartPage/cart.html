@@ -15,14 +15,19 @@
 	    </style>
 
 	</head>
+
+	<header class="bg-dark p-2 text-center">
+	{% extends "base.html" %}
+	    {% block content %}
+
+        {% load static %}
+
+        <link rel="stylesheet" href="{% static 'TheMemeExchange/theme.css' %}">
+        
+    </header> 
+
 	<body>
-		{% extends "base.html" %}
 
-		{% block content %}
-
-		{% load static %}
-
-		<link rel="stylesheet" href="{% static 'TheMemeExchange/theme.css' %}">
 	    <h2 style="text-align: center; padding-bottom: 30px; padding-top: 30px">Currently Viewing Your Cart</h2>
 
 	    {% if cart %}

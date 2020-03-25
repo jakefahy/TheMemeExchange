@@ -91,14 +91,18 @@
     </style>
 
 </head>
-<body>
+
+<header class="bg-dark p-2 text-center">
   {% extends "base.html" %}
+    {% block content %}
 
-  {% block content %}
+      {% load static %}
 
-  {% load static %}
+      <link rel="stylesheet" href="{% static 'TheMemeExchange/theme.css' %}">
+      
+</header> 
 
-  <link rel="stylesheet" href="{% static 'TheMemeExchange/theme.css' %}">
+<body>
 
   <main class="padding">
 
@@ -131,9 +135,10 @@
              {% for m in ownedmemes %}
                <div class="imageFrame">
                    <b> {{m.description}} </b>
-                   <a class="tester" href="../memeDetails/{{m.id}}"><div class="actualMeme">
-                     <img class="rounded border" src="{{m.link}}" alt="My image" height="300" width="300"> <br>
-                   </div></a>
+                   <a class="tester" href="../memeDetails/{{m.id}}"><div class="actualMeme" style="width: 300px;">
+                    <img class="rounded border" src="{{m.link}}" alt="My image" height="300" width="auto" style="max-width: 300px"> <br>
+                  </div></a>
+
                </div>
 
              {% endfor %}
