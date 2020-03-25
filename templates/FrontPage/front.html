@@ -12,6 +12,10 @@
         #body {
             height: 80%;
         }
+        .imageFrame {
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
     </style>
 </head>
 
@@ -26,14 +30,20 @@
         {% load static %}
 
         <link rel="stylesheet" href="{% static 'TheMemeExchange/theme.css' %}">
-        
-    </header> 
 
     <div class="d-flex justify-content-center">
         <div class="w-75 bg-secondary h-100 p-5 bg-light" id="body">
-            {% for img in images %}
-			<img src = {{img.link}}>
-			{% endfor %}
+
+          {% for m in images %}
+            <div class="imageFrame">
+                <a class="tester" href="../memeDetails/{{meme.id}}"><div class="actualMeme">
+                  <b> {{m.description}} </b> <br>
+                  {{m.user}}
+                  <img class="rounded border" src="{{m.link}}" alt="My image" height="300" width="300"> <br>
+                </div></a>
+            </div>
+
+          {% endfor %}
         </div>
     </div>
 </body>
