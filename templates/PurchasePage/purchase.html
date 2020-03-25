@@ -135,6 +135,7 @@
     });
 
         $("#modalConfirm").on("click", function() {
+          $("#buyModal").modal('hide');
           $.ajax({
             method: "POST",
             url: "{% url 'purchase' %}",
@@ -143,8 +144,7 @@
             success: function(result, status)
             {
                 console.log("success");
-                $("#buyModal").modal('hide');
-                location.reload(); 
+                location.reload();
             }
 
           });//a
