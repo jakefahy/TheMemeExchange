@@ -8,9 +8,6 @@
   padding-top: 20px;
 }
 
-a {
-  color: #FF0000;
-}
 
 button {
   background-color: Transparent;
@@ -30,8 +27,12 @@ button {
 
   <hr>
 </div>
-<!-- need to add in if the session then check if login is needed or not -->
-<!-- Hello <i> User</i>,  You Currently Have:
+
+<div class="preloader" id='loader' style='display: none;'>
+  {% load static %}
+  <img src="{% static "/luke.gif" %}" >
+</div>
+
 
 <a href="../BuyMemeCoin/"> 20 MemeCoins </a> -->
 <!-- Trigger/Open The Modal -->
@@ -51,13 +52,13 @@ button {
                 <div class="d-flex input-group mb-3">
 				<a class="btn btn-outline-dark p-2" href = "../front">home</a>
 				<a class="btn btn-outline-dark p-2" href = "../about/">about</a>
-						
+
                          <span class = "ml-auto">   <input id="searchfield" type="text" class="form-control " aria-label="Text input"></span>
 							<div class="input-group-prepend">
                                 <button id="searchbutton" class="btn btn-outline-dark" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search</button>
                             </div>
-		
-						
+
+
                 </div>
         </span>
 
@@ -88,7 +89,7 @@ button {
                     <button type="submit" >Login</button>
                   </form>
             </div>
-          </div>       
+          </div>
           <div class="modal-footer">
             <span>
               <a href="../createAccount" id="sign-up">Don't have an account? Click to Sign Up!</a>
