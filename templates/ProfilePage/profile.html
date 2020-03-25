@@ -13,18 +13,6 @@
 
     <style>
 
-      .preloader {
-        align-items: center;
-        display: flex;
-        height: 100vh;
-        justify-content: center;
-        left: 0;
-        position: fixed;
-        top: 0;
-        transition: opacity 0.3s linear;
-        width: 100%;
-        z-index: 9999;
-      }
 
 
       .MemesTab{
@@ -47,7 +35,7 @@
 
       .bluetime{
         color: #124B63 !important;
-      } 
+      }
 
       .padding {
         padding-top: 10px;
@@ -120,7 +108,7 @@
         <h2> Welcome to the Profile Page </h2>
         <div id="checkUploadStatus">{{upload}}</div>
         <h4> You have {{ request.session.coins }} MemeCoins </h4>
-        <h6> <a href="../BuyMemeCoin/"><u>Buy More Here!</u></a> </h6>
+        <h6> <a href="../BuyMemeCoin/" onclick="isloading()"><u>Buy More Here!</u></a> </h6>
       </span>
 
 
@@ -301,6 +289,7 @@
     // Some Code Django Docs provided so that Ajax requests can get through
     $.ajaxSetup({
          beforeSend: function(xhr, settings) {
+             $("#loader").show();
              function getCookie(name) {
                  var cookieValue = null;
                  if (document.cookie && document.cookie != '') {
@@ -378,7 +367,6 @@
             }
           },
           complete:function(data){
-          // Hide image container
           $("#loader").hide();
          }
         });
@@ -396,17 +384,12 @@
             'memeid': id
           },
           dataType: 'json',
-          beforeSend: function(){
-            // Show image container
-            $("#loader").show();
-           },
           success: function (data) {
             $("#deletingId").attr("value", data['id']);
             $("#DeleteImage").attr("src",data['memeLink']);
             $("#DeleteModal").modal("show");
           },
           complete:function(data){
-          // Hide image container
           $("#loader").hide();
          }
         });
@@ -432,6 +415,14 @@
             $("#loader").hide();
           },5000);
         });
+
+        function isloading() {
+          $("#loader").show();
+          setTimeout(function() {
+            $("#loader").hide();
+          },5000);
+        }
+
 
         $(".tester").on("click",function() {
           $("#loader").show();
@@ -471,12 +462,7 @@
             check = true;
           }
 
-           // var tabid = $(this).find("a").attr("href");
-           // $(".nav-tabs li,.tabs div.tab").removeClass("active");   // removing active class from tab
-           // var res = String(tabid);
-           // $(".tab").hide();   // hiding open tab
-           // $(tabid).show();    // show tab
-           // $(this).addClass("active"); //  adding active class to clicked tab
+
         });
 
       }); //End of Document Ready
