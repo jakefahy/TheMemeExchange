@@ -100,7 +100,6 @@
     </div>
     <!-- End of Modal -->
 
-    {% block javascript %}
       <script>
 
         function buy(x,money) {
@@ -112,6 +111,7 @@
 
         $.ajaxSetup({
          beforeSend: function(xhr, settings) {
+             $("#loader").show();
              function getCookie(name) {
                  var cookieValue = null;
                  if (document.cookie && document.cookie != '') {
@@ -135,6 +135,7 @@
     });
 
         $("#modalConfirm").on("click", function() {
+          $("#buyModal").modal('hide');
           $.ajax({
             method: "POST",
             url: "{% url 'purchase' %}",
@@ -143,15 +144,20 @@
             success: function(result, status)
             {
                 console.log("success");
-                $("#buyModal").modal('hide');
-                location.reload(); 
+                location.reload();
+<<<<<<< HEAD
+            },
+            complete:function(data){
+            $("#loader").hide();
+          },
+=======
             }
 
+>>>>>>> fc4678367daac5f929aaf7a66b81242b0f2b595a
           });//a
         });
 
       </script>
-    {% endblock javascript %}
 
 
 </body>
