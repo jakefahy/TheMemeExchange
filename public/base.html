@@ -21,10 +21,16 @@ button {
 
 <header style="background-color: #D1D1D1; border-bottom: solid;" class="flex justify-content-center text-right padding">
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <div class="text-center">
   <h2> <a href="../../front" style="color: #000000">The Meme Exchange</a> </h2>
 
   <hr>
+</div>
+
+<div class="preloader" id='loader' style='display: none;'>
+  {% load static %}
+  <img src="{% static "/luke.gif" %}" >
 </div>
 
 <div class="">
@@ -101,7 +107,19 @@ button {
       modal.style.display = "none";
     }
   }
+  $("#searchbutton").on("click",function(){
+  if($("#searchfield").val()!= ""){
+	console.log("hello");
+	
+	}
+	else
+	{
+		console.log("goodbye");
+	}
+  })
+
 </script>
+
 
 
 </header>
