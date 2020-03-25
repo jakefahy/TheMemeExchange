@@ -35,6 +35,10 @@
   {% extends "base.html" %}
 
   {% block content %}
+
+  {% load static %}
+
+  <link rel="stylesheet" href="{% static 'TheMemeExchange/theme.css' %}">
   <main class="">
       {% load static %}
       <div class="jumbotron flex justify-content-center text-center">

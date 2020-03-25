@@ -46,8 +46,8 @@
       }
 
       .bluetime{
-        color: #325aa8 !important;
-      }
+        color: #124B63 !important;
+      } 
 
       .padding {
         padding-top: 10px;
@@ -108,6 +108,10 @@
 
   {% block content %}
 
+  {% load static %}
+
+  <link rel="stylesheet" href="{% static 'TheMemeExchange/theme.css' %}">
+
   <main class="padding">
 
 
@@ -122,7 +126,7 @@
 
       <!-- Upload Button -->
       <div class="flex justify-content-center text-right">
-        <button type="button" class="btn btn-secondary " id="uploadModelButton" onclick="modalhelper()">Upload A Spicy New Meme</button>
+        <button style="font-weight: bold; background: #124B63; color: #ffffff" type="button" class="btn btn-secondary " id="uploadModelButton" onclick="modalhelper()">Upload A Spicy New Meme</button>
       </div>
 
       <!-- Nav tabs -->
@@ -155,8 +159,8 @@
             {% for meme in mymemes %}
               <div class="imageFrame">
                   <b> {{meme.description}} </b>
-                  <a class="tester" href="../memeDetails/{{meme.id}}"><div class="actualMeme">
-                    <img class="rounded border" src="{{meme.link}}" alt="My image" height="300" width="300"> <br>
+                  <a class="tester" href="../memeDetails/{{meme.id}}"><div class="actualMeme" style="width: 300px;">
+                    <img class="rounded border" src="{{meme.link}}" alt="My image" height="300" width="auto" style="max-width: 300px"> <br>
                   </div></a>
                   <a class="bluetime" href="#" onclick="editModalHelper({{meme.id}})"><i class='fas fa-edit' style='font-size:24px'></i></a> &ensp;
                   <a class="bluetime" href="#" onclick="deleteModalHelper({{meme.id}})"><i class='far fa-trash-alt' style='font-size:24px'></a></i>

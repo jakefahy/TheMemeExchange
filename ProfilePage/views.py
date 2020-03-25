@@ -6,6 +6,7 @@ from django.core.files.storage import FileSystemStorage
 import requests
 import firebase_admin
 from firebase_admin import credentials
+import google.cloud
 from firebase_admin import storage
 import os
 import json

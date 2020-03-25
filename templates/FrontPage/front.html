@@ -16,11 +16,15 @@
 </head>
 
 
-<body class="bg-secondary text-light">
+<body class="bg-secondary ">
 
-    <header class="bg-dark text-light p-2 text-center">
+    <header class="bg-dark p-2 text-center">
 	{% extends "base.html" %}
 	    {% block content %}
+
+        {% load static %}
+
+        <link rel="stylesheet" href="{% static 'TheMemeExchange/theme.css' %}">
         <span>
 			<hr>
                 <div class="d-flex input-group mb-3">

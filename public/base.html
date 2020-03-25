@@ -1,29 +1,7 @@
 <!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <style>
-
-/* The Modal (background) */
-#myModal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%;
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content2 {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 50%;
-}
 
 .padding {
   padding-right: 20px;
@@ -45,7 +23,8 @@ button {
 
 </style>
 
-<header class="flex justify-content-center text-right padding">
+<header style="background-color: #D1D1D1; border-bottom: solid;" class="flex justify-content-center text-right padding">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 <div class="text-center">
   <h2> <a href="../../front" style="color: #000000">The Meme Exchange</a> </h2>
@@ -61,7 +40,7 @@ button {
 
 <!-- Trigger/Open The Modal -->
 {% if request.user.is_anonymous %}
-  <button id="myBtn" >Click Here To Login</button>
+  <button id="myBtn" onclick="modalhelper()">Click Here To Login</button>
 {% else %}
   Hello <i> <a href="../../Profile/"> {{request.user}} </a> </i>,  You Currently Have:
   <a href="../../../BuyMemeCoin/"> {{ request.session.coins }} MemeCoins </a> <br>
@@ -71,59 +50,56 @@ button {
 {% endif %}
 
 
-<!-- The Modal -->
-<div id="myModal" class="modal">
-    <form class="modal-content2 animate" action="{% url 'login' %}" method="get">
-      <span class="close">&times;</span>
-      <h2 class="text-center">
-        Login To Begin Memeing
-      </h2>
-      <div class="modal-content2 ">
-        <label for="uname"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="uname" required>
+
+<!-- Start of Purchase Model -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"><h2 id="modalTitle">Login To Begin Memeing</h2></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+             <div>
+                <form action="{% url 'login' %}" method="get">
+                  <div class="modal-content ">
+                    <label for="uname"><b>Username</b></label>
+                    <input type="text" placeholder="Enter Username" name="uname" required>
+                  </div>
+                  <div class="modal-content ">
+                    <label for="psw"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="psw" required>
+                  </div>
+                  <div class="modal-content ">
+                    <button type="submit" >Login</button>
+                  </form>
+            </div>
+          </div>       
+          <div class="modal-footer">
+            <span>
+              <a href="../createAccount" id="sign-up">Don't have an account? Click to Sign Up!</a>
+            </span>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
       </div>
-      <div class="modal-content2 ">
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
-      </div>
-      <div class="modal-content2 ">
-        <button type="submit" >Login</button>
-      </div>
-      <span>
-        <a href="../createAccount" id="sign-up">Don't have an account? Click to Sign Up!</a>
-      </span>
-  </form>
-</div>
+    </div>
+<!-- End of Upload Model -->
 
 <script>
-// Get the modal
-var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-//Gets the button required to create an account
-var create = document.getElementById("sign-up");
-
-// When the user clicks the button, open the modal
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
+  //Shows upload modal on button press
+  function modalhelper() {
+    $("#myModal").modal("show");
   }
-}
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
 </script>
 
 
