@@ -12,11 +12,16 @@
         #body {
             height: 80%;
         }
+        .imageFrame {
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
     </style>
 </head>
 
 
 <body class="bg-secondary ">
+
 
     <header class="bg-dark p-2 text-center">
 	{% extends "base.html" %}
@@ -25,30 +30,23 @@
         {% load static %}
 
         <link rel="stylesheet" href="{% static 'TheMemeExchange/theme.css' %}">
-        <span>
-			<hr>
-                <div class="d-flex input-group mb-3">
-				<a class="btn btn-outline-secondary p-2" href = "/">home</a>
-				<a class="btn btn-outline-secondary p-2" href = "../about/">about</a>
-						
-                         <span class = "ml-auto">   <input id="searchfield" type="text" class="form-control " aria-label="Text input with dropdown button"></span>
-							<div class="input-group-prepend">
-                                <button id="searchbutton" class="btn btn-outline-secondary" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search</button>
-                            </div>
-		
-						
-                </div>
-        </span>
         <span class = "d-flex flex-column justify-content-center">
-            
+
         </span>
     </header>
-    
     <div class="d-flex justify-content-center">
         <div class="w-75 bg-secondary h-100 p-5 bg-light" id="body">
-            {% for img in images %}
-			<img src = {{img.link}}>
-			{% endfor %}
+
+          {% for m in images %}
+            <div class="imageFrame">
+                <a class="tester" href="../memeDetails/{{meme.id}}"><div class="actualMeme">
+                  <b> {{m.description}} </b> <br>
+                  {{m.user}}
+                  <img class="rounded border" src="{{m.link}}" alt="My image" height="300" width="300"> <br>
+                </div></a>
+            </div>
+
+          {% endfor %}
         </div>
     </div>
 </body>
