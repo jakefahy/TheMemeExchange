@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from dbFunctions import updateUserCoins
+from django.shortcuts import redirect
 
 def index(request):
     if(request.user.is_anonymous):
@@ -15,4 +16,4 @@ def purchase(request):
         purchaseAmmt = int(request.POST.get('purchaseAmmt'))
         newAmmt = updateUserCoins(request.user, purchaseAmmt)
         request.session['coins'] = newAmmt
-    return JsonResponse({"success": "yes"})
+    return JsonResponse({"foo" : "bar"})
