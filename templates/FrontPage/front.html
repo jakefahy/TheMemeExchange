@@ -15,6 +15,19 @@
         .imageFrame {
           padding-top: 10px;
           padding-bottom: 10px;
+          padding-right: 15px;
+          padding-left: 15px;
+        }
+        .PageDisplay{
+          display: flex;
+          flex-direction:row;
+          flex-wrap: wrap;
+          padding: 10px;
+        }
+        .actualMeme {
+          width: 380px;
+          text-align: center;
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
     </style>
 </head>
@@ -33,17 +46,18 @@
 
     <div class="d-flex justify-content-center">
         <div class="w-75 bg-secondary h-100 p-5 bg-light" id="body">
-
+          <div class="PageDisplay">
           {% for m in images %}
             <div class="imageFrame">
-                <a class="tester" href="../memeDetails/{{meme.id}}"><div class="actualMeme">
-                  <b> {{m.description}} </b> <br>
-                  {{m.user}}
-                  <img class="rounded border" src="{{m.link}}" alt="My image" height="300" width="300"> <br>
+                <a class="tester" href="../memeDetails/{{m.id}}"><div class="actualMeme">
+                  <div class="actualMeme">
+                    <b> {{m.description}} </b> <br>
+                    <img class="rounded border" src="{{m.link}}" alt="My image" height="300" width="auto" style="max-width: 380px"> <br>
+                  </div>
                 </div></a>
             </div>
-
-          {% endfor %}
+            {% endfor %}
+          </div>
         </div>
     </div>
 </body>

@@ -28,36 +28,37 @@
 	    <h2 style="text-align: center; padding-bottom: 30px">"{{ image.description }}"</h2>
 
 	    {% load static %}
-	    <div style="padding-left: 150px; padding-bottom: 25px; text-align: center;" >
-	    	<div class="rounded " style="position: fixed; width: 600px">
-				<img class="rounded border " src="{{image.link}}" alt="My image" height="400" width="auto" style="max-width: 600px">
-			</div>
-			<span style="position: absolute; padding-left: 25px; padding-top: 100px">
+
+	    <div style="padding-left: 150px; padding-bottom: 25px; ">
+	    	<span class="rounded " style="width: 600px; text-align: center; ">
+				<img class="rounded border " src="{{image.link}}" alt="My image" style="max-width: 600px" height="400" width="auto">
+			</span>
+			<span style="padding-left: 25px; padding-top: 10px">
 				<b style="padding-left: 10px; font-size: 25px" >Creator: </b>
 				<label style="font-size: 20px"> {{ user.username }}</label>
 				{% if image.creator == request.user.id %}
-					<div style="padding-left: 10px; padding-top: 25px">
+					<span style="padding-left: 10px; padding-top: 25px">
 						<label class="rounded " style="font-size: 20px; padding: 10px; border: dotted; background: #124B63; color: #ffffff">This is your meme!</label>
-					</div>
+					</span>
 				{% elif image.id in owned %}
-					<div style="padding-left: 10px; padding-top: 25px">
+					<span style="padding-left: 10px; padding-top: 25px">
 						<label class="rounded " style="font-size: 20px; padding: 10px; border: dotted; background: #124B63; color: #ffffff">You already own this!</label>
-					</div>
+					</span>
 				{% else %}
 					{% if image.id in cart %}
-						<div style="padding-left: 10px; padding-top: 25px">
+						<span style="padding-left: 10px; padding-top: 25px">
 							<label class="rounded " style="font-size: 20px; padding: 10px; border: dotted; background: #124B63; color: #ffffff">Added!</label>
-						</div>
+						</span>
 					{% else %}
 						<form style="padding-left: 10px; padding-top: 25px" action="../../memeDetails/addToCart/{{ image.id }}/" method="post"> {% csrf_token %}
-							<input type="submit" class="rounded " style="font-size: 20px; padding: 10px; border: dotted; background: #124B63; color: #ffffff" value="Add to Cart"/> 
+							<input type="submit" class="rounded " style="font-size: 20px; padding: 10px; border: dotted; background: #124B63; color: #ffffff" value="Add to Cart"/>
 						</form>
 					{% endif %}
 				{% endif %}
 			</span>
 			<br><br>
 		</div>
-		<div style="position: absolute; padding-top: 350px; padding-left: 150px;">
+		<div style="padding-top: 10px; padding-left: 150px;">
 			<span>{{image.likes}} memers have bought this dank masterpiece</span> <br>
 			<b style="font-size: 25px">Tags: </b>
 			<label style="font-size: 20px"> {{ image.tags }}</label>
