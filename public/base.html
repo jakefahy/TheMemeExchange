@@ -52,10 +52,12 @@ button {
 
   <hr>
 </div>
-<!-- need to add in if the session then check if login is needed or not -->
-<!-- Hello <i> User</i>,  You Currently Have:
 
-<a href="../BuyMemeCoin/"> 20 MemeCoins </a> -->
+<div class="preloader" id='loader' style='display: none;'>
+  {% load static %}
+  <img src="{% static "/luke.gif" %}" >
+</div>
+
 
 <!-- Trigger/Open The Modal -->
 {% if request.user.is_anonymous %}

@@ -110,10 +110,6 @@
 
   <main class="padding">
 
-    <div class="preloader" id='loader' style='display: none;'>
-      {% load static %}
-      <img src="{% static "/luke.gif" %}" >
-    </div>
 
       <!-- bootstrap jumbotron -->
       <span class="jumbotron flex justify-content-center text-center">
@@ -143,7 +139,7 @@
              {% for m in ownedmemes %}
                <div class="imageFrame">
                    <b> {{m.description}} </b>
-                   <a class="tester" href="../memeDetails/{{meme.id}}"><div class="actualMeme">
+                   <a class="tester" href="../memeDetails/{{m.id}}"><div class="actualMeme">
                      <img class="rounded border" src="{{m.link}}" alt="My image" height="300" width="300"> <br>
                    </div></a>
                </div>
@@ -330,7 +326,7 @@
       // Add the "show" class to DIV
       x.className = "show";
       // After 4 seconds, remove the show class from DIV
-      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
+      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 4000);
       }
 
       //Shows upload modal on button press
@@ -424,12 +420,14 @@
 
       //Document Ready Stuff
       $(document).ready(function(){
+
+        // Lookin to show gif when form is submitted
         $("form").on("submit", function(){
           $("#loader").show();
           setTimeout(function() {
             $("#loader").hide();
-          },4000);
-        });//submit
+          },5000);
+        });
 
         $(".tester").on("click",function() {
           $("#loader").show();

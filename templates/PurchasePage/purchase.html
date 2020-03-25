@@ -136,13 +136,20 @@
             url: "{% url 'purchase' %}",
             data: {"purchaseAmmt": $("#buyingNum").text()},
             dataType: 'json',
+            beforeSend: function(){
+              // Show image container
+              $("#loader").show();
+             },
             success: function(result, status)
             {
                 console.log("success");
                 $("#buyModal").modal('hide');
-                location.reload(); 
-            }
-
+                location.reload();
+            },
+            complete:function(data){
+            // Hide image container
+            $("#loader").hide();
+           }
           });//a
         });
 
