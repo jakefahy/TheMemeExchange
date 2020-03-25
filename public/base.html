@@ -61,7 +61,7 @@ button {
           </div>
           <div class="modal-body">
              <div>
-                <form>
+                <form action="{% url 'login' %}" method="get">
                   <div class="modal-content ">
                     <label for="uname"><b>Username</b></label>
                     <input type="text" placeholder="Enter Username" name="uname" required>
