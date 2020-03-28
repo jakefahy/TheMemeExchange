@@ -2,6 +2,7 @@ from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 class Account(models.Model):
@@ -19,3 +20,4 @@ class ImageLink(models.Model):
     description = models.TextField(default="No Description Provided")
     creator = models.IntegerField(default=-1)
     likes = models.IntegerField(default=0)
+    pub_date = models.DateTimeField('date published', default=timezone.now)
