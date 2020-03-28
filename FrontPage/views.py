@@ -8,7 +8,7 @@ def index(request):
     context = {"images": getLastTenImg()}
     template = loader.get_template('front.html')
     return HttpResponse(template.render(context,request))
-    
+
 def search(request):
     if request.method == 'GET':
         term = request.GET['tag']
