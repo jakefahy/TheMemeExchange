@@ -3,7 +3,7 @@ from ProfilePage.models import Account
 from ProfilePage.models import ImageLink
 
 def getLastTenImg():
-    q = ImageLink.objects.all()[:40]
+    q = ImageLink.objects.order_by('-pub_date')[:40]
     return q
 
 
