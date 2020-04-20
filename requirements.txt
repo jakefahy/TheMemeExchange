@@ -66,6 +66,7 @@ MarkupSafe==1.1.1
 mccabe==0.6.1
 more-itertools==8.2.0
 msgpack==1.0.0
+newrelic==5.12.0.140
 oauth2client==4.1.3
 packaging==20.1
 pathspec==0.7.0
