@@ -1,1 +1,1 @@
-web: gunicorn TheMemeExchange.wsgi:application --log-file -
+web: newrelic-admin run-program gunicorn TheMemeExchange.wsgi:application
