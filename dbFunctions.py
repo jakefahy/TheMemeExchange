@@ -29,6 +29,7 @@ def addToCart(currUser, id):
 def getUserByID(id):
 	return User.objects.get(id=id)
 
+
 def getCart(user):
 	return Account.objects.get(user=user).cartItems
 

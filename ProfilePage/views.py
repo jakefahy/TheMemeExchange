@@ -99,12 +99,15 @@ def login(request):
         username = request.GET['uname']
         password = request.GET['psw']
         user = authenticate(request, username=username, password=password)
-        request.session['coins'] = getUserCoins(user)
+
+
         if user is not None:
             djangoLogin(request, user)
+            request.session['coins'] = getUserCoins(user)
+            return redirect("/Profile/")
         else:
-            print("No user found")
-        return redirect("/Profile/")
+            return redirect("/")
+        return redirect("/")
 
 
 def getMeme(request):
