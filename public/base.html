@@ -35,22 +35,27 @@ button {
 </div>
 
 <div class="">
-  <span class=" input-group mb-3" style="padding-left: 10px;">
-    <a style="height: 35px; color: #124B63" class="btn btn-outline-dark round" href = "../front">home</a>
-   <!--  <a style="height: 35px;color: #124B63" class="btn btn-outline-dark round" href = "../about/">about</a> -->
 
-    <span>   
-      <form action ="{% url 'searchByTag' %}" method ="get" class = "ml-auto"> 
-            
-            <!--<span class = "ml-auto">-->   
-            <input id="searchfield" type="text" class="form-control " name = "tag" aria-label="Text input">
-            <!--</span>-->
-              <div class="input-group-prepend">
-                                <button id="searchbutton" class="btn btn-outline-dark" type="submit" >Search</button>
-                            </div>
-            </form> 
-    </span>
-    <span style="padding-left: 510px">
+    <span>
+      <form action ="{% url 'searchByTag' %}" method ="get" >
+
+
+          <input id="searchfield" type="text" class="form-control " name = "tag" aria-label="Text input">
+
+
+
+          <button id="searchbutton" class="btn btn-outline-dark" type="submit" >Search</button>
+
+      </span>
+
+
+      </form>
+      <span class=" input-group mb-3" style="padding-left: 10px;">
+        <a style="height: 35px; color: #124B63" class="btn btn-outline-dark round" href = "../../../front">home</a>
+        <a style="height: 35px;color: #124B63" class="btn btn-outline-dark round" >about</a>
+      </span>
+
+    <span style="text-align: right">
       {% if request.user.is_anonymous %}
         <button id="myBtn" style="color: #124B63" onclick="modalhelper()">Click Here To Login</button>
       {% else %}
@@ -62,7 +67,7 @@ button {
         <a href="../../Profile/logout" id="logout" >Logout</a></label> <br>
       {% endif %}
     </span>
-  </span>
+
 
 </div>
 
@@ -112,7 +117,7 @@ button {
   $("#searchbutton").on("click",function(){
   if($("#searchfield").val()!= ""){
 	console.log("hello");
-	
+
 	}
 	else
 	{
