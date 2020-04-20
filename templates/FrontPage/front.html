@@ -52,7 +52,11 @@
                 <a class="tester" href="../../memeDetails/{{m.id}}"><div class="actualMeme">
                   <div class="actualMeme">
                     <b> {{m.description}} </b> <br>
+                    {% if m.id in viewed %}
                     <img class="rounded border" src="{{m.link}}" alt="My image" height="300" width="auto" style="max-width: 380px"> <br>
+                    {% else %}
+                    <img class="rounded border" src="{{m.blurred}}" alt="My image" height="300" width="auto" style="max-width: 380px"> <br>
+                    {% endif %}
                   </div>
                 </div></a>
             </div>

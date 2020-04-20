@@ -45,12 +45,10 @@ def updateUserCoins(user, purchaseAmmt):
     return acct.memeBucks
 
 def getUserMemes(id):
-    query = ImageLink.objects.filter(creator = id)
-    return query
+    return ImageLink.objects.filter(creator = id)
 
 def getOwnedMemes(user):
-    query = Account.objects.get(user=user).purchased
-    return query
+    return Account.objects.get(user=user).purchased
 
 def remove(img_id,user):
 	acct = Account.objects.get(user=user)
@@ -98,3 +96,8 @@ def likeImage(imageId):
 def deleteMemefromDB(id):
     img = ImageLink.objects.get(id = id)
     img.delete()
+
+def getViewedMemes(user):
+    q = Account.objects.get(user=user).viewed
+    print(q)
+    return q

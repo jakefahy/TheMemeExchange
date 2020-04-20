@@ -8,6 +8,7 @@ from django.utils import timezone
 class Account(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, default=None)
     memeBucks = models.IntegerField(default=0)
+    viewed = ArrayField(models.IntegerField(default=0), blank=True, default=list)
     cartItems = ArrayField(models.IntegerField(default=0), blank=True, default=list)
     purchased = ArrayField(models.IntegerField(default=0), blank=True, default=list)
 
@@ -16,6 +17,7 @@ class Account(models.Model):
 
 class ImageLink(models.Model):
     link = models.TextField(default="AAAAAAAAA")
+    blurred = models.TextField(default="http://wallpaperstock.net/wallpapers/thumbs1/42657hd.jpg")
     tags = ArrayField(models.TextField(max_length=25), blank=True)
     description = models.TextField(default="No Description Provided")
     creator = models.IntegerField(default=-1)
