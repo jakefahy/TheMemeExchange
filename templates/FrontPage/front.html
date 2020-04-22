@@ -1,59 +1,42 @@
 <!doctype html>
 <html>
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <style>
-        .imgs {
-            width: 154px;
-            margin: 2px;
-        }
-        #body {
-            height: 80%;
-        }
-        .imageFrame {
-          padding-top: 10px;
-          padding-bottom: 10px;
-          padding-right: 15px;
-          padding-left: 15px;
-        }
-        .PageDisplay{
-          display: flex;
-          flex-direction:row;
-          flex-wrap: wrap;
-          padding: 10px;
-        }
-        .actualMeme {
-          width: 380px;
-          text-align: center;
-          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        }
-    </style>
-</head>
 
 
-<body class="bg-secondary ">
+{% extends "base.html" %}
+    {% block content %}
 
 
-    <header class="bg-dark p-2 text-center">
-	{% extends "base.html" %}
-	    {% block content %}
 
-        {% load static %}
-        <link rel="stylesheet" href="{% static 'TheMemeExchange/theme.css' %}">
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'TheMemeExchange/theme.css' %}">
+<link rel="stylesheet" href="{% static 'TheMemeExchange/cards.css' %}">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+
+
+
+
+
+<body style="background-color:#FCCA46" class="p-2 text-center">
 
     <div class="d-flex justify-content-center">
-        <div class="w-75 bg-secondary h-100 p-5 bg-light" id="body">
+        <div class="p-5">
           <div class="PageDisplay">
           {% for m in images %}
             <div class="imageFrame">
-                <a class="tester" href="../../memeDetails/{{m.id}}"><div class="actualMeme">
-                  <div class="actualMeme">
+                  <div class="cards">
+                    <a class="tester" href="../../memeDetails/{{m.id}}">
                     <b> {{m.description}} </b> <br>
-                    <img class="rounded border" src="{{m.link}}" alt="My image" height="300" width="auto" style="max-width: 380px"> <br>
-                  </div>
-                </div></a>
+                    <img class="rounded border actualMeme" src="{{m.link}}" alt="My image"></a> <br>
+                    <div class="lowerBar">
+                    <i class="fas fa-eye">:20 </i> &nbsp; &nbsp; &nbsp;
+                    <i class="fas fa-heart">:{{m.likes}} &nbsp; &nbsp; Creator: {{m.creator}}</i>
+                    </div>
+                </div>
             </div>
             {% endfor %}
           </div>
