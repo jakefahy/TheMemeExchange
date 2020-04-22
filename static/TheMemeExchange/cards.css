@@ -1,0 +1,35 @@
+.imageFrame {
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-bottom: 75px;
+}
+.PageDisplay{
+  display: flex;
+  flex-direction:row;
+  flex-wrap: wrap;
+}
+.cards {
+  height:310px;
+  width:310px;
+  border: round;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: #f7feec;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.actualMeme{
+  /* padding: 10px; */
+  height:250px;
+  width: 220px;
+}
+
+.lowerBar{
+  padding: 10px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction:row;
+  flex-wrap: wrap;
+}
