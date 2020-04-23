@@ -61,6 +61,7 @@ def uploadMemeImg(request):
 
         #Grab current user and the image file and save image
         current_user = request.user.id
+        current_username = request.user.username
         myfile = request.FILES['myfile']
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
@@ -80,7 +81,7 @@ def uploadMemeImg(request):
             fs.delete(filename)
 
         #Upload image link to our postgres db
-        uploadImagetoDB(blob.public_url,tags,descript,current_user)
+        uploadImagetoDB(blob.public_url,tags,descript,current_user,current_username)
 
         #Send toast back to user and refresh page
         messages.add_message(request,20, "A Fine Addition To Your Collection")
