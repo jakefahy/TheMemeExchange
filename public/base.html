@@ -4,14 +4,15 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'TheMemeExchange/base.css' %}">
 
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-<header style="background-color: #619B8A;border-radius: 25px;" class="title flex ">
+<header style="background-color: #619B8A;border-radius: 30px;" class="title">
 <div>
   <span>
-  <a href="../../front" class="main">The Meme Exchange</a> </span>
+  <a href="../../front" class="main"><b>The Meme Exchange<b></a> </span>
   <span style="float: right; ">
   {% if request.user.is_anonymous %}
     <button id="myBtn" class="mainButtons" onclick="modalhelper()">Click Here To Login</button>
@@ -21,7 +22,7 @@
     <a href="../../../BuyMemeCoin/"> {{ request.session.coins }} MemeCoins </a> </label><br>
     {% load static %}
     <label style="font-size: 15px; float: right;"> <a href="../../../shoppingCart/" > <img src="{% static "/shoppingCart.png" %}" alt="My image" height="35" width="35"> </a>
-    <a href="../../Profile/logout" id="logout" >Logout</a></label> 
+    <a href="../../Profile/logout" id="logout" >Logout</a></label>
   {% endif %}
   </span>
 
@@ -43,14 +44,14 @@
 
       <input id="searchfield" type="text" name = "tag" size="75" aria-label="Text input">
       <button id="searchbutton" class="mainButtons" type="submit" >Search</button>
-      
+
     </form>
   </div>
   <div >
     <label>holder1 </label>
     <label>holder2 </label>
   </div>
-    
+
 </div>
 
 
