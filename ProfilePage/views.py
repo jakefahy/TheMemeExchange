@@ -90,7 +90,7 @@ def uploadMemeImg(request):
             fs.delete(filename)
 
         #Upload image link to our postgres db
-        uploadImagetoDB(blob.public_url,blob2.public_url,tags,descript,current_user)
+        uploadImagetoDB(blob.public_url,blob2.public_url,tags,descript,current_username,current_user)
 
         #Send toast back to user and refresh page
         messages.add_message(request,20, "A Fine Addition To Your Collection")
