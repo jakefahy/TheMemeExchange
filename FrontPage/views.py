@@ -11,14 +11,15 @@ def index(request):
 
 def search(request):
     if request.method == 'GET':
-        term = request.GET['tag']
         searchOption = request.GET['searchOptions']
         creators = getCreators()
-        for creator in creators:
-            print(creator)
+        #for creator in creators:
+        #    print(creator)
         if(searchOption == "user"):
+            user = request.GET['tag']
             context = {"images": getImageByUser(user)}
-        elif(searchOption == "tag"):    
+        elif(searchOption == "tag"):
+            term = request.GET['tag']
             context = {"images": getImageByTag(term)}
         else:
             context = {"images": getLastTenImg()}

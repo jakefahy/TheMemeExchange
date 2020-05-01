@@ -38,19 +38,19 @@
 
 <div class="text-center" >
   <div>
-    <form action ="{% url 'searchByTag' %}" method ="get" >
-
+    <form action ="{% url 'search' %}" method ="get" >
       <a class="mainButtons" href = "../../../front">home</a>
       <a class="mainButtons" >about</a>
       <input id="searchfield" type="text" name = "tag" size="75" aria-label="Text input">
       <button id="searchbutton" class="mainButtons" type="submit" >Search</button>
+	<div >
+		<input type = "radio" name = "searchOptions" value ="tag" class = "m-1" checked > <label>Tags </label>
+		<input type = "radio" name = "searchOptions" value ="user" class = "m-1"> <label>Users </label>
+	</div>	  
 
     </form>
   </div>
-  <div >
-    <label>holder1 </label>
-    <label>holder2 </label>
-  </div>
+
 
 </div>
 

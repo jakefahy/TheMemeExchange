@@ -91,11 +91,13 @@ def getImageByTag(tag):
     return results
 
 def getImageByUser(user):
+    user = int(user)
     query = ImageLink.objects.all()
     results = []
     for meme in query:
         if user == meme.creator:
             results.append(meme)
+    print(len(results))        
     return results
 
 def likeImage(imageId):
