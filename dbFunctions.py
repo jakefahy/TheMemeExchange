@@ -13,8 +13,8 @@ def createUser(username, email, password):
     acct = Account(user=user, memeBucks=0)
     acct.save()
 
-def uploadImagetoDB(link,blurred,tags,description,creator):
-    img = ImageLink(link=link,blurred=blurred,tags=tags,description=description,creator=creator)
+def uploadImagetoDB(link,blurred,tags,description,username,creator_id):
+    img = ImageLink(link=link,blurred=blurred,tags=tags,description=description,creator=creator_id,username=username)
     img.save()
     user = User.objects.get(id=creator)
     acct = Account.objects.get(user=user)
