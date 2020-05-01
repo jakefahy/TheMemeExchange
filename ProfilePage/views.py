@@ -93,7 +93,7 @@ def uploadMemeImg(request):
 
 def logout(request):
     djangoLogout(request)
-    return redirect("/Profile/")
+    return redirect("/")
 
 def login(request):
     if request.method == "GET":
