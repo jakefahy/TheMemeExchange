@@ -7,15 +7,14 @@ def getLastTenImg():
     return q
 
 
-
 def createUser(username, email, password):
     user = User.objects.create_user(username, email, password)
     user.save()
     acct = Account(user=user, memeBucks=0)
     acct.save()
 
-def uploadImagetoDB(link,tags,description,creator):
-    img = ImageLink(link=link,tags=tags,description=description,creator=creator)
+def uploadImagetoDB(link,tags,description,creator,username):
+    img = ImageLink(link=link,tags=tags,description=description,creator=creator,username=username)
     img.save()
 
 def getImageByID(image_id):
@@ -28,6 +27,7 @@ def addToCart(currUser, id):
 
 def getUserByID(id):
 	return User.objects.get(id=id)
+
 
 def getCart(user):
 	return Account.objects.get(user=user).cartItems
