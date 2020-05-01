@@ -88,8 +88,32 @@ def getImageByTag(tag):
     results = []
     for meme in query:
         for memeTag in meme.tags:
-            if tag == memeTag:
+            if tag in memeTag:
                 results.append(meme)
+    return results
+
+def getImageByDescription(desc):
+    query = ImageLink.objects.all()
+    results = []
+    for meme in query:
+        if desc in meme.description:
+            if meme not in results:
+                results.append(meme)
+        if desc == meme.username:
+            if meme not in results:
+                results.append(meme)
+        for memeTag in meme.tags:
+            if desc in memeTag:
+                if meme not in results:
+                    results.append(meme)
+    return results
+
+def getImageByUser(user):
+    query = ImageLink.objects.all()
+    results = []
+    for meme in query:
+        if user == meme.username:
+            results.append(meme)
     return results
 
 def likeImage(imageId):
@@ -101,6 +125,13 @@ def deleteMemefromDB(id):
     img = ImageLink.objects.get(id = id)
     img.delete()
 
+def getCreators():
+    query = ImageLink.objects.all()
+    results = []
+    for meme in query:
+        results.append(meme.creator)
+    return results
+    
 def getViewedMemes(user):
     q = Account.objects.get(user=user).viewed
     print(q)

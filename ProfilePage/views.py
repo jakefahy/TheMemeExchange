@@ -10,7 +10,6 @@ import google.cloud
 from firebase_admin import storage
 import os
 import json
-from django.shortcuts import redirect
 from dbFunctions import uploadImagetoDB, getUserCoins, getUserMemes, updateMemeInDB, getMemeById, getUserMemes, uploadImagetoDB, deleteMemefromDB, getOwnedMemes
 from django.contrib.auth import logout as djangoLogout, login as djangoLogin, authenticate
 from django.shortcuts import redirect

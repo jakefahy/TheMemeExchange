@@ -78,7 +78,8 @@
   <img src="{% static "/luke.gif" %}" >
 </div>
 
-<div class="text-center" >
+
+<div class="text-center" style="padding-bottom: 20px">
   <div>
     <button class="toolbarButtons" onclick="window.location.href='../../../front'"><b>Home</b></button>
     &nbsp;
@@ -88,13 +89,11 @@
       <input id="searchfield" type="text" name = "tag" size="75" aria-label="Text input" placeholder="Search The Meme Exchange">
       &nbsp;&nbsp;&nbsp;
       <button id="searchbutton" class="toolbarButtons" type="submit" ><b>Search</b></button>
-    </form>
+      &nbsp;&nbsp;
+      <input type = "checkbox" name = "searchOptions" value ="tag" class = "m-1"  > <label style="font-family: monospace; color: #124B63; font-weight: bold; font-size: 15px">Tags </label>
+      <input type = "checkbox" name = "searchOptions" value ="user" class = "m-1"> <label style="font-family: monospace; color: #124B63; font-weight: bold; font-size: 15px">Users </label>
+    </form>  
   </div>
-  <div >
-    <label>holder1 </label>
-    <label>holder2 </label>
-  </div>
-
 </div>
 
 <!-- Start of Login Modal -->
