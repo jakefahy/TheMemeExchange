@@ -23,7 +23,7 @@
           <div class="PageDisplay">
           {% for m in images %}
             <div class="imageFrame">
-                  <div class="cards" style="background-color:#ffffff">
+                  <div class="cards hideText" style="background-color:#ffffff">
                     <a class="tester" href="../../memeDetails/{{m.id}}">
                     <b> {{m.description}} </b> <br>
                     {% if m.id in viewed %}
@@ -32,8 +32,8 @@
                     <img class="rounded border actualMeme" src="{{m.blurred}}" alt="My image" height="300" width="auto" style="max-width: 380px"> <br>
                     {% endif %}
                     <div class="lowerBar">
-                    <i class="fas fa-eye">:20 </i> &nbsp; &nbsp; &nbsp;
-                    <i class="fas fa-heart">:{{m.likes}} &nbsp; &nbsp; Creator: {{m.creator}}</i>
+                    <i class="fas fa-eye">:20 </i> &nbsp; &nbsp;
+                    <i class="fas fa-heart">:{{m.likes}} &nbsp; &nbsp; Creator: {{m.username}}</i>
                     </div>
                   </div>
                 </div></a>
