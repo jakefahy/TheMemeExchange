@@ -106,3 +106,11 @@ def likeImage(imageId):
 def deleteMemefromDB(id):
     img = ImageLink.objects.get(id = id)
     img.delete()
+
+def getCreators():
+    query = ImageLink.objects.all()
+    results = []
+    for meme in query:
+        results.append(meme.creator)
+    return results
+    

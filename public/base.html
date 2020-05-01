@@ -37,11 +37,12 @@ button {
 <div class="">
 
     <span>
-      <form action ="{% url 'searchByTag' %}" method ="get" >
+      <form action ="{% url 'search' %}" method ="get" >
 
 
           <input id="searchfield" type="text" class="form-control " name = "tag" aria-label="Text input">
-
+		  <input type = "radio" name = "searchOptions" value ="tag" class = "m-1" checked > Tags
+		  <input type = "radio" name = "searchOptions" value ="user" class = "m-1"> Users
 
 
           <button id="searchbutton" class="btn btn-outline-dark" type="submit" >Search</button>
