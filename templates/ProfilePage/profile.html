@@ -99,10 +99,12 @@
       {% load static %}
 
       <link rel="stylesheet" href="{% static 'TheMemeExchange/theme.css' %}">
-      
-</header> 
+      <link rel="stylesheet" href="{% static 'TheMemeExchange/cards.css' %}">
+
+</header>
 
 <body>
+
 
   <main class="padding">
 
@@ -133,14 +135,17 @@
            <h4>Quite a Meme Collection You Have Here</h4><hr width="35%"> <br><br>
            <div class="PageDisplay">
              {% for m in ownedmemes %}
-               <div class="imageFrame">
-                   <b> {{m.description}} </b>
-                   <a class="tester" href="../memeDetails/{{m.id}}"><div class="actualMeme" style="width: 300px;">
-                    <img class="rounded border" src="{{m.link}}" alt="My image" height="300" width="auto" style="max-width: 300px"> <br>
-                  </div></a>
-
-               </div>
-
+             <div class="imageFrame">
+                   <div class="cards">
+                     <a class="tester" href="../../memeDetails/{{m.id}}">
+                     <b> {{m.description}} </b> <br>
+                     <img class="rounded border actualMeme" src="{{m.link}}" alt="My image"></a> <br>
+                     <div class="lowerBar">
+                     <i class="fas fa-eye">:20 </i> &nbsp; &nbsp; &nbsp;
+                     <i class="fas fa-heart">:{{m.likes}} &nbsp; &nbsp; Creator: {{m.creator}}</i>
+                     </div>
+                 </div>
+             </div>
              {% endfor %}
            </div>
 
@@ -149,16 +154,18 @@
           <br>
           <h4>Your Glorious Memes</h4> <hr width="25%"> <br><br>
           <div class="PageDisplay">
-            {% for meme in mymemes %}
-              <div class="imageFrame">
-                  <b> {{meme.description}} </b>
-                  <a class="tester" href="../memeDetails/{{meme.id}}"><div class="actualMeme" style="width: 300px;">
-                    <img class="rounded border" src="{{meme.link}}" alt="My image" height="300" width="auto" style="max-width: 300px"> <br>
-                  </div></a>
-                  <a class="bluetime" href="#" onclick="editModalHelper({{meme.id}})"><i class='fas fa-edit' style='font-size:24px'></i></a> &ensp;
-                  <a class="bluetime" href="#" onclick="deleteModalHelper({{meme.id}})"><i class='far fa-trash-alt' style='font-size:24px'></a></i>
-              </div>
-
+            {% for m in mymemes %}
+            <div class="imageFrame">
+                  <div class="cards">
+                    <a class="tester" href="../../memeDetails/{{m.id}}">
+                    <b> {{m.description}} </b> <br>
+                    <img class="rounded border actualMeme" src="{{m.link}}" alt="My image"></a> <br>
+                    <div class="lowerBar">
+                    <i class="fas fa-eye">:20 </i> &nbsp; &nbsp; &nbsp;
+                    <i class="fas fa-heart">:{{m.likes}} &nbsp; &nbsp; Creator: {{m.creator}}</i>
+                    </div>
+                </div>
+            </div>
             {% endfor %}
           </div>
         </div>

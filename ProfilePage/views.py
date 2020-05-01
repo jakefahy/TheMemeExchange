@@ -62,6 +62,7 @@ def uploadMemeImg(request):
 
         #Grab current user and the image file and save image
         current_user = request.user.id
+        current_username = request.user.username
         myfile = request.FILES['myfile']
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
@@ -89,7 +90,6 @@ def uploadMemeImg(request):
             fs.delete(filename)
 
         #Upload image link to our postgres db
-        print(current_user)
         uploadImagetoDB(blob.public_url,blob2.public_url,tags,descript,current_user)
 
         #Send toast back to user and refresh page
@@ -109,12 +109,15 @@ def login(request):
         username = request.GET['uname']
         password = request.GET['psw']
         user = authenticate(request, username=username, password=password)
-        request.session['coins'] = getUserCoins(user)
+
+
         if user is not None:
             djangoLogin(request, user)
+            request.session['coins'] = getUserCoins(user)
+            return redirect("/Profile/")
         else:
-            print("No user found")
-        return redirect("/Profile/")
+            return redirect("/")
+        return redirect("/")
 
 
 def getMeme(request):

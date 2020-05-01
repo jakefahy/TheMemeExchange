@@ -7,7 +7,6 @@ def getLastTenImg():
     return q
 
 
-
 def createUser(username, email, password):
     user = User.objects.create_user(username, email, password)
     user.save()
@@ -32,6 +31,7 @@ def addToCart(currUser, id):
 
 def getUserByID(id):
 	return User.objects.get(id=id)
+
 
 def getCart(user):
 	return Account.objects.get(user=user).cartItems
