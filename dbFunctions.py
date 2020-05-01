@@ -13,9 +13,13 @@ def createUser(username, email, password):
     acct = Account(user=user, memeBucks=0)
     acct.save()
 
-def uploadImagetoDB(link,tags,description,creator,username):
-    img = ImageLink(link=link,tags=tags,description=description,creator=creator,username=username)
+def uploadImagetoDB(link,blurred,tags,description,creator):
+    img = ImageLink(link=link,blurred=blurred,tags=tags,description=description,creator=creator)
     img.save()
+    user = User.objects.get(id=creator)
+    acct = Account.objects.get(user=user)
+    acct.viewed.append(img.id)
+    acct.save()
 
 def getImageByID(image_id):
 	return ImageLink.objects.get(id=image_id)
@@ -45,12 +49,10 @@ def updateUserCoins(user, purchaseAmmt):
     return acct.memeBucks
 
 def getUserMemes(id):
-    query = ImageLink.objects.filter(creator = id)
-    return query
+    return ImageLink.objects.filter(creator = id)
 
 def getOwnedMemes(user):
-    query = Account.objects.get(user=user).purchased
-    return query
+    return Account.objects.get(user=user).purchased
 
 def remove(img_id,user):
 	acct = Account.objects.get(user=user)
@@ -86,18 +88,32 @@ def getImageByTag(tag):
     results = []
     for meme in query:
         for memeTag in meme.tags:
-            if tag == memeTag:
+            if tag in memeTag:
                 results.append(meme)
     return results
 
-def getImageByUser(user):
-    user = int(user)
+def getImageByDescription(desc):
     query = ImageLink.objects.all()
     results = []
     for meme in query:
-        if user == meme.creator:
+        if desc in meme.description:
+            if meme not in results:
+                results.append(meme)
+        if desc == meme.username:
+            if meme not in results:
+                results.append(meme)
+        for memeTag in meme.tags:
+            if desc in memeTag:
+                if meme not in results:
+                    results.append(meme)
+    return results
+
+def getImageByUser(user):
+    query = ImageLink.objects.all()
+    results = []
+    for meme in query:
+        if user == meme.username:
             results.append(meme)
-    print(len(results))        
     return results
 
 def likeImage(imageId):
@@ -116,3 +132,7 @@ def getCreators():
         results.append(meme.creator)
     return results
     
+def getViewedMemes(user):
+    q = Account.objects.get(user=user).viewed
+    print(q)
+    return q

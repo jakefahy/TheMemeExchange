@@ -10,10 +10,10 @@ import google.cloud
 from firebase_admin import storage
 import os
 import json
-from django.shortcuts import redirect
 from dbFunctions import uploadImagetoDB, getUserCoins, getUserMemes, updateMemeInDB, getMemeById, getUserMemes, uploadImagetoDB, deleteMemefromDB, getOwnedMemes
 from django.contrib.auth import logout as djangoLogout, login as djangoLogin, authenticate
 from django.shortcuts import redirect
+from PIL import Image, ImageFilter
 
 def index(request):
     if(request.user.is_anonymous):
@@ -67,21 +67,29 @@ def uploadMemeImg(request):
         filename = fs.save(myfile.name, myfile)
         uploaded_file_url = fs.path(filename)
 
+        im = createBlur(uploaded_file_url)
+        im.save("outfile.png")
+        #of = open("outfile.png", 'rb')
+
+
         #Upload image to firebase and get the url back
         if (not len(firebase_admin._apps)):
             cred = credentials.Certificate('the-meme-exchange-026e359fe3e6.json')
             default_app = firebase_admin.initialize_app(cred, {'storageBucket': 'the-meme-exchange.appspot.com'})
         bucket = storage.bucket()
         blob = bucket.blob(filename)
+        blob2 = bucket.blob("blurred_"+filename)
         blob.upload_from_filename(uploaded_file_url)
+        blob2.upload_from_filename("outfile.png")
         blob.make_public()
+        blob2.make_public()
 
         #Clean up local directory of image data
         if blob.public_url:
             fs.delete(filename)
 
         #Upload image link to our postgres db
-        uploadImagetoDB(blob.public_url,tags,descript,current_user,current_username)
+        uploadImagetoDB(blob.public_url,blob2.public_url,tags,descript,current_user)
 
         #Send toast back to user and refresh page
         messages.add_message(request,20, "A Fine Addition To Your Collection")
@@ -93,7 +101,7 @@ def uploadMemeImg(request):
 
 def logout(request):
     djangoLogout(request)
-    return redirect("/Profile/")
+    return redirect("/")
 
 def login(request):
     if request.method == "GET":
@@ -161,3 +169,7 @@ def deleteMeme(request):
     deleteMemefromDB(id)
     messages.add_message(request,20, "Meme Deleted!")
     return redirect("/Profile/")
+
+def createBlur(path):
+    im = Image.open(path).filter(ImageFilter.GaussianBlur(200))
+    return im
