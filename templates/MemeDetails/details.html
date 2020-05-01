@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html >
 	<head>
 	    <meta charset="utf-8">
 	    <title>Meme Detail Page</title>
@@ -10,11 +10,24 @@
 			.padding {
 				padding-top: 10px;
 			}
+
+			.ownedButton {
+				font-family: monospace; 
+			    background: transparent;
+			    font-size: 15px; 
+			    border: solid; 
+			    border-radius: 5px; 
+			    border-width: thin; 
+			    padding: 5px; 
+			    color: #124B63; 
+			    box-shadow: 0 9px 16px 0 rgba(0,0,0,0.24), 0 10px 50px 0 rgba(0,0,0,0.19);
+			}
+
 	    </style>
 
 	</head>
 
-	<header class="bg-dark p-2 text-center">
+	<header class="p-2 text-center" >
 	{% extends "base.html" %}
 	    {% block content %}
 
@@ -23,9 +36,9 @@
         <link rel="stylesheet" href="{% static 'TheMemeExchange/theme.css' %}">
         
     </header> 
-	<body>
-		
-	    <h2 style="text-align: center; padding-bottom: 30px">"{{ image.description }}"</h2>
+	<body style="background-color: #EDF6F9">
+		<br>
+	    <h2 style="text-align: center; padding-bottom: 30px; font-family: Trebuchet MS;font-weight: bold;">{{ image.description }}</h2>
 
 	    {% load static %}
 
@@ -34,34 +47,30 @@
 				<img class="rounded border " src="{{image.link}}" alt="My image" style="max-width: 600px" height="400" width="auto">
 			</span>
 			<span style="padding-left: 25px; padding-top: 10px">
-				<b style="padding-left: 10px; font-size: 25px" >Creator: </b>
-				<label style="font-size: 20px"> {{ user.username }}</label>
+				<b style="padding-left: 10px; font-size: 25px;font-family: Trebuchet MS;font-weight: bold" >Creator: </b>
+				<label style="font-size: 20px;font-family: Trebuchet MS"> {{ user.username }}</label>
 				{% if image.creator == request.user.id %}
-					<span style="padding-left: 10px; padding-top: 25px">
-						<label class="rounded " style="font-size: 20px; padding: 10px; border: dotted; background: #124B63; color: #ffffff">This is your meme!</label>
-					</span>
+					<!-- <div style="padding-left: 10px; padding-top: 25px"> -->
+						<label class="rounded ownedButton" style="background-color: #619B8A; font-weight: bold; font-size: 20px">This is your meme!</label>
 				{% elif image.id in owned %}
-					<span style="padding-left: 10px; padding-top: 25px">
-						<label class="rounded " style="font-size: 20px; padding: 10px; border: dotted; background: #124B63; color: #ffffff">You already own this!</label>
-					</span>
+						<label class="rounded ownedButton" style="background-color: #619B8A; font-weight: bold; font-size: 20px">You already own this!</label>
 				{% else %}
 					{% if image.id in cart %}
-						<span style="padding-left: 10px; padding-top: 25px">
-							<label class="rounded " style="font-size: 20px; padding: 10px; border: dotted; background: #124B63; color: #ffffff">Added!</label>
-						</span>
+							<label class="rounded toolbarButtons" style="background-color: #619B8A; font-weight: bold; font-size: 20px">Added!</label>
 					{% else %}
 						<form style="padding-left: 10px; padding-top: 25px" action="../../memeDetails/addToCart/{{ image.id }}/" method="post"> {% csrf_token %}
-							<input type="submit" class="rounded " style="font-size: 20px; padding: 10px; border: dotted; background: #124B63; color: #ffffff" value="Add to Cart"/>
+							<input type="submit" class="rounded toolbarButtons" style="background-color: #619B8A; font-weight: bold; font-size: 20px" value="Add to Cart"/>
 						</form>
+						<!-- </div> -->
 					{% endif %}
 				{% endif %}
 			</span>
 			<br><br>
 		</div>
-		<div style="padding-top: 10px; padding-left: 150px;">
+		<div style="padding-top: 10px; padding-left: 150px; font-family: Trebuchet MS">
 			<span>{{image.likes}} memers have bought this dank masterpiece</span> <br>
-			<b style="font-size: 25px">Tags: </b>
-			<label style="font-size: 20px"> {{ image.tags }}</label>
+			<b style="font-size: 25px; font-family: Trebuchet MS; font-weight: bold;">Tags: </b>
+			<label style="font-size: 20px; font-family: Trebuchet MS"> {{ image.tags }}</label>
 		</div>
 
 	    {% endblock %}

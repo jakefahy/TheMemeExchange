@@ -16,7 +16,7 @@
 
 	</head>
 
-	<header class="bg-dark p-2 text-center">
+	<header class="p-2 text-center">
 	{% extends "base.html" %}
 	    {% block content %}
 
@@ -26,33 +26,34 @@
         
     </header> 
 
-	<body>
+	<body style="background-color: #EDF6F9">
 
-	    <h2 style="text-align: center; padding-bottom: 30px; padding-top: 30px">Currently Viewing Your Cart</h2>
+	    <h2 style="text-align: center; padding-bottom: 30px; padding-top: 30px; font-family: Trebuchet MS">Currently Viewing Your Cart</h2> <hr>
 
 	    {% if cart %}
+	    	<div style="display: flex;flex-direction:row; flex-wrap: wrap; width: auto;" class="">
 		    {% for pic in cart %}
-		    <div style="padding-left: 150px; padding-bottom: 175px " >
-		    	<div class="rounded " style="position: fixed; width: 300px;">
-					<img class="rounded border " src="{{pic.link}}" alt="My image" height="150" width="auto">
+		    
+		    <div style="padding-left: 75px; padding-bottom: 20px;" >
+		    	
+				<img class="rounded border " src="{{pic.link}}" alt="My image" height="150" width="auto">
+		
+				<div>
+					<form style="padding-top: 25px; text-align: center;" action="../../shoppingCart/removeItemFromCart/{{ pic.id }}/" method="delete"> {% csrf_token %}
+						<input type="submit" class="rounded " style="font-size: 15px; padding: 5px; border: solid;" value="Remove from Cart"/> 
+					</form>						
 				</div>
 
-				<span style="position: absolute; padding-left: 175px; padding-top: 20px">
-					<div>
-						<label style="font-size: 20px"> "{{ pic.description }}" </label>
-					</div>
-					<form style="padding-left: 10px; padding-top: 25px" action="../../shoppingCart/removeItemFromCart/{{ pic.id }}/" method="delete"> {% csrf_token %}
-						<input type="submit" class="rounded " style="font-size: 15px; padding: 5px; border: solid;" value="Remove from Cart ?"/> 
-					</form>						
-				</span>
 			</div>
+			
 			{% endfor %}
+			</div>
 			<div style="text-align: center; ">
-				<button class="border rounded " type="button" class="btn btn-secondary " id="uploadModelButton" onclick="modalhelper()" style="font-weight: bold; font-size: 25px; border: dashed; border-width: thick; box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); background: #124B63; color: #ffffff">Get Those Memes!</button>
+				<button type="button" id="uploadModelButton" onclick="modalhelper()" class="rounded toolbarButtons" style="background-color: #619B8A; font-weight: bold; font-size: 25px">Get Those Memes!</button>
 
 			</div>
 		{% else %}
-			<div style="padding-top: 100px; text-align: center; font-size: 30px" >
+			<div style="padding-top: 100px; text-align: center; font-size: 30px; font-family: Trebuchet MS" >
 				<label>Your Cart Is Empty! Go Add Some Memes :)</label>
 			</div>
 		{% endif %}
@@ -96,7 +97,7 @@
           	<span >
 				<a href="../BuyMemeCoin">Purchase More MemeCoins Here!</a>
 			</span>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: #619B8A; color: #000000">Cancel</button>
           </div>
         </div>
       </div>
