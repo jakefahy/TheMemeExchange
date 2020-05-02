@@ -42,35 +42,41 @@
 
 	    {% load static %}
 
-	    <div style="padding-left: 150px; padding-bottom: 25px; ">
-	    	<span class="rounded " style="width: 600px; text-align: center; ">
+	    <div style="text-align: center;">
+	    	<span class="rounded " style="width: 600px; text-align: center; float: left; padding-left: 100px">
 				<img class="rounded border " src="{{image.link}}" alt="My image" style="max-width: 600px" height="400" width="auto">
 			</span>
-			<span style="padding-left: 25px; padding-top: 10px">
-				<b style="padding-left: 10px; font-size: 25px;font-family: Trebuchet MS;font-weight: bold" >Creator: </b>
-				<label style="font-size: 20px;font-family: Trebuchet MS"> {{ user.username }}</label>
-				{% if image.creator == request.user.id %}
-					<!-- <div style="padding-left: 10px; padding-top: 25px"> -->
+			<span>
+				<div style="padding-top: 50px; padding-bottom: 5px">
+					<b style="font-size: 25px;font-family: Trebuchet MS;font-weight: bold" >Creator: </b> 
+					<label style="font-size: 20px;font-family: Trebuchet MS"> {{ user.username }}</label>
+				</div>
+				<div>
+					{% if image.creator == request.user.id %}
 						<label class="rounded ownedButton" style="background-color: #619B8A; font-weight: bold; font-size: 20px">This is your meme!</label>
-				{% elif image.id in owned %}
+					{% elif image.id in owned %}
 						<label class="rounded ownedButton" style="background-color: #619B8A; font-weight: bold; font-size: 20px">You already own this!</label>
-				{% else %}
-					{% if image.id in cart %}
-							<label class="rounded toolbarButtons" style="background-color: #619B8A; font-weight: bold; font-size: 20px">Added!</label>
 					{% else %}
-						<form style="padding-left: 10px; padding-top: 25px" action="../../memeDetails/addToCart/{{ image.id }}/" method="post"> {% csrf_token %}
-							<input type="submit" class="rounded toolbarButtons" style="background-color: #619B8A; font-weight: bold; font-size: 20px" value="Add to Cart"/>
-						</form>
-						<!-- </div> -->
+						{% if image.id in cart %}
+								<label class="rounded toolbarButtons" style="background-color: #619B8A; font-weight: bold; font-size: 20px">Added!</label>
+						{% else %}
+							<form style="padding-left: 10px; padding-top: 25px" action="../../memeDetails/addToCart/{{ image.id }}/" method="post"> {% csrf_token %}
+								<input type="submit" class="rounded toolbarButtons" style="background-color: #619B8A; font-weight: bold; font-size: 20px" value="Add to Cart"/>
+							</form>
+						{% endif %}
 					{% endif %}
-				{% endif %}
+				</div>
+				<br><br>
+				<div style="font-family: Trebuchet MS">
+					{% if image.likes == 1 %}
+						<label>{{image.likes}} memer has bought this dank masterpiece</label> <br>
+					{% else %}
+						<label>{{image.likes}} memers have bought this dank masterpiece</label> <br>
+					{% endif %}
+					<b style="font-size: 25px; font-family: Trebuchet MS; font-weight: bold;">Tags: </b>
+					<label style="font-size: 20px; font-family: Trebuchet MS"> {{ image.tags }}</label>
+				</div>
 			</span>
-			<br><br>
-		</div>
-		<div style="padding-top: 10px; padding-left: 150px; font-family: Trebuchet MS">
-			<span>{{image.likes}} memers have bought this dank masterpiece</span> <br>
-			<b style="font-size: 25px; font-family: Trebuchet MS; font-weight: bold;">Tags: </b>
-			<label style="font-size: 20px; font-family: Trebuchet MS"> {{ image.tags }}</label>
 		</div>
 
 	    {% endblock %}
