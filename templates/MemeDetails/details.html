@@ -49,7 +49,7 @@
 			<span>
 				<div style="padding-top: 50px; padding-bottom: 5px">
 					<b style="font-size: 25px;font-family: Trebuchet MS;font-weight: bold" >Creator: </b> 
-					<label style="font-size: 20px;font-family: Trebuchet MS"> {{ user.username }}</label>
+					<a href="../../follow/{{user.id}}" style="font-size: 20px;font-family: Trebuchet MS"> {{ user.username }}</a>
 				</div>
 				<div>
 					{% if image.creator == request.user.id %}

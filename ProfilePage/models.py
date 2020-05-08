@@ -12,7 +12,8 @@ class Account(models.Model):
     viewed = ArrayField(models.IntegerField(default=0), blank=True, default=list)
     cartItems = ArrayField(models.IntegerField(default=0), blank=True, default=list)
     purchased = ArrayField(models.IntegerField(default=0), blank=True, default=list)
-
+    following = ArrayField(models.IntegerField(default=0),blank=True, default=list)
+    followers = ArrayField(models.IntegerField(default=0),blank=True, default=list)
     def __str__(self):
         return self.user.username
 

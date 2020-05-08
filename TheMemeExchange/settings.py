@@ -68,6 +68,7 @@ TEMPLATES = [
                  'templates/FrontPage',
                  'templates/CartPage',
                  'templates/AboutPage',
+                 'templates/FollowProfile',
                  'public/'
         ],
         'APP_DIRS': True,

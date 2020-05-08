@@ -6,7 +6,6 @@ def getLastTenImg():
     q = ImageLink.objects.order_by('-pub_date')[:40]
     return q
 
-
 def createUser(username, email, password):
     user = User.objects.create_user(username, email, password)
     user.save()
@@ -31,7 +30,6 @@ def addToCart(currUser, id):
 
 def getUserByID(id):
 	return User.objects.get(id=id)
-
 
 def getCart(user):
 	return Account.objects.get(user=user).cartItems
@@ -136,3 +134,38 @@ def getViewedMemes(user):
     q = Account.objects.get(user=user).viewed
     print(q)
     return q
+
+def getFollowers(user):
+    return Account.objects.get(user=user).followers
+
+def getFollowing(user):
+    return Account.objects.get(user=user).following
+
+def followUser(currUser, userToFollow):
+    acct2 = Account.objects.get(user=getUserByID(userToFollow))
+    currAcct = Account.objects.get(user=currUser)
+    currAcct.following.append(userToFollow)
+    acct2.followers.append(currAcct.id)
+    currAcct.save()
+    acct2.save()
+
+def unfollow(currUser, userToUnfollow):
+    acct2 = Account.objects.get(user=getUserByID(userToUnfollow))
+    currAcct = Account.objects.get(user=currUser)
+    currAcct.following.remove(int(userToUnfollow))
+    acct2.followers.remove(int(currAcct.id))
+    currAcct.save()
+    acct2.save()
+
+def checkIfFollowing(currUser, followers):
+    currAcct = Account.objects.get(user=currUser)
+    if currAcct.id in followers:
+        return True
+    else:
+        return False
+
+
+
+
+
+
