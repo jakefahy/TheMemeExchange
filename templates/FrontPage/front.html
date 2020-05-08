@@ -45,19 +45,21 @@
           {% for m in images %}
             <div class="imageFrame">
                   <div class="cards hideText" style="background-color:#ffffff">
-                    <a class="tester" href="../../memeDetails/{{m.id}}">
+                    <a id="linkNum{{forloop.counter0}}"class="tester">
                       <b> {{m.description}} </b> <br>
-                    </a>
+
                     {% if m.id in viewed %}
-                    <a class="tester" href="../../memeDetails/{{m.id}}">
+                    <script type="text/javascript">
+                       $("#linkNum{{forloop.counter0}}").attr("href", "../../memeDetails/{{m.id}}");
+                    </script>
                       <img id="imageNum{{forloop.counter0}}" class="rounded border actualMeme" src="{{m.link}}" alt="My image" height="300" width="auto" style="max-width: 380px"> <br>
-                    </a>
                     {% else %}
                     <span class="container">
                       <img id="imageNum{{forloop.counter0}}" class="rounded border actualMeme" src="{{m.blurred}}" alt="My image" height="300" width="auto" style="max-width: 380px">
                       <img id="unlockNum{{forloop.counter0}}" class="unlock" src="{% static "/Overlay.png" %}" onclick="addToViewed({{forloop.counter0}},'{{m.link}}', {{m.id}}, {{m.creator}})"></img>
                     </span> <br>
                     {% endif %}
+                  </a>
                     <div class="lowerBar">
                     <i class="fas fa-eye">:{{m.views}} </i> &nbsp; &nbsp;
                     <i class="fas fa-heart">:{{m.likes}} &nbsp; &nbsp; Creator: {{m.username}}</i>
@@ -122,8 +124,10 @@
             if(data['status'] == -1){
               alert("You must purchase more coins first!")
             }else {
+              $("#linkNum"+num).attr("href", "../../memeDetails/"+id);
               $("#imageNum"+num).attr("src", link);
               $("#unlockNum"+num).css("visibility", "hidden");
+
             }
           },
         });
