@@ -22,7 +22,7 @@ def insertAcct(request):
         except Exception as e:
             template = loader.get_template('createAcct.html')
             return HttpResponse(template.render({
-            "error" : e
+            "error" : "yes"
             }, request))
         user = authenticate(request, username=username, password=password)
         login(request, user)

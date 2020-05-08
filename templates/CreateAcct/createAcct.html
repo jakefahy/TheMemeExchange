@@ -1,6 +1,10 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
 <!------ Include the above in your HEAD tag ---------->
 
 <style>
@@ -56,7 +60,9 @@ span.note {
   
     <div class="form">
         <h1><span class="note">Welcome To A New World Of Memes</span></h1>
-        <div id="isError">{{error}}</div>
+        <div id="isError">
+            {{error}}
+        </div>
         <form action="{% url 'insertAcct' %}" method="post"> {% csrf_token %}
         	<div class="form-group">
 			    <label for="user">Username</label>
@@ -101,14 +107,15 @@ span.note {
 <script type="text/javascript">
   $( document ).ready(function() {
     $("#isError").hide();
-    if($("#isError").text() == "yes"){
+    if("{{error}}" == "yes"){
       alert("Username is already taken");
+      // console.log($("#isError").text());
     }
     document.getElementById("btn").disabled = true;
   	var myInput = document.getElementById("pass1");
   	var letter = document.getElementById("letter");
   	var capital = document.getElementById("capital");
-  	var number = document.getElementById("number");
+  	var numbers = document.getElementById("number");
   	var length = document.getElementById("length");
   	var special = document.getElementById("special");
     var pass2 = document.getElementById("pass2");
@@ -128,34 +135,34 @@ span.note {
   		// Validate lowercase letters
   		var lowerCaseLetters = /[a-z]/g;
   		if(myInput.value.match(lowerCaseLetters)) {
-  		letter.classList.remove("invalid");
-  		letter.classList.add("valid");
+    		letter.classList.remove("invalid");
+    		letter.classList.add("valid");
   		} else {
-  		letter.classList.remove("valid");
-  		letter.classList.add("invalid");
-      document.getElementById("mySubmit").disabled = true;
+    		letter.classList.remove("valid");
+    		letter.classList.add("invalid");
+        document.getElementById("btn").disabled = true;
   		}
 
   		// Validate capital letters
   		var upperCaseLetters = /[A-Z]/g;
   		if(myInput.value.match(upperCaseLetters)) {
-  		capital.classList.remove("invalid");
-  		capital.classList.add("valid");
+    		capital.classList.remove("invalid");
+    		capital.classList.add("valid");
   		} else {
-  		capital.classList.remove("valid");
-  		capital.classList.add("invalid");
-      document.getElementById("btn").disabled = true;
+    		capital.classList.remove("valid");
+    		capital.classList.add("invalid");
+        document.getElementById("btn").disabled = true;
   		}
 
   		// Validate numbers
   		var numbers = /[0-9]/g;
   		if(myInput.value.match(numbers)) {
-  		number.classList.remove("invalid");
-  		number.classList.add("valid");
+    		number.classList.remove("invalid");
+    		number.classList.add("valid");
   		} else {
-  		number.classList.remove("valid");
-  		number.classList.add("invalid");
-      document.getElementById("btn").disabled = true;
+    		number.classList.remove("valid");
+    		number.classList.add("invalid");
+        document.getElementById("btn").disabled = true;
   		}
 
   		// Validate length
