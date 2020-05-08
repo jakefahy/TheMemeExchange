@@ -10,7 +10,7 @@ import google.cloud
 from firebase_admin import storage
 import os
 import json
-from dbFunctions import uploadImagetoDB, getUserCoins, getUserMemes, updateMemeInDB, getMemeById, getUserMemes, uploadImagetoDB, deleteMemefromDB, getOwnedMemes
+from dbFunctions import uploadImagetoDB, getUserCoins, getUserMemes, updateMemeInDB, getMemeById, getUserMemes, uploadImagetoDB, deleteMemefromDB, getOwnedMemes, getFollowers, getFollowing
 from django.contrib.auth import logout as djangoLogout, login as djangoLogin, authenticate
 from django.shortcuts import redirect
 from PIL import Image, ImageFilter
@@ -20,11 +20,14 @@ def index(request):
         return redirect("/createAccount")
     memes = getUserMemes(request.user.id)
     purchased = getOwnedMemes(request.user)
+    followers = getFollowers(request.user.id)
+    following = getFollowing(request.user.id)
     owned = []
     for m in purchased:
         meme_query = getMemeById(m)
         owned.append(meme_query[0])
-    context = {"mymemes" : memes, "ownedmemes" : owned}
+    context = {"mymemes" : memes, "ownedmemes" : owned, "followers" : len(followers),
+    "following" : len(following)}
     template = loader.get_template('profile.html')
     return HttpResponse(template.render(context, request))
 
