@@ -129,7 +129,7 @@ def getCreators():
     for meme in query:
         results.append(meme.creator)
     return results
-    
+
 def getViewedMemes(user):
     q = Account.objects.get(user=user).viewed
     print(q)
@@ -163,9 +163,25 @@ def checkIfFollowing(currUser, followers):
         return True
     else:
         return False
+    return Account.objects.get(user=user).viewed
 
-
-
-
-
-
+def addToViewed(user, memeID, creator):
+    acct = Account.objects.get(user=user)
+    if acct.memeBucks > 0:
+        # subtract coin and add meme to viewed memes
+        acct.memeBucks -= 1
+        owner = getUserByID(creator)
+        acct.viewed.append(memeID)
+        acct.save()
+        # add coin to creator's account
+        ownerAcct = Account.objects.get(user=creator)
+        ownerAcct.memeBucks += 1
+        ownerAcct.save()
+        # increase views on meme
+        img = getMemeById(memeID)[0]
+        img.views += 1
+        img.save()
+        return acct.memeBucks
+    else:
+        # indicates that user did not have enough coins
+        return -1

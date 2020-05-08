@@ -26,3 +26,4 @@ class ImageLink(models.Model):
     creator = models.IntegerField(default=-1)
     likes = models.IntegerField(default=0)
     pub_date = models.DateTimeField('date published', default=timezone.now)
+    views = models.IntegerField(default=0)
