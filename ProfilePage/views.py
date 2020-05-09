@@ -70,9 +70,6 @@ def uploadMemeImg(request):
         filename = fs.save(myfile.name, myfile)
         uploaded_file_url = fs.path(filename)
 
-        im = createBlur(uploaded_file_url)
-        im.save("outfile.png")
-        #of = open("outfile.png", 'rb')
 
 
         #Upload image to firebase and get the url back
@@ -81,18 +78,31 @@ def uploadMemeImg(request):
             default_app = firebase_admin.initialize_app(cred, {'storageBucket': 'the-meme-exchange.appspot.com'})
         bucket = storage.bucket()
         blob = bucket.blob(filename)
-        blob2 = bucket.blob("blurred_"+filename)
         blob.upload_from_filename(uploaded_file_url)
-        blob2.upload_from_filename("outfile.png")
         blob.make_public()
-        blob2.make_public()
+
+        # if image is gif or something similar, do not blur image
+        file_type = uploaded_file_url.split(".")[-1]
+        if file_type == ".png" or file_type == "jpg" or file_type == "jpeg":
+            im = createBlur(uploaded_file_url)
+            im.save("outfile.png")
+            blob2 = bucket.blob("blurred_"+filename)
+            blob2.upload_from_filename("outfile.png")
+            blob2.make_public()
+            #Upload image link with blurred image to our postgres db
+            uploadImagetoDB(blob.public_url,blob2.public_url,tags,descript,current_username,current_user)
+        else:
+            #Upload image link with default blur to our postgres db
+            default = "http://wallpaperstock.net/wallpapers/thumbs1/42657hd.jpg"
+            uploadImagetoDB(blob.public_url,default,tags,descript,current_username,current_user)
 
         #Clean up local directory of image data
         if blob.public_url:
             fs.delete(filename)
+        if blob2.public_url:
+            fs.delete("outfile.png")
 
-        #Upload image link to our postgres db
-        uploadImagetoDB(blob.public_url,blob2.public_url,tags,descript,current_username,current_user)
+
 
         #Send toast back to user and refresh page
         messages.add_message(request,20, "A Fine Addition To Your Collection")
