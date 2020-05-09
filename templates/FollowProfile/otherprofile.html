@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+
+
+<head>
+    <meta charset="utf-8">
+    <title>Other User Profile Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
+
+
+</head>
+
+<header class=" p-2 text-center">
+  {% extends "base.html" %}
+    {% block content %}
+
+      {% load static %}
+
+      <link rel="stylesheet" href="{% static 'TheMemeExchange/theme.css' %}">
+      <link rel="stylesheet" href="{% static 'TheMemeExchange/cards.css' %}">
+
+</header>
+
+<body style="background-color: #EDF6F9; font-family: Trebuchet MS;">
+
+  <div style="text-align: center; padding: 20px">
+    <span style="padding-left: 50px; float: left;">
+      <h2 style="">{{user}}</h2>
+    </span>
+    <span>
+      <span style="font-size: 20px">
+        <label>Followers: {{followers}}</label>
+        &nbsp;&nbsp;
+        <label>Following: {{following}}</label>
+      </span>
+
+      <div style="float: right; padding-right: 75px">
+        {% if isFollowing %}
+          <form action="{% url 'userunfollow' id %}" method="post">
+            {% csrf_token %}
+            <input type="submit" class="toolbarButtons" value="Unfollow">
+          </form>
+        {% else %}
+          <form action="{% url 'userfollow' id %}" method="post">
+            {% csrf_token %}
+            <input type="submit" class="toolbarButtons" value="Follow">
+          </form>
+        {% endif %}
+      </div>  
+    </span>
+  </div>
+
+  <hr>
+  <div style="padding-top: 20px" class="d-flex justify-content-center">
+    <div class="p-5">
+      <div class="PageDisplay">
+      {% for m in images %}
+        <div class="imageFrame">
+          <div class="cards hideText" style="background-color:#ffffff">
+            <a class="tester" href="../../memeDetails/{{m.id}}">
+            <b> {{m.description}} </b> <br>
+            {% if m.id in viewed %}
+            <img class="rounded border actualMeme" src="{{m.link}}" alt="My image" height="300" width="auto" style="max-width: 380px"> <br>
+            {% else %}
+            <img class="rounded border actualMeme" src="{{m.blurred}}" alt="My image" height="300" width="auto" style="max-width: 380px"> <br>
+            {% endif %}
+            <div class="lowerBar">
+            <i class="fas fa-eye">:20 </i> &nbsp; &nbsp;
+            <i class="fas fa-heart">:{{m.likes}} &nbsp; &nbsp; Creator: {{m.username}}</i>
+            </div>
+          </div>
+        </div></a>
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+
+
+
+
+    {% endblock %}
+</body>
+
+</html>

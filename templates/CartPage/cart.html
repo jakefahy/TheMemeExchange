@@ -26,7 +26,7 @@
         
     </header> 
 
-	<body style="background-color: #EDF6F9">
+	<body style="background-color:#EDF6F9">
 
 	    <h2 style="text-align: center; padding-bottom: 30px; padding-top: 30px; font-family: Trebuchet MS">Currently Viewing Your Cart</h2> <hr>
 
@@ -39,8 +39,8 @@
 				<img class="rounded border " src="{{pic.link}}" alt="My image" height="150" width="auto">
 		
 				<div>
-					<form style="padding-top: 25px; text-align: center;" action="../../shoppingCart/removeItemFromCart/{{ pic.id }}/" method="delete"> {% csrf_token %}
-						<input type="submit" class="rounded " style="font-size: 15px; padding: 5px; border: solid;" value="Remove from Cart"/> 
+					<form style="padding-top: 25px; text-align: center; " action="../../shoppingCart/removeItemFromCart/{{ pic.id }}/" method="delete"> {% csrf_token %}
+						<input style="background-color: #ffffff;" type="submit" class="rounded toolbarButtons" value="Remove"/> 
 					</form>						
 				</div>
 
@@ -48,7 +48,7 @@
 			
 			{% endfor %}
 			</div>
-			<div style="text-align: center; ">
+			<div style="text-align: center; padding-top: 30px; padding-bottom: 30px">
 				<button type="button" id="uploadModelButton" onclick="modalhelper()" class="rounded toolbarButtons" style="background-color: #619B8A; font-weight: bold; font-size: 25px">Get Those Memes!</button>
 
 			</div>
@@ -60,12 +60,12 @@
 
 
 
-		<!-- Start of Purchase Model -->
-    <div class="modal fade" id="purchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<!-- Start of Purchase Modal -->
+    <div class="modal fade" id="purchModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"><h2 id="modalTitle">Confirm Your Meme Purchase</h2></h5>
+            <h2 class="modal-title" style="font-family: Trebuchet MS;">Confirm Your Meme Purchase</h2>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -73,11 +73,11 @@
           <div class="modal-body">
              <div>
                   <form>
-                    <div >
+                    <div style="font-family: Trebuchet MS;">
 						<b>Your Meme Coins: </b>
 						<label>{{ request.session.coins }}</label>
 					</div>
-					<div >
+					<div style="font-family: Trebuchet MS;">
 						<b>Meme Purchase Total:  </b>
 						<label>{{ total }}</label>
 					</div>
@@ -87,22 +87,22 @@
 						</div>
 					{% else %}
 						<div class="text-center" style="padding-top: 10px">
-							<b><a href="../../shoppingCart/purchaseMeme/" >Confirm Your Purchase</a></b>
+							<b><a href="../../shoppingCart/purchaseMeme/" class="toolbarButtons">Confirm Your Purchase</a></b>
 						</div>
 					{% endif %}
                   </form>
             </div>
           </div>
-          <div class="modal-footer">
-          	<span >
+          <div class="modal-footer " style="text-align: left;">
+          	<span>
 				<a href="../BuyMemeCoin">Purchase More MemeCoins Here!</a>
 			</span>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: #619B8A; color: #000000">Cancel</button>
+            <button type="button" class="btn " data-dismiss="modal" style="background-color: #619B8A; color: #000000; font-family: monospace;">Cancel</button>
           </div>
         </div>
       </div>
     </div>
-<!-- End of Upload Model -->
+<!-- End of Upload Modal -->
 	<script>
 
 	//Shows upload modal on button press
