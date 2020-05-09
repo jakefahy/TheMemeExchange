@@ -78,10 +78,51 @@
              <div>
 
                 <h1 id="insideTitle">You are Buying: <span id="buyingNum"> </span> MemeCoin</h1>
-
-                <p>Using This Payment Info : Discover Card Ending in 0092 </p>
-
                 <img src="{% static "/grevious.jpg" %}" alt="Grevious" height="200" width="400">
+				
+				<div id="paypal-button-container"></div>
+				<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD" data-sdk-integration-source="button-factory"></script>
+				<script>
+					paypal.Buttons({
+						style: {
+						shape: 'rect',
+						color: 'silver',
+						layout: 'vertical',
+						label: 'paypal',
+          
+					},
+					createOrder: function(data, actions) {
+						return actions.order.create({
+							purchase_units: [{
+								amount: {
+									value: $("#totalReal").text()
+								}
+							}]
+						});
+					},
+					onApprove: function(data, actions) {
+						return actions.order.capture().then(function(details) {
+							//alert('Transaction completed by ' + details.payer.name.given_name + '! ' + $("#totalReal").text());
+							$.ajax({
+							method: "POST",
+							url: "{% url 'purchase' %}",
+							data: {"purchaseAmmt": $("#buyingNum").text()},
+							dataType: 'json',
+							success: function(result, status)
+							{
+								console.log("success");
+								location.reload();
+							},
+							complete:function(data){
+							$("#loader").hide();
+							},
+						});
+							
+						});
+					}
+				}).render('#paypal-button-container');
+				</script>
+
 
             </div>
 
