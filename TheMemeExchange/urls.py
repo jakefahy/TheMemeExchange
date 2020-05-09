@@ -29,6 +29,7 @@ urlpatterns = [
     path('BuyMemeCoin/', include('PurchasePage.urls')),
     path('shoppingCart/', include('CartPage.urls')),
     path('Profile/', include('ProfilePage.urls')),
+    path('follow/', include('FollowProfile.urls')),
 
 ]
 
