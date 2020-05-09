@@ -9,13 +9,13 @@ def getLastTenImg():
 def createUser(username, email, password):
     user = User.objects.create_user(username, email, password)
     user.save()
-    acct = Account(user=user, memeBucks=0)
+    acct = Account(user=user, memeBucks=100)
     acct.save()
 
 def uploadImagetoDB(link,blurred,tags,description,username,creator_id):
     img = ImageLink(link=link,blurred=blurred,tags=tags,description=description,creator=creator_id,username=username)
     img.save()
-    user = User.objects.get(id=creator)
+    user = User.objects.get(id=creator_id)
     acct = Account.objects.get(user=user)
     acct.viewed.append(img.id)
     acct.save()

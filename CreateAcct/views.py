@@ -26,4 +26,5 @@ def insertAcct(request):
             }, request))
         user = authenticate(request, username=username, password=password)
         login(request, user)
+        request.session['coins'] = 100
         return redirect("/Profile/")
