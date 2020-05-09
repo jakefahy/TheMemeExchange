@@ -13,7 +13,7 @@ import json
 from dbFunctions import uploadImagetoDB, getUserCoins, getUserMemes, updateMemeInDB, getMemeById, getUserMemes, uploadImagetoDB, deleteMemefromDB, getOwnedMemes, getFollowers, getFollowing
 from django.contrib.auth import logout as djangoLogout, login as djangoLogin, authenticate
 from django.shortcuts import redirect
-from PIL import Image, ImageFilter
+from PIL import Image, ImageFilter, ImageFont, ImageDraw
 
 def index(request):
     if(request.user.is_anonymous):
@@ -69,6 +69,14 @@ def uploadMemeImg(request):
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
         uploaded_file_url = fs.path(filename)
+
+
+        # if(checkforWatermark(uploaded_file_url)):
+        #     messages.add_message(request,20, "Upload Failed - Watermark Detected")
+        #     return redirect("/Profile")
+        #
+        #
+        # addWatermark(uploaded_file_url)
 
 
 
@@ -186,3 +194,42 @@ def deleteMeme(request):
 def createBlur(path):
     im = Image.open(path).filter(ImageFilter.GaussianBlur(200))
     return im
+
+
+# def addWatermark(path):
+#     photo = Image.open(path)
+#     text='The-Meme-Exchange'
+#
+#     # make the image editable
+#     drawing = ImageDraw.Draw(photo)
+#
+#     w, h = photo.size
+#
+#     pos = (w-150,h-28)
+#     font = ImageFont.truetype("arial.ttf", 15)
+#     black = (0, 0, 0)
+#     drawing.text(pos, text, fill=black, font=font)
+#     photo.save()
+#
+# def checkforWatermark(path):
+#     filename = path
+#     payload = {'apikey': "31510f9df888957"}
+#     with open(filename, 'rb') as f:
+#         r = requests.post('https://api.ocr.space/parse/image',
+#                           files={filename: f},
+#                           data=payload,
+#                           )
+#
+#
+#     test = r.content.decode().split(":")
+#     #print(test)
+#     for i in range(len(test)):
+#         #print(test[i])
+#         if "ParsedText" in test[i]:
+#             line = test[i+1]
+#
+#
+#     if "-Exchange" in line or "Them me" in line or "me-" in line:
+#         return True
+#     else:
+#         return False
