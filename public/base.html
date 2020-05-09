@@ -83,9 +83,11 @@
   <div>
     <button class="toolbarButtons" onclick="window.location.href='../../../front'"><b>Home</b></button>
     &nbsp;
+=======
+
     <button class="toolbarButtons" onclick="window.location.href='../../../followFeed'"><b>Following</b></button>
     &nbsp;
-    <button class="toolbarButtons"><b>About</b></button>
+    <button class="toolbarButtons" onclick="window.location.href='../../../about'"><b>About</b></button>
     &nbsp;&nbsp;&nbsp;
     <form action ="{% url 'searchByTag' %}" method ="get" style="display: inline-block;">
       <input id="searchfield" type="text" name = "tag" size="75" aria-label="Text input" placeholder="Search The Meme Exchange">
@@ -94,7 +96,7 @@
       &nbsp;&nbsp;
       <input type = "checkbox" name = "searchOptions" value ="tag" class = "m-1"  > <label style="font-family: monospace; color: #124B63; font-weight: bold; font-size: 15px">Tags </label>
       <input type = "checkbox" name = "searchOptions" value ="user" class = "m-1"> <label style="font-family: monospace; color: #124B63; font-weight: bold; font-size: 15px">Users </label>
-    </form>  
+    </form>
   </div>
 </div>
 

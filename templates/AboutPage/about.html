@@ -1,6 +1,106 @@
 <!doctype html>
 <html>
 <head>
-<h1>hello world</h1>
+  <style>
+    .Box{
+      display: flex;
+      justify-content: center;
+      padding:10px;
+      height: auto;
+      width: auto;
+      padding-left: 100px;
+      padding-right: 100px;
+    }
+    .b{
+      padding: 10px;
+    }
+    .paragraph{
+      padding-right: 20px;
+      text-align: left;
+      font-size: 1.3em;
+      font-family: fantasy;
+      border: round;
+      padding: 5px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+  </style>
+
+
 <head>
+
+  <header class="text-center">
+    {% extends "base.html" %}
+      {% block content %}
+
+        {% load static %}
+
+        <link rel="stylesheet" href="{% static 'TheMemeExchange/theme.css' %}">
+        <link rel="stylesheet" href="{% static 'TheMemeExchange/cards.css' %}">
+
+  </header>
+
+  <body class="b" style="background-color: #EDF6F9">
+  <br>
+  <h1 class="text-center"> Welcome to the Meme Exchange ! </h1> <hr width=50%> <h2 class="text-center">Here's how it works:</h2> <br>
+
+  <div class="Box">
+    <div class="paragraph">
+      First, you buy <a href="../../BuyMemeCoin">MemeCoins&trade;</a> to view or buy Memes.
+    </div>
+  </div>
+
+  <br>
+
+  <div class="Box">
+    <div class="paragraph">
+      Second, If purchased memes will be added to your personal collection.
+    </div>
+  </div>
+
+  <br>
+
+  <div class="Box">
+    <div class="paragraph">
+      Third, the creator of the meme gains the coins you paid.
+    </div>
+  </div>
+
+  <br>
+
+  <div class="Box">
+    <div class="paragraph">
+      Then, create your own memes to try and get more coins
+    </div>
+  </div>
+
+  <br>
+
+  <div class="Box">
+    <div class="paragraph">
+      Last, you can trade your coins in for DogeCoin, 1 DogeCoin : 100k MemeCoin
+    </div>
+  </div>
+
+  <br>
+
+  <div class="Box">
+    <div class="paragraph">
+      Good Luck and Happy Memeing
+    </div>
+  </div>
+
+  <br>
+
+  <div class="Box">
+    <div class="paragraph">
+      <img src="{% static "/greatinterest.jpg" %}" height="200px" width="350px" >
+    </div>
+  </div>
+
+
+
+  </body>
+
+  {% endblock %}
 <html>
